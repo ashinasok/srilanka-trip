@@ -971,6 +971,25 @@ a { text-decoration: none; }
   pointer-events: none;
 }
 
+/* Leave-by time tags */
+.tag-leaveby {
+  background: rgba(200, 146, 42, 0.12);
+  color: var(--gold);
+  border: 1.5px solid rgba(200, 146, 42, 0.4);
+  font-weight: 700;
+}
+.tag-leaveby-urgent {
+  background: rgba(192, 57, 43, 0.12);
+  color: var(--red);
+  border: 1.5px solid rgba(192, 57, 43, 0.5);
+  font-weight: 700;
+  animation: pulse-border 1.8s ease-in-out infinite;
+}
+@keyframes pulse-border {
+  0%, 100% { border-color: rgba(192, 57, 43, 0.4); }
+  50%       { border-color: var(--red); }
+}
+
 /* ══════════════════════════════════════
    FOOTER
 ══════════════════════════════════════ */

@@ -30,7 +30,27 @@
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=10&format=json&srsearch=Japanese+Peace+Pagoda+Unawatuna+Sri+Lanka\" -H \"User-Agent: Mozilla/5.0 TripPlanner/1.0\")",
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&titles=File:Japanese%20Peace%20Pagoda%20Rumassala.jpg|File:Japanese%20peace%20pagoda%20in%20Rumassala%2CUnawatuna.jpg|File:Japanese%20Peace%20Pagoda%20Temple.jpg&prop=imageinfo&iiprop=url|size|mime&format=json\" -H \"User-Agent: Mozilla/5.0 TripPlanner/1.0\")",
       "Bash(curl -L -o /Users/ashinasok/Desktop/Trip/images/loc/peace-pagoda.jpg \"https://upload.wikimedia.org/wikipedia/commons/4/4c/Japanese_peace_pagoda_in_Rumassala%2CUnawatuna.jpg\" -H \"User-Agent: Mozilla/5.0 TripPlanner/1.0\" --progress-bar)",
-      "Bash(sips -Z 1200 -s format jpeg -s formatOptions 80 /Users/ashinasok/Desktop/Trip/images/loc/peace-pagoda.jpg)"
+      "Bash(sips -Z 1200 -s format jpeg -s formatOptions 80 /Users/ashinasok/Desktop/Trip/images/loc/peace-pagoda.jpg)",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=15&format=json&srsearch=stilt+fishermen+sunset+Sri+Lanka\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=15&format=json&srsearch=stilt+fishing+golden+hour+Sri+Lanka\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=15&format=json&srsearch=Koggala+stilt+fishermen+sunset\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=15&format=json&srsearch=stilt+fisherman+sunset+sri+lanka\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=15&format=json&srsearch=stilt+fishing+silhouette+Sri+Lanka\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=15&format=json&srsearch=stilt+fish+sunset+koggala\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=20&format=json&srsearch=stilt+fishing+Sri+Lanka\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=20&format=json&srsearch=stilt+fishermen+Sri+Lanka\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&pageids=90692193|52016465|3770340|3770338|79913323|79387977&prop=imageinfo&iiprop=url|extmetadata&format=json\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=15&format=json&srsearch=stilt+fishing+sunset\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=20&format=json&srsearch=stilt+fishing+Sri+Lanka+silhouette\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&pageids=146537109&prop=imageinfo&iiprop=url|extmetadata&format=json\" -A \"Mozilla/5.0\")",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o /Users/ashinasok/Desktop/Trip/images/loc/stilt-fishing-sunset.jpg \"https://upload.wikimedia.org/wikipedia/commons/f/fa/Sweven_arcadian03.jpg\")",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o /tmp/riti-panna-check.jpg \"https://upload.wikimedia.org/wikipedia/commons/a/a1/Riti_Panna.jpg\")",
+      "Read(//tmp/**)",
+      "Bash(sips -g all /tmp/riti-panna-check.jpg)",
+      "Bash(sips -g all /Users/ashinasok/Desktop/Trip/images/loc/stilt-fishing-sunset.jpg)",
+      "Bash(sips -Z 1200 -s format jpeg -s formatOptions 80 /Users/ashinasok/Desktop/Trip/images/loc/stilt-fishing-sunset.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/ashinasok/Desktop/Trip/images/loc/stilt-fishing-sunset.jpg)",
+      "Bash(python3:*)"
     ]
   }
 }
