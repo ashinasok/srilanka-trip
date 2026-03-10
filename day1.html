@@ -11,22 +11,31 @@
 <body>
 
 <!-- NAV -->
-<nav class="day-nav">
-  <a href="index.html#day1" class="back-link">← Back</a>
-  <a href="index.html#overview">Overview</a>
-  <a href="index.html#tuktuk">🛺 Rentals</a>
-  <a href="index.html#glance">Itinerary</a>
-  <a href="day1.html" class="active">Day 1</a>
-  <a href="day2.html">Day 2</a>
-  <a href="day3.html">Day 3</a>
-  <a href="day4.html">Day 4</a>
-  <a href="day5.html">Day 5</a>
-  <a href="day6.html">Day 6</a>
-  <a href="day7.html">Day 7</a>
-  <a href="index.html#fuel">⛽ Fuel</a>
-  <a href="index.html#fees">🎟 Fees</a>
-  <a href="index.html#bookings">📞 Bookings</a>
-  <a href="index.html#accommodation">🏨 Stays</a>
+<nav class="site-nav" id="siteNav">
+  <div class="nav-brand"><a href="index.html">&#8592; Sri Lanka 2026</a></div>
+  <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#overview">Overview</a>
+    <a href="index.html#accommodation">Stays</a>
+    <a href="index.html#tuktuk">Rentals</a>
+    <a href="index.html#fuel">Fuel</a>
+    <a href="index.html#fees">Fees</a>
+    <a href="index.html#bookings">Bookings</a>
+    <div class="nav-dropdown" id="itinDropdown">
+      <button class="nav-dropdown-btn active" id="itinBtn">Itinerary <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="day1.html" class="active">Day 1 &middot; Colombo &rarr; Bentota</a>
+        <a href="day2.html">Day 2 &middot; Bentota &rarr; Weligama</a>
+        <a href="day3.html">Day 3 &middot; Weligama &mdash; The Big Day</a>
+        <a href="day4.html">Day 4 &middot; Into the Mountains</a>
+        <a href="day5.html">Day 5 &middot; Highland Wonders</a>
+        <a href="day6.html">Day 6 &middot; The Big Abseil Day</a>
+        <a href="day7.html">Day 7 &middot; Rafting &amp; Goodbye</a>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -334,9 +343,50 @@
 <footer class="site-footer">
   <div style="font-size:1.5rem;margin-bottom:0.8rem;">🇮🇳 ✈️ 🇱🇰</div>
   <strong>Sowmya &amp; Ashin's Sri Lanka Adventure 2026</strong><br>
-  28 March – 3 April · SriLankan Airlines UL122/UL123 · Booking Ref: 7ZGMRX<br><br>
+  28 March – 3 April · UL122/UL123 CMB · 7 Days · ~680 km by Tuk Tuk 🛺<br><br>
   <span style="font-size:0.75rem;opacity:0.6;">All prices approximate. Entry fees subject to change. Book all activities well in advance. Have an incredible trip! 🌊</span>
 </footer>
 
+<script>
+(function () {
+  var toggle   = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  var dropdown = document.getElementById('itinDropdown');
+  var dropBtn  = document.getElementById('itinBtn');
+
+  function closeAll() {
+    if (navLinks) navLinks.classList.remove('open');
+    if (toggle)   toggle.classList.remove('open');
+    if (dropdown) dropdown.classList.remove('open');
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = navLinks.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      if (!isOpen && dropdown) dropdown.classList.remove('open');
+    });
+  }
+
+  if (dropBtn) {
+    dropBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+  }
+
+  if (navLinks) {
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { closeAll(); });
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var nav = document.getElementById('siteNav');
+    if (nav && !nav.contains(e.target)) closeAll();
+  });
+})();
+</script>
 </body>
 </html>

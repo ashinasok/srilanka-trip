@@ -137,32 +137,7 @@
   }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--teal-dark);
-    display: flex; gap: 0; overflow-x: auto;
-    scrollbar-width: none;
-    border-bottom: 2px solid var(--gold);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
-  nav::-webkit-scrollbar { display: none; }
-
-  nav a {
-    flex-shrink: 0;
-    color: rgba(255,255,255,0.7);
-    text-decoration: none;
-    padding: 0.85rem 1.2rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
-  }
-  nav a:hover { color: var(--gold-light); border-color: var(--gold-light); background: rgba(255,255,255,0.05); }
-
+  /* Nav CSS in site-nav class — see NAV_CSS block */
   /* ── SECTIONS ── */
   section { padding: 4rem 0; }
 
@@ -230,6 +205,25 @@
     text-decoration: none;
     color: inherit;
   }
+  .toc-row {
+    position: relative;
+  }
+  .toc-row::after {
+    content: '→';
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: opacity 0.2s, right 0.2s;
+  }
+  .toc-row:hover::after {
+    opacity: 1;
+    right: 0.8rem;
+  }
+
   .toc-row:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
 
   .toc-day { background: var(--teal); color: white; padding: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; text-align: center; }
@@ -633,7 +627,7 @@
 
   /* ── PRINT ── */
   @media print {
-    nav, .scroll-hint { display: none; }
+    .site-nav, .scroll-hint { display: none; }
     .day-header { height: 280px; }
     .day-sidebar { position: static; }
     .day-content { grid-template-columns: 1fr; }
@@ -668,6 +662,242 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 14px rgba(10,110,110,0.35);
   }
+/* ══════════════════════════════════════
+     SITE NAV — RESPONSIVE
+  ══════════════════════════════════════ */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--teal-dark);
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: stretch;
+    min-height: 52px;
+    padding: 0 1rem;
+  }
+  
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .nav-brand a {
+    color: var(--gold-light);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    margin-right: 0.5rem;
+    transition: color 0.2s;
+  }
+  .nav-brand a:hover { color: #fff; }
+  
+  .nav-links {
+    display: flex;
+    align-items: stretch;
+    flex: 1;
+  }
+  
+  .nav-links > a {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    padding: 0 1rem;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
+  }
+  .nav-links > a:hover,
+  .nav-links > a.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+    background: rgba(255,255,255,0.05);
+  }
+  
+  /* Itinerary dropdown */
+  .nav-dropdown {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+  }
+  .nav-dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    color: rgba(255,255,255,0.72);
+    padding: 0 1rem;
+    font-family: inherit;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    height: 100%;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
+  }
+  .nav-dropdown-btn:hover,
+  .nav-dropdown.open > .nav-dropdown-btn,
+  .nav-dropdown-btn.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+    background: rgba(255,255,255,0.05);
+  }
+  .nav-caret {
+    font-size: 0.6rem;
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+  .nav-dropdown.open .nav-caret { transform: rotate(180deg); }
+  
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    min-width: 240px;
+    background: #0c3535;
+    border-top: 2px solid var(--gold);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 300;
+  }
+  .nav-dropdown.open .nav-dropdown-menu { display: flex; }
+  
+  .nav-dropdown-menu a {
+    display: block;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    padding: 0.65rem 1.2rem;
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-left: 3px solid transparent;
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .nav-dropdown-menu a + a {
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-dropdown-menu a:hover,
+  .nav-dropdown-menu a.active {
+    color: var(--gold-light);
+    background: rgba(255,255,255,0.07);
+    border-left-color: var(--gold-light);
+  }
+  
+  /* Hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255,255,255,0.88);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  
+  /* Mobile */
+  @media (max-width: 820px) {
+    .nav-hamburger { display: flex; }
+  
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 52px;
+      left: 0;
+      right: 0;
+      background: var(--teal-dark);
+      flex-direction: column;
+      align-items: stretch;
+      border-bottom: 2px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      z-index: 199;
+      max-height: calc(100vh - 52px);
+      overflow-y: auto;
+    }
+    .nav-links.open { display: flex; }
+  
+    .nav-links > a {
+      padding: 0.85rem 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid transparent;
+      font-size: 0.8rem;
+    }
+    .nav-links > a.active {
+      border-left-color: var(--gold-light);
+      border-bottom-color: rgba(255,255,255,0.07);
+    }
+    .nav-links > a:hover { border-bottom-color: rgba(255,255,255,0.07); }
+  
+    .nav-dropdown { flex-direction: column; align-items: stretch; }
+  
+    .nav-dropdown-btn {
+      width: 100%;
+      padding: 0.85rem 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid transparent;
+      font-size: 0.8rem;
+      justify-content: space-between;
+      height: auto;
+    }
+    .nav-dropdown-btn.active { border-left-color: var(--gold-light); }
+  
+    .nav-dropdown-menu {
+      position: static;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0;
+      background: rgba(0,0,0,0.18);
+      box-shadow: none;
+      min-width: unset;
+    }
+    .nav-dropdown-menu a {
+      padding: 0.72rem 1.4rem 0.72rem 2.6rem;
+      font-size: 0.78rem;
+      border-left: none;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-dropdown-menu a:hover,
+    .nav-dropdown-menu a.active {
+      border-left: none;
+      padding-left: 2.8rem;
+    }
+  }
+  
 </style>
 </head>
 <body>
@@ -693,21 +923,31 @@
 </section>
 
 <!-- NAV -->
-<nav>
-  <a href="#overview">Overview</a>
-  <a href="#tuktuk">🛺 Rentals</a>
-  <a href="#glance">Itinerary</a>
-  <a href="#day1">Day 1</a>
-  <a href="#day2">Day 2</a>
-  <a href="#day3">Day 3</a>
-  <a href="#day4">Day 4</a>
-  <a href="#day5">Day 5</a>
-  <a href="#day6">Day 6</a>
-  <a href="#day7">Day 7</a>
-  <a href="#fuel">⛽ Fuel</a>
-  <a href="#fees">🎟 Fees</a>
-  <a href="#bookings">📞 Bookings</a>
-  <a href="#accommodation">🏨 Stays</a>
+<nav class="site-nav" id="siteNav">
+  <div class="nav-brand"><a href="#hero">&#127949; Sri Lanka 2026</a></div>
+  <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="#overview">Overview</a>
+    <a href="#accommodation">Stays</a>
+    <a href="#tuktuk">Rentals</a>
+    <a href="#fuel">Fuel</a>
+    <a href="#fees">Fees</a>
+    <a href="#bookings">Bookings</a>
+    <div class="nav-dropdown" id="itinDropdown">
+      <button class="nav-dropdown-btn" id="itinBtn">Itinerary <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="day1.html">Day 1 &middot; Colombo &rarr; Bentota</a>
+        <a href="day2.html">Day 2 &middot; Bentota &rarr; Weligama</a>
+        <a href="day3.html">Day 3 &middot; Weligama &mdash; The Big Day</a>
+        <a href="day4.html">Day 4 &middot; Into the Mountains</a>
+        <a href="day5.html">Day 5 &middot; Highland Wonders</a>
+        <a href="day6.html">Day 6 &middot; The Big Abseil Day</a>
+        <a href="day7.html">Day 7 &middot; Rafting &amp; Goodbye</a>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <!-- OVERVIEW -->
@@ -1042,37 +1282,37 @@
     <div class="section-label">Full Schedule</div>
     <h2 class="section-title">7 Days, One Epic Island</h2>
     <div class="toc-grid">
-      <a class="toc-row" href="#day1">
+      <a class="toc-row" href="day1.html">
         <div class="toc-day"><div class="day-num">1</div><div>Day</div></div>
         <div class="toc-date">28 Mar</div>
         <div class="toc-info"><div class="toc-route">Colombo → Bentota</div><div class="toc-desc">Airport landing • Mangrove boat ride • First beach sunset</div></div>
       </a>
-      <a class="toc-row" href="#day2">
+      <a class="toc-row" href="day2.html">
         <div class="toc-day"><div class="day-num">2</div><div>Day</div></div>
         <div class="toc-date">29 Mar</div>
         <div class="toc-info"><div class="toc-route">Bentota → Weligama via Galle</div><div class="toc-desc">Bawa estates • Baby turtles • Hikkaduwa • Galle Fort at sunset</div></div>
       </a>
-      <a class="toc-row" href="#day3">
+      <a class="toc-row" href="day3.html">
         <div class="toc-day"><div class="day-num">3</div><div>Day</div></div>
         <div class="toc-date">30 Mar</div>
         <div class="toc-info"><div class="toc-route">Weligama (Stay)</div><div class="toc-desc">🐋 Whale Watching • 🏄 Surfing • Parrot Rock golden hour</div></div>
       </a>
-      <a class="toc-row" href="#day4">
+      <a class="toc-row" href="day4.html">
         <div class="toc-day"><div class="day-num">4</div><div>Day</div></div>
         <div class="toc-date">31 Mar</div>
         <div class="toc-info"><div class="toc-route">Weligama → Diyaluma Falls</div><div class="toc-desc">Coconut Hill sunrise • Hiriketiya cove • Ravana Falls<span class="new-badge">NEW</span> • Mountain drive</div></div>
       </a>
-      <a class="toc-row" href="#day5">
+      <a class="toc-row" href="day5.html">
         <div class="toc-day"><div class="day-num">5</div><div>Day</div></div>
         <div class="toc-date">1 Apr</div>
         <div class="toc-info"><div class="toc-route">Diyaluma → Bambarakanda → Maskeliya</div><div class="toc-desc">Infinity pools at cliff edge • Lipton's Seat<span class="new-badge">NEW</span> • First abseil!</div></div>
       </a>
-      <a class="toc-row" href="#day6">
+      <a class="toc-row" href="day6.html">
         <div class="toc-day"><div class="day-num">6</div><div>Day</div></div>
         <div class="toc-date">2 Apr</div>
         <div class="toc-info"><div class="toc-route">Maskeliya → Kitulgala</div><div class="toc-desc">🧗 Laxapana 126m Abseil • Prehistoric cave • Rainforest walk • Rock pools</div></div>
       </a>
-      <a class="toc-row" href="#day7">
+      <a class="toc-row" href="day7.html">
         <div class="toc-day"><div class="day-num">7</div><div>Day</div></div>
         <div class="toc-date">3 Apr</div>
         <div class="toc-info"><div class="toc-route">Kitulgala → Colombo → ✈️ Home</div><div class="toc-desc">🚣 White Water Rafting • Galle Face Green • Flight home</div></div>
@@ -1081,419 +1321,6 @@
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ════════════════ DAY 1 ════════════════ -->
-<div class="day-section" id="day1">
-  <div class="day-header">
-    <div class="day-header-img" style="background-image:url('images/day1-header.jpg');background-position:center 60%;"></div>
-    <div class="day-header-overlay"></div>
-    <div class="day-header-content">
-      <div class="day-number-label">Day 1 · 28 March 2026</div>
-      <h2 class="day-title">Colombo → Bentota</h2>
-      <div class="day-route">Arrival · Mangrove River · First Beach Sunset <span class="day-km-badge">94 km</span></div>
-    </div>
-  </div>
-  <div class="photo-strip">
-    <div class="photo-strip-img" style="background-image:url('images/day1-photo1.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day1-photo2.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day1-photo3.jpg');"></div>
-  </div>
-  <div class="day-body">
-    <div class="day-content">
-      <div>
-        <ul class="stops-list">
-          <li class="stop-item">
-            <div class="stop-icon">✈️</div>
-            <div class="stop-text"><strong>11:05 AM — Land at Colombo Airport (CMB)</strong><p>Get a SIM card right inside arrivals — Mobitel or Dialog both work great. Download the PickMe app — it's like Uber for tuk tuks!</p></div>
-          </li>
-          <li class="stop-item">
-            <div class="stop-icon">🥥</div>
-            <div class="stop-text"><strong>King Coconut outside arrivals</strong><p>Bright orange coconuts called "thambili" — they taste incredible and cost about INR 28. Your first taste of Sri Lanka!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div>
-          </li>
-          <li class="stop-item">
-            <div class="stop-icon">⛽</div>
-            <div class="stop-text"><strong>PETROL STOP — Fill up FULL near airport</strong><p>CEYPETCO or IOC station on Galle Road before leaving Colombo. Fill the whole tank — it's only a 7.5 litre tank!</p><div class="stop-meta"><span class="meta-tag meta-petrol">Petrol Stop 1 · INR 645</span></div></div>
-          </li>
-          <li class="stop-item">
-            <div class="stop-icon">🛺</div>
-            <div class="stop-text"><strong>2:30 PM — Drive south to Bentota</strong><p>94 km down the beautiful Galle Road coastal highway. About 2.5 hours in the tuk tuk. Keep the ocean on your right!</p><div class="stop-meta"><span class="meta-tag meta-km">📏 94 km · ~2.5 hrs</span></div></div>
-          </li>
-          <li class="stop-item">
-            <div class="stop-icon">🏖️</div>
-            <div class="stop-text"><strong>5:00 PM — Bentota River Mouth Beach Walk</strong><p>A 45-minute walk where the river meets the ocean. The sun turns everything golden at this hour. This is your first proper Sri Lanka beach moment!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div>
-          </li>
-          <li class="stop-item">
-            <div class="stop-icon">🚣</div>
-            <div class="stop-text"><strong>6:00 PM — Mangrove River Boat Ride</strong><p>A 1-hour boat safari through the mangrove jungle. You'll spot monitor lizards sunbathing on roots, kingfishers darting like jewels, and giant fruit bats taking off at dusk. Ask your hotel to arrange it.</p><div class="stop-meta"><span class="meta-tag meta-paid">~INR 1,700/boat</span></div></div>
-          </li>
-          <li class="stop-item">
-            <div class="stop-icon">🍛</div>
-            <div class="stop-text"><strong>7:30 PM — Dinner: Local Rice &amp; Curry</strong><p>Order rice and curry at any local spot. Say "without fish, without meat" clearly. Sri Lankan rice &amp; curry is just warm, spicy heaven.</p></div>
-          </li>
-        </ul>
-      </div>
-      <div class="day-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📍 Google Maps</div>
-          <div class="sidebar-card-body">
-            <a class="map-link-item" href="https://maps.google.com/?q=Bandaranaike+International+Airport+Sri+Lanka" target="_blank">Colombo Airport (CMB)</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Bentota+Beach+Sri+Lanka" target="_blank">Bentota River Beach</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Bentota+River+Boat+Safari+Sri+Lanka" target="_blank">Mangrove Boat Safari</a>
-          </div>
-        </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">💡 Tips</div>
-          <div class="sidebar-card-body">
-            <div class="tip-item"><span>💡</span><span>Lunch is served on the SriLankan Airlines flight — no need to stop for lunch today!</span></div>
-            <div class="tip-item"><span>💡</span><span>The mangrove boat is best arranged through your Bentota hotel — ask at check-in.</span></div>
-            <div class="tip-item"><span>💡</span><span>Carry small notes for tips. Tuk tuk drivers and boat operators love it!</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="day-guide-btn-wrap">
-      <a href="day1.html" class="day-guide-btn">📖 Full Day Guide — Day 1 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DAY 2 ════════════════ -->
-<div class="day-section" id="day2">
-  <div class="day-header">
-    <div class="day-header-img" style="background-image:url('images/day2-header.jpg');background-position:center 50%;"></div>
-    <div class="day-header-overlay"></div>
-    <div class="day-header-content">
-      <div class="day-number-label">Day 2 · 29 March 2026</div>
-      <h2 class="day-title">Bentota → Galle → Weligama</h2>
-      <div class="day-route">Bawa Gardens · Baby Turtles · UNESCO Fort · Coastal Drive <span class="day-km-badge">~98 km</span></div>
-    </div>
-  </div>
-  <div class="photo-strip">
-    <div class="photo-strip-img" style="background-image:url('images/day2-photo1.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day2-photo2.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day2-photo3.jpg');"></div>
-  </div>
-  <div class="day-body">
-    <div class="day-content">
-      <div>
-        <ul class="stops-list">
-          <li class="stop-item"><div class="stop-icon">🏊</div><div class="stop-text"><strong>7:00 AM — Morning swim at Bentota Beach</strong><p>30 min in the cool morning ocean. Barely anyone around — pure bliss before the day begins.</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🌿</div><div class="stop-text"><strong>7:45 AM — Lunuganga Estate (Geoffrey Bawa)</strong><p>Sri Lanka's most famous architect built this dreamy garden on a rubber estate — terraced lawns, ancient trees, colonial house. Like walking into a painting.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $3 (INR 255)</span><span class="meta-tag meta-km">📏 From hotel · 15 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🎨</div><div class="stop-text"><strong>10:00 AM — Brief Garden (Bevis Bawa)</strong><p>Geoffrey's eccentric brother Bevis created this surrealist jungle full of strange sculptures and whimsical art. 1.5 hrs to wander around properly.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $3 (INR 255)</span><span class="meta-tag meta-km">📏 12 km · 20 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🐢</div><div class="stop-text"><strong>11:45 AM — Kosgoda Turtle Conservation</strong><p>Baby sea turtles the size of your palm! They hatch eggs here and release the babies into the ocean. You can hold one gently.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $5 (INR 425)</span><span class="meta-tag meta-km">📏 10 km · 15 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🏄</div><div class="stop-text"><strong>1:00 PM — Hikkaduwa Beach &amp; Lunch</strong><p>Great snorkelling reef right off the beach. Check the menu for vegetarian options — it's a seafood-heavy area. Buy lunch here before heading south.</p><div class="stop-meta"><span class="meta-tag meta-free">Beach FREE</span><span class="meta-tag meta-petrol">⛽ Petrol Stop 2 here — INR 335</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🏰</div><div class="stop-text"><strong>3:30 PM — Unawatuna Beach</strong><p>A perfect horseshoe bay — calm water, beautiful curve of sand. Safe for swimming. 1 hour stop.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 25 km · 30 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">⚓</div><div class="stop-text"><strong>4:45 PM — Galle Dutch Fort at Sunset</strong><p>A UNESCO World Heritage Site — an entire colonial town inside ancient walls. Walk the ramparts as the sun drops over the ocean. The lighthouse glows gold. The cafes inside are great for vegetarians!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE entry</span><span class="meta-tag meta-km">📏 6 km · 10 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>7:15 PM — Drive to Weligama</strong><p>40 km, about 1 hour. Check in, rest up — tomorrow you're hunting blue whales.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 40 km · 1 hr</span></div></div></li>
-        </ul>
-      </div>
-      <div class="day-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📍 Google Maps</div>
-          <div class="sidebar-card-body">
-            <a class="map-link-item" href="https://maps.google.com/?q=Lunuganga+Bentota+Sri+Lanka" target="_blank">Lunuganga Estate</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Brief+Garden+Henarathgoda+Sri+Lanka" target="_blank">Brief Garden (Bevis Bawa)</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Kosgoda+Sea+Turtle+Conservation+Project" target="_blank">Kosgoda Turtle Hatchery</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Hikkaduwa+Beach+Sri+Lanka" target="_blank">Hikkaduwa Beach</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Unawatuna+Beach+Sri+Lanka" target="_blank">Unawatuna Beach</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Galle+Fort+Sri+Lanka" target="_blank">Galle Dutch Fort</a>
-          </div>
-        </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">💡 Tips</div>
-          <div class="sidebar-card-body">
-            <div class="tip-item"><span>💡</span><span>Busiest driving day — start early at 7 AM sharp!</span></div>
-            <div class="tip-item"><span>💡</span><span>At Galle Fort, walk the ocean-facing rampart wall — it's the best spot at sunset.</span></div>
-            <div class="tip-item"><span>💡</span><span>Vegetarian cafes inside Galle Fort: The Heritage and Pedlar's Inn are both excellent.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="day-guide-btn-wrap">
-      <a href="day2.html" class="day-guide-btn">📖 Full Day Guide — Day 2 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DAY 3 ════════════════ -->
-<div class="day-section" id="day3">
-  <div class="day-header">
-    <div class="day-header-img" style="background-image:url('images/day3-header.jpg');background-position:center 40%;"></div>
-    <div class="day-header-overlay"></div>
-    <div class="day-header-content">
-      <div class="day-number-label">Day 3 · 30 March 2026</div>
-      <h2 class="day-title">Weligama — The Big Day</h2>
-      <div class="day-route">🐋 Whale Watching · 🏄 Surfing · Parrot Rock Sunset <span class="day-km-badge">0 km driving</span></div>
-    </div>
-  </div>
-  <div class="photo-strip">
-    <div class="photo-strip-img" style="background-image:url('images/day3-photo1.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day3-photo2.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day3-photo3.jpg');"></div>
-  </div>
-  <div class="day-body">
-    <div class="day-content">
-      <div>
-        <ul class="stops-list">
-          <li class="stop-item"><div class="stop-icon">🐋</div><div class="stop-text"><strong>6:00 AM — WHALE WATCHING (3–5 hours at sea!)</strong><p>Blue whales are the biggest animals that have EVER lived on Earth — longer than 3 city buses parked end to end. March/April is the absolute best time to see them off Mirissa. The boat goes far out into deep ocean water. Bring sunscreen!</p><div class="stop-meta"><span class="meta-tag meta-paid">~$50/person (INR 4,250)</span><span class="meta-tag meta-book">📞 Book ahead!</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🥤</div><div class="stop-text"><strong>Important: Confirm vegetarian snacks when booking</strong><p>The boat serves breakfast — confirm no fish or meat products. Raja &amp; Whales: +94 71 046 0399. Book at least 2 weeks before travel!</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🍽️</div><div class="stop-text"><strong>11:30 AM — Return, shower, rest &amp; lunch</strong><p>Vegetarian kottu roti — chopped flatbread stir-fried with vegetables, eggs, and spices on a hot iron plate. The sound of the iron scrapers is part of the experience!</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🏄</div><div class="stop-text"><strong>1:30 PM — Surf Lesson at Weligama Beach</strong><p>Weligama is called the best beginner surf beach in all of Asia. The waves are gentle, the instructors are brilliant, and you WILL stand up on your first day. 1.5 hour lesson.</p><div class="stop-meta"><span class="meta-tag meta-paid">~INR 1,700/person</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🌴</div><div class="stop-text"><strong>3:30 PM — Explore Weligama Town</strong><p>Wander the streets, try fresh tropical fruits, buy a coconut, watch stilt fishermen if you can spot them from the shore.</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🦜</div><div class="stop-text"><strong>5:15 PM — Parrot Rock Golden Hour</strong><p>A giant rock island just off the beach that turns deep orange in the sunset. Sit on the beach and watch the colours change. One of Sri Lanka's most iconic sunset views.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🍛</div><div class="stop-text"><strong>7:00 PM — Dinner</strong><p>Ask for pumpkin curry, dhal, pol sambol, and string hoppers. Best vegetarian combo in Sri Lanka.</p></div></li>
-        </ul>
-      </div>
-      <div class="day-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📍 Google Maps</div>
-          <div class="sidebar-card-body">
-            <a class="map-link-item" href="https://maps.google.com/?q=Mirissa+Harbour+Sri+Lanka" target="_blank">Mirissa Harbour (Whale Watching)</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Weligama+Beach+Sri+Lanka" target="_blank">Weligama Beach (Surf)</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Parrot+Rock+Weligama+Sri+Lanka" target="_blank">Parrot Rock, Weligama</a>
-          </div>
-        </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">💡 Tips</div>
-          <div class="sidebar-card-body">
-            <div class="tip-item"><span>🐋</span><span>Book whale watching at least 2 weeks in advance. March/April = peak blue whale season. You are very lucky!</span></div>
-            <div class="tip-item"><span>💡</span><span>No driving today — rest your tuk tuk arms! Weligama is small enough to walk everywhere.</span></div>
-            <div class="tip-item"><span>💡</span><span>Bring motion sickness tablets if either of you gets seasick — the whale boat goes to deep water.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="day-guide-btn-wrap">
-      <a href="day3.html" class="day-guide-btn">📖 Full Day Guide — Day 3 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DAY 4 ════════════════ -->
-<div class="day-section" id="day4">
-  <div class="day-header">
-    <div class="day-header-img" style="background-image:url('images/day4-header.jpg');background-position:center 50%;"></div>
-    <div class="day-header-overlay"></div>
-    <div class="day-header-content">
-      <div class="day-number-label">Day 4 · 31 March 2026</div>
-      <h2 class="day-title">Into the Mountains</h2>
-      <div class="day-route">Coconut Hill · Hiriketiya · Ravana Falls ⭐ · Diyaluma <span class="day-km-badge">~168 km</span></div>
-    </div>
-  </div>
-  <div class="photo-strip">
-    <div class="photo-strip-img" style="background-image:url('images/day4-photo1.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day4-photo2.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day4-photo3.jpg');"></div>
-  </div>
-  <div class="day-body">
-    <div class="day-content">
-      <div>
-        <ul class="stops-list">
-          <li class="stop-item"><div class="stop-icon">🌅</div><div class="stop-text"><strong>6:00 AM — Coconut Tree Hill, Mirissa</strong><p>A small hill completely covered in tall coconut trees that lean dramatically out over the cliff. Watch the sun rise out of the ocean from here. Absolutely breathtaking — one of those views you'll never forget.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 7 km · 15 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">⛵</div><div class="stop-text"><strong>6:45 AM — Mirissa Fishing Harbour</strong><p>Walk down from Coconut Hill to watch fishermen bringing in the morning catch as the golden sun paints the colourful boats. A quiet magical moment.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 10 min walk from Coconut Hill</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🍳</div><div class="stop-text"><strong>7:30 AM — Breakfast + Check Out</strong><p>Egg hoppers (bowl-shaped crispy crepes with egg cooked inside) + pol sambol (spiced coconut paste). The best Sri Lankan breakfast.</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🏊</div><div class="stop-text"><strong>10:15 AM — Hiriketiya Beach</strong><p>A SECRET hidden cove only discovered recently — the ocean wraps around like a perfect turquoise bowl. Shallow, calm, beautiful. One of the most unique beaches in all of Asia.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 45 km · 1 hr</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🌊</div><div class="stop-text"><strong>12:00 PM — Tangalle Beach &amp; Lunch</strong><p>Beautiful wide beach. IMPORTANT for the vegetarian: say "without fish, without meat, without Maldive fish" very clearly — Tangalle is an intense seafood town and hidden fish seasoning is everywhere.</p><div class="stop-meta"><span class="meta-tag meta-petrol">⛽ Petrol Stop 3 here — INR 430</span><span class="meta-tag meta-km">📏 25 km · 35 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🗿</div><div class="stop-text"><strong>3:00 PM — Buduruwagala Rock Carvings</strong><p>Seven giant Buddhas carved directly into a jungle rock face 1,200 years ago. They're enormous — the central standing Buddha is 15 metres tall! Hidden behind a quiet forest path.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $5 (INR 425)</span><span class="meta-tag meta-km">📏 60 km · 1.5 hrs</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">💧</div><div class="stop-text"><strong>NEW ⭐ — Ravana Falls (20 min stop)</strong><p>A stunning 25-metre waterfall that you can see RIGHT FROM THE ROAD — just pull the tuk tuk over! Named after the demon king Ravana from the Ramayana. Totally free, zero effort, completely beautiful.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 20 km · 30 min</span><span class="meta-tag meta-highlight">⭐ NEW</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🏨</div><div class="stop-text"><strong>4:30 PM — Diyaluma Falls &amp; Check In</strong><p>Arrive at your guesthouse near Sri Lanka's second-tallest waterfall. Eat early, sleep early — tomorrow morning you'll be swimming at the TOP of it.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 15 km · 20 min</span></div></div></li>
-        </ul>
-      </div>
-      <div class="day-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📍 Google Maps</div>
-          <div class="sidebar-card-body">
-            <a class="map-link-item" href="https://maps.google.com/?q=Coconut+Tree+Hill+Mirissa+Sri+Lanka" target="_blank">Coconut Tree Hill, Mirissa</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Mirissa+Harbour+Sri+Lanka" target="_blank">Mirissa Fishing Harbour</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Hiriketiya+Beach+Dikwella+Sri+Lanka" target="_blank">Hiriketiya Beach</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Tangalle+Beach+Sri+Lanka" target="_blank">Tangalle Beach</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Buduruwagala+Sri+Lanka" target="_blank">Buduruwagala Rock Carvings</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Rawana+Ella+Falls+Sri+Lanka" target="_blank">Ravana Falls ⭐</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Diyaluma+Falls+Sri+Lanka" target="_blank">Diyaluma Falls</a>
-          </div>
-        </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">💡 Tips</div>
-          <div class="sidebar-card-body">
-            <div class="tip-item"><span>💡</span><span>Longest driving day — 168 km. Start at 6 AM sharp to make it comfortably.</span></div>
-            <div class="tip-item"><span>💡</span><span>Ravana Falls needs zero effort — just pull over on the A23 road and stare!</span></div>
-            <div class="tip-item"><span>🥗</span><span>Tangalle is a seafood town — be extra specific about vegetarian needs here.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="day-guide-btn-wrap">
-      <a href="day4.html" class="day-guide-btn">📖 Full Day Guide — Day 4 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DAY 5 ════════════════ -->
-<div class="day-section" id="day5">
-  <div class="day-header">
-    <div class="day-header-img" style="background-image:url('images/day5-header.jpg');background-position:center 40%;"></div>
-    <div class="day-header-overlay"></div>
-    <div class="day-header-content">
-      <div class="day-number-label">Day 5 · 1 April 2026</div>
-      <h2 class="day-title">Highland Wonders</h2>
-      <div class="day-route">Infinity Pools · Bambarakanda · Lipton's Seat ⭐ · First Abseil! <span class="day-km-badge">~110 km</span></div>
-    </div>
-  </div>
-  <div class="photo-strip">
-    <div class="photo-strip-img" style="background-image:url('images/day5-photo1.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day5-photo2.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day5-photo3.jpg');"></div>
-  </div>
-  <div class="day-body">
-    <div class="day-content">
-      <div>
-        <ul class="stops-list">
-          <li class="stop-item"><div class="stop-icon">🌊</div><div class="stop-text"><strong>6:30 AM — Upper Diyaluma Infinity Pools</strong><p>Natural swimming pools right at the edge of a 220-metre cliff! You literally swim and look DOWN at the whole valley. Take the Poonagala road to the top, then 30 minutes walk down to the pools. Guide Saman knows every pool!</p><div class="stop-meta"><span class="meta-tag meta-paid">Guide fee ~INR 255</span><span class="meta-tag meta-book">📞 Saman: +94 71 430 4910</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🍳</div><div class="stop-text"><strong>8:15 AM — Breakfast + Check Out</strong><p>Ask for early breakfast at 8 AM when you check in. String hoppers are perfect highland fuel.</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🏔️</div><div class="stop-text"><strong>11:00 AM — Bambarakanda Falls</strong><p>Sri Lanka's TALLEST waterfall at 263 metres — taller than the Eiffel Tower! It's a thin silver ribbon dropping from the sky into a misty pool. Quick 45-minute stop — photos and awe, then move on.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: LKR 350 (INR 97)</span><span class="meta-tag meta-km">📏 40 km · 1 hr</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🍵</div><div class="stop-text"><strong>NEW ⭐ — 12:30 PM — Lipton's Seat Tea Estate</strong><p>Drive through endless rolling green tea plantations to a hilltop where Sir Thomas Lipton (the tea brand!) used to watch over his entire estate. On a clear April day you can see all the way to the southern coast. The road up through the Dambatenne Tea Factory is one of the most scenic drives in Sri Lanka.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 30 km · 45 min</span><span class="meta-tag meta-highlight">⭐ NEW</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🍛</div><div class="stop-text"><strong>1:30 PM — Maskeliya Lunch</strong><p>Vegetarian rice and curry in the highlands is exceptional — the pumpkin, dhal, and jackfruit curries up here are spiced differently than the coast. Best vegetarian food of the trip!</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🧗</div><div class="stop-text"><strong>2:30 PM — Gartmore Falls Abseil 25m!</strong><p>Your FIRST abseil! Walk backwards off a 25-metre waterfall into a pool overlooking the Maskeliya Reservoir. It sounds terrifying but the guides are incredible. This is the confidence-builder before the big one tomorrow!</p><div class="stop-meta"><span class="meta-tag meta-paid">~$30/person (INR 2,550)</span><span class="meta-tag meta-book">📞 Ceylon Extreme: +94 70 7900 700</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🚶</div><div class="stop-text"><strong>4:15 PM — Maskeliya Reservoir Walk</strong><p>A serene lake completely surrounded by misty tea-estate mountains. 45 minutes strolling the edge with the cool highland air around you.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🏨</div><div class="stop-text"><strong>5:15 PM — Check In Maskeliya/Hatton</strong><p>Dinner: string hoppers + pol sambol + dhal + pumpkin curry. The absolute BEST vegetarian meal of the entire trip. Sleep well — tomorrow is the BIG abseil!</p><div class="stop-meta"><span class="meta-tag meta-petrol">⛽ Petrol Stop 4 &amp; 5 · Wellawaya + Hatton · INR 415+335</span></div></div></li>
-        </ul>
-      </div>
-      <div class="day-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📍 Google Maps</div>
-          <div class="sidebar-card-body">
-            <a class="map-link-item" href="https://maps.google.com/?q=Diyaluma+Falls+Upper+Pools+Koslanda" target="_blank">Upper Diyaluma Pools</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Bambarakanda+Falls+Sri+Lanka" target="_blank">Bambarakanda Falls</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Lipton%27s+Seat+Haputale+Sri+Lanka" target="_blank">Lipton's Seat ⭐</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Gartmore+Falls+Maskeliya+Sri+Lanka" target="_blank">Gartmore Falls</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Maskeliya+Reservoir+Sri+Lanka" target="_blank">Maskeliya Reservoir</a>
-          </div>
-        </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">💡 Tips</div>
-          <div class="sidebar-card-body">
-            <div class="tip-item"><span>💡</span><span>Book Gartmore AND Laxapana together: Ceylon Extreme +94 70 7900 700.</span></div>
-            <div class="tip-item"><span>🍵</span><span>Lipton's Seat is best in the morning — afternoon clouds can cover the view.</span></div>
-            <div class="tip-item"><span>💡</span><span>It gets cold up here at night — pack a light jacket in the tuk tuk from Day 4 onwards!</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="day-guide-btn-wrap">
-      <a href="day5.html" class="day-guide-btn">📖 Full Day Guide — Day 5 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DAY 6 ════════════════ -->
-<div class="day-section" id="day6">
-  <div class="day-header">
-    <div class="day-header-img" style="background-image:url('images/day6-header.jpg');background-position:center 50%;"></div>
-    <div class="day-header-overlay"></div>
-    <div class="day-header-content">
-      <div class="day-number-label">Day 6 · 2 April 2026</div>
-      <h2 class="day-title">The Big Abseil Day</h2>
-      <div class="day-route">🧗 Laxapana 126m · Prehistoric Cave · Rainforest · Rock Pools <span class="day-km-badge">~80 km</span></div>
-    </div>
-  </div>
-  <div class="photo-strip">
-    <div class="photo-strip-img" style="background-image:url('images/day6-photo1.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day6-photo2.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day6-photo3.jpg');"></div>
-  </div>
-  <div class="day-body">
-    <div class="day-content">
-      <div>
-        <ul class="stops-list">
-          <li class="stop-item"><div class="stop-icon">🧗</div><div class="stop-text"><strong>8:00 AM — LAXAPANA FALLS ABSEIL · 126 METRES!!</strong><p>THE moment of the trip. The highest free-falling waterfall abseil in Sri Lanka. You walk backwards off the top of a 126-metre cliff with the waterfall thundering next to you. The valley opens up below you as you descend. Professional guides, full safety gear, 3 hours total. Like becoming a superhero — for real.</p><div class="stop-meta"><span class="meta-tag meta-paid">~$60/person (INR 5,100)</span><span class="meta-tag meta-book">📞 Ceylon Extreme: +94 70 7900 700</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>11:30 AM — Drive to Kitulgala</strong><p>About 80 km, 2 hours on winding mountain roads through tea estates and misty valleys. One of the most beautiful drives in Sri Lanka.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 80 km · ~2 hrs</span><span class="meta-tag meta-petrol">⛽ Petrol Stop 5 in Hatton before leaving · INR 335</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🍛</div><div class="stop-text"><strong>1:30 PM — Arrive Kitulgala, Lunch</strong><p>Vegetarian kottu roti — ask clearly for no fish. Sit by the Kelani River and feel the achievement of the morning sinking in!</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🦴</div><div class="stop-text"><strong>2:30 PM — Belilena Prehistoric Cave</strong><p>People lived in this cave 32,000 YEARS AGO. They found the skeleton of "Balangoda Man" here — the oldest human remains in Sri Lanka. You walk through a rubber estate to reach it. Small, quiet, genuinely mind-bending to stand where ancient humans cooked food and slept.</p><div class="stop-meta"><span class="meta-tag meta-paid">~$2 (INR 170)</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🌿</div><div class="stop-text"><strong>4:00 PM — Makandawa Rainforest Walk</strong><p>Giant ancient trees whose canopy blocks the sky. Endemic birds that exist ONLY in Sri Lanka. The sounds of the forest — cicadas, hornbills, rushing streams. 1 hour walk on marked paths.</p><div class="stop-meta"><span class="meta-tag meta-paid">LKR 200 (INR 56)</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">💦</div><div class="stop-text"><strong>5:15 PM — Kataran Oya Natural Rock Pools</strong><p>Seven natural pools connected by a 5-metre slide of smooth rock, plus a jumping waterfall. Like a natural water park carved by the river. Perfect way to wash off the abseil adrenaline!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🏨</div><div class="stop-text"><strong>7:30 PM — Dinner at Riverside Eco-Lodge</strong><p>Tell them vegetarian when you book. Many Kitulgala lodges are right on the Kelani River — dinner with the sound of rushing water is perfect after an epic day.</p></div></li>
-        </ul>
-      </div>
-      <div class="day-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📍 Google Maps</div>
-          <div class="sidebar-card-body">
-            <a class="map-link-item" href="https://maps.google.com/?q=Laxapana+Falls+Sri+Lanka" target="_blank">Laxapana Falls Abseil</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Belilena+Cave+Kitulgala+Sri+Lanka" target="_blank">Belilena Cave</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Makandawa+Rainforest+Kitulgala" target="_blank">Makandawa Rainforest</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Kataran+Oya+Kitulgala+Sri+Lanka" target="_blank">Kataran Oya Rock Pools</a>
-          </div>
-        </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">💡 Tips</div>
-          <div class="sidebar-card-body">
-            <div class="tip-item"><span>🧗</span><span>After the 126m abseil your legs may feel like jelly — completely normal! Sit, eat something sweet, drink water.</span></div>
-            <div class="tip-item"><span>🎬</span><span>Kitulgala is where 'The Bridge on the River Kwai' (1957 Oscar winner) was filmed!</span></div>
-            <div class="tip-item"><span>💡</span><span>Book the Kitulgala eco-lodge in advance — riverside rooms sell out fast.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="day-guide-btn-wrap">
-      <a href="day6.html" class="day-guide-btn">📖 Full Day Guide — Day 6 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DAY 7 ════════════════ -->
-<div class="day-section" id="day7">
-  <div class="day-header">
-    <div class="day-header-img" style="background-image:url('images/day7-header.jpg');background-position:center 50%;"></div>
-    <div class="day-header-overlay"></div>
-    <div class="day-header-content">
-      <div class="day-number-label">Day 7 · 3 April 2026 · Final Day</div>
-      <h2 class="day-title">Rafting &amp; Goodbye</h2>
-      <div class="day-route">🚣 White Water Rafting · Galle Face Green · ✈️ Home <span class="day-km-badge">~84 km</span></div>
-    </div>
-  </div>
-  <div class="photo-strip">
-    <div class="photo-strip-img" style="background-image:url('images/day7-photo1.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day7-photo2.jpg');"></div>
-    <div class="photo-strip-img" style="background-image:url('images/day7-photo3.jpg');"></div>
-  </div>
-  <div class="day-body">
-    <div class="day-content">
-      <div>
-        <ul class="stops-list">
-          <li class="stop-item"><div class="stop-icon">🚣</div><div class="stop-text"><strong>8:00 AM SHARP — White Water Rafting, Kelani River</strong><p>Grade 2–3 rapids — splashing, screaming, laughing for 5 km down the same river where Bridge on the River Kwai was filmed. 2.5 hours of pure adrenaline and joy. The river is fast, the guides are hilarious, and the jungle on both banks is absolutely beautiful. CONFIRM the 8 AM slot strictly — you have a flight!</p><div class="stop-meta"><span class="meta-tag meta-paid">~$25/person (INR 2,125)</span><span class="meta-tag meta-book">📞 Adventure LK: +94 76 686 7707</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🚿</div><div class="stop-text"><strong>10:30 AM — Shower + Pack + Check Out</strong><p>Pack everything carefully — the tuk tuk journey back to Colombo is 84 km on smoother roads.</p></div></li>
-          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>12:00 PM — DEPART for Colombo</strong><p>The A7 highway — much smoother than the mountain roads! 84 km, about 2 hours. Last tuk tuk drive of the adventure.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 84 km · ~2 hrs</span><span class="meta-tag meta-petrol">⛽ Petrol Stop 6 · INR 220</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🌊</div><div class="stop-text"><strong>2:15 PM — Galle Face Green, Colombo</strong><p>A long seaside lawn where all of Colombo comes in the evening. Buy a king coconut — your last one! Buy isso vadai (spiced lentil fritters — vegetarian and delicious). Stand at the edge and look at the Indian Ocean one final time.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">30 min stop — don't linger!</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>2:45 PM — Drive to Airport</strong><p>35 km from Galle Face Green, about 45 minutes. Drop off the tuk tuk, go to the SriLankan Airlines counter.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 35 km · 45 min</span></div></div></li>
-          <li class="stop-item"><div class="stop-icon">✅</div><div class="stop-text"><strong>3:30 PM — Arrive Airport</strong><p>You made it — within the 4 PM deadline with 30 minutes to spare! Eat at the CMB departure lounge — plenty of vegetarian options.</p></div></li>
-          <li class="stop-item"><div class="stop-icon">✈️</div><div class="stop-text"><strong>6:45 PM — Board UL123 to Chennai</strong><p>Arrive Chennai at 8:10 PM. 7 days, ~680 km, 2 waterfall abseils, 1 blue whale, countless memories. Trip complete! 🎉</p></div></li>
-        </ul>
-      </div>
-      <div class="day-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📍 Google Maps</div>
-          <div class="sidebar-card-body">
-            <a class="map-link-item" href="https://maps.google.com/?q=Adventure+Lanka+Kitulgala+Sri+Lanka" target="_blank">Adventure LK Rafting</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Galle+Face+Green+Colombo+Sri+Lanka" target="_blank">Galle Face Green</a>
-            <a class="map-link-item" href="https://maps.google.com/?q=Bandaranaike+International+Airport+Sri+Lanka" target="_blank">Colombo Airport (CMB)</a>
-          </div>
-        </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">⚠️ Critical Timing</div>
-          <div class="sidebar-card-body">
-            <div class="tip-item"><span>⏰</span><span>Rafting MUST start at 8 AM — call Adventure LK the night before to reconfirm.</span></div>
-            <div class="tip-item"><span>⏰</span><span>Leave Kitulgala by 12 PM latest. Do not be late — you have a flight.</span></div>
-            <div class="tip-item"><span>⏰</span><span>You need to be at CMB by 4 PM. Timeline gives you 30 min buffer — use it wisely!</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="day-guide-btn-wrap">
-      <a href="day7.html" class="day-guide-btn">📖 Full Day Guide — Day 7 →</a>
-    </div>
-  </div>
-</div>
 
 <div class="section-divider"></div>
 
@@ -1652,7 +1479,7 @@
 <footer>
   <div style="font-size:1.5rem;margin-bottom:0.8rem;">🇮🇳 ✈️ 🇱🇰</div>
   <strong>Sowmya &amp; Ashin's Sri Lanka Adventure 2026</strong><br>
-  28 March – 3 April · SriLankan Airlines UL122/UL123 · Booking Ref: 7ZGMRX<br><br>
+  28 March – 3 April · UL122/UL123 CMB · 7 Days · ~680 km by Tuk Tuk 🛺<br><br>
   <span style="font-size:0.75rem;opacity:0.6;">All prices approximate. Entry fees subject to change. Book all activities well in advance. Have an incredible trip! 🌊</span>
 </footer>
 
@@ -1669,16 +1496,78 @@
 
   // ── ACTIVE NAV HIGHLIGHT ───────────────────────────────────────────────────
   const sections = document.querySelectorAll('[id]');
-  const navLinks = document.querySelectorAll('nav a');
+  const navLinks = document.querySelectorAll('.site-nav .nav-links > a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(l => { l.style.color = ''; l.style.borderColor = ''; });
-        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        const active = document.querySelector(`.site-nav .nav-links > a[href="#${entry.target.id}"]`);
         if (active) { active.style.color = '#e8b84b'; active.style.borderColor = '#e8b84b'; }
       }
     });
   }, { rootMargin: '-40% 0px -50% 0px' });
   sections.forEach(s => observer.observe(s));
 
-  // ── STOP ITEM FADE-IN ──────────────────────────────────�
+  // ── STOP ITEM FADE-IN ──────────────────────────────────
+  const fadeItems = document.querySelectorAll('.day-section, .info-card, .overview-card');
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObs.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+  fadeItems.forEach(el => fadeObs.observe(el));
+
+</script>
+<script>
+(function () {
+  var toggle   = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  var dropdown = document.getElementById('itinDropdown');
+  var dropBtn  = document.getElementById('itinBtn');
+
+  function closeAll() {
+    if (navLinks) navLinks.classList.remove('open');
+    if (toggle)   toggle.classList.remove('open');
+    if (dropdown) dropdown.classList.remove('open');
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = navLinks.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      if (!isOpen && dropdown) dropdown.classList.remove('open');
+    });
+  }
+
+  if (dropBtn) {
+    dropBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+  }
+
+  if (navLinks) {
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { closeAll(); });
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var nav = document.getElementById('siteNav');
+    if (nav && !nav.contains(e.target)) closeAll();
+  });
+})();
+</script>
+<footer class="site-footer">
+  <div style="font-size:1.5rem;margin-bottom:0.8rem;">&#127470;&#127475; &#9992;&#65039; &#127466;&#127472;</div>
+  <strong>Sowmya &amp; Ashin&#39;s Sri Lanka Adventure 2026</strong><br>
+  28 March &#8211; 3 April &middot; UL122/UL123 CMB &middot; 7 Days &middot; ~680 km by Tuk Tuk &#128666;<br><br>
+  <span style="font-size:0.75rem;opacity:0.6;">All prices approximate. Entry fees subject to change. Book all activities well in advance. Have an incredible trip! &#127754;</span>
+</footer>
+
+</body>
+</html>

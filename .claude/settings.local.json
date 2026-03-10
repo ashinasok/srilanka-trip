@@ -21,7 +21,10 @@
       "Bash(__NEW_LINE_24a42069606044fc__ echo \"\")",
       "Bash(# Check laxapana image dimensions sips -g all /Users/ashinasok/Desktop/Trip/images/loc/laxapana-falls.jpg)",
       "Bash(grep -rn \"Parrot Rock\\\\|parrot\" /Users/ashinasok/Desktop/Trip/day*.html)",
-      "Bash(python3 fix_all2.py)"
+      "Bash(python3 fix_all2.py)",
+      "Bash(python3 fix_nav.py)",
+      "Bash(python3 -:*)",
+      "Bash(python3 fix_index.py)"
     ]
   }
 }
