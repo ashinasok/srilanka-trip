@@ -5,7 +5,23 @@
       "Bash(python3 retry_images.py)",
       "Bash(python3 -c \":*)",
       "Bash(python3 patch_images.py)",
-      "Bash(python3 fix_photo3.py)"
+      "Bash(python3 fix_photo3.py)",
+      "Bash(ls -la /Users/ashinasok/Desktop/Trip/*.html /Users/ashinasok/Desktop/Trip/*.css)",
+      "Bash(ls -lh /Users/ashinasok/Desktop/Trip/day*.html)",
+      "Bash(done)",
+      "Bash(python3 fix_all.py)",
+      "Bash(wc -l /Users/ashinasok/Desktop/Trip/day*.html /Users/ashinasok/Desktop/Trip/index.html)",
+      "Bash(__NEW_LINE_6c2f4d7d0d0b0efd__ echo \"\")",
+      "Bash(ls /Users/ashinasok/Desktop/Trip/images/*.jpg)",
+      "Bash(python3 fix_images2.py)",
+      "Bash(__NEW_LINE_fb3fe4dfd5bf0dd4__ echo \"\")",
+      "Bash(__NEW_LINE_16ee2a881fc0ae3d__ echo \"\")",
+      "Bash(__NEW_LINE_317ffa2dab663b77__ echo \"\")",
+      "Bash(__NEW_LINE_03bbd81277d8898e__ echo \"\")",
+      "Bash(__NEW_LINE_24a42069606044fc__ echo \"\")",
+      "Bash(# Check laxapana image dimensions sips -g all /Users/ashinasok/Desktop/Trip/images/loc/laxapana-falls.jpg)",
+      "Bash(grep -rn \"Parrot Rock\\\\|parrot\" /Users/ashinasok/Desktop/Trip/day*.html)",
+      "Bash(python3 fix_all2.py)"
     ]
   }
 }
