@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 download_images.py)",
+      "Bash(python3 retry_images.py)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3 patch_images.py)",
+      "Bash(python3 fix_photo3.py)"
+    ]
+  }
+}
