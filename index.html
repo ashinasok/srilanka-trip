@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Lanka Adventure — Sowmya & Ashin 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0a6e6e;
+    --teal-light: #12a3a3;
+    --teal-dark: #064f4f;
+    --gold: #c8922a;
+    --gold-light: #e8b84b;
+    --cream: #fdf6ed;
+    --cream-dark: #f5e8d4;
+    --dark: #1a1a2e;
+    --text: #2d2d2d;
+    --muted: #6b6b6b;
+    --white: #ffffff;
+    --red: #c0392b;
+    --green: #1e7a4a;
+    --orange: #d4500a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO COVER ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--teal-dark);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    /* image loaded dynamically by JS */
+    background-size: cover;
+    background-position: center 40%;
+    opacity: 0.45;
+    transform: scale(1.05);
+    animation: heroZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(6,40,40,0.3) 0%, rgba(6,40,40,0.7) 60%, rgba(6,40,40,0.95) 100%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeUp 1.2s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-flag { font-size: 2.2rem; letter-spacing: 0.5rem; margin-bottom: 1.2rem; }
+
+  .hero-names {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+
+  .hero-title span { color: var(--gold-light); font-style: italic; }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 2rem;
+  }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    justify-content: center; margin-bottom: 2.5rem;
+  }
+
+  .pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(8px);
+  }
+
+  .scroll-hint {
+    position: relative; z-index: 2;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s ease infinite;
+    margin-top: 1rem;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--teal-dark);
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  nav a {
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+  }
+  nav a:hover { color: var(--gold-light); border-color: var(--gold-light); background: rgba(255,255,255,0.05); }
+
+  /* ── SECTIONS ── */
+  section { padding: 4rem 0; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  /* ── OVERVIEW CARDS ── */
+  #overview { background: var(--teal-dark); }
+  #overview .section-title { color: white; }
+  #overview .section-label { color: var(--gold-light); }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .overview-card {
+    background: rgba(255,255,255,0.05);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .overview-card:hover { background: rgba(255,255,255,0.1); }
+  .overview-card .oc-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
+  .overview-card .oc-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold-light); margin-bottom: 0.3rem; }
+  .overview-card .oc-value { color: white; font-weight: 600; font-size: 0.95rem; line-height: 1.4; }
+
+  /* ── ITINERARY AT A GLANCE ── */
+  .toc-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .toc-row {
+    display: grid;
+    grid-template-columns: 80px 90px 1fr;
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .toc-row:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+
+  .toc-day { background: var(--teal); color: white; padding: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; text-align: center; }
+  .toc-day .day-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; line-height: 1; }
+
+  .toc-date { background: var(--teal-dark); color: var(--gold-light); padding: 1rem; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 500; text-align: center; }
+
+  .toc-info { background: white; padding: 0.9rem 1.2rem; display: flex; flex-direction: column; justify-content: center; }
+  .toc-route { font-weight: 600; font-size: 0.9rem; color: var(--dark); margin-bottom: 0.2rem; }
+  .toc-desc { font-size: 0.78rem; color: var(--muted); }
+  .new-badge { background: var(--gold); color: white; font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 100px; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 0.4rem; }
+
+  /* ── DAY PAGES ── */
+  .day-section { scroll-margin-top: 60px; }
+
+  .day-header {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .day-header-img {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+  }
+  .day-section:hover .day-header-img { transform: scale(1.03); }
+
+  .day-header-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(6,40,40,0.92) 0%, rgba(6,40,40,0.4) 55%, transparent 100%);
+  }
+
+  .day-header-content {
+    position: relative; z-index: 2;
+    padding: 2rem 2.5rem;
+    width: 100%;
+  }
+
+  .day-number-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  .day-route {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+  }
+
+  .day-km-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-left: 0.8rem;
+    vertical-align: middle;
+  }
+
+  /* ── DAY BODY ── */
+  .day-body { background: white; }
+
+  .day-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .day-content { grid-template-columns: 1fr; gap: 1.5rem; }
+    .toc-row { grid-template-columns: 60px 70px 1fr; }
+  }
+
+  /* Stops */
+  .stops-list { list-style: none; }
+
+  .stop-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .stop-item:last-child { border-bottom: none; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:none} }
+
+  .stop-icon { font-size: 1.3rem; flex-shrink: 0; width: 2rem; text-align: center; padding-top: 0.1rem; }
+
+  .stop-text { flex: 1; }
+  .stop-text strong { font-weight: 600; color: var(--dark); display: block; margin-bottom: 0.15rem; font-size: 0.92rem; }
+  .stop-text p { font-size: 0.84rem; color: var(--muted); line-height: 1.5; }
+
+  .stop-meta {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;
+  }
+  .meta-tag {
+    font-size: 0.7rem; padding: 0.15rem 0.55rem; border-radius: 100px;
+    font-weight: 500; letter-spacing: 0.03em;
+  }
+  .meta-free { background: #e8f5e9; color: var(--green); }
+  .meta-paid { background: #fff3e0; color: var(--orange); }
+  .meta-km { background: #e3f2fd; color: #1565c0; }
+  .meta-petrol { background: #fce4ec; color: #c62828; }
+  .meta-book { background: #f3e5f5; color: #6a1b9a; }
+  .meta-highlight { background: var(--gold); color: white; }
+
+  /* Sidebar */
+  .day-sidebar { position: sticky; top: 80px; }
+
+  .sidebar-card {
+    background: var(--cream);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    border: 1px solid var(--cream-dark);
+  }
+
+  .sidebar-card-header {
+    background: var(--teal);
+    color: white;
+    padding: 0.7rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .sidebar-card-body { padding: 1rem; }
+
+  .map-link-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    text-decoration: none;
+    color: var(--teal);
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .map-link-item:last-child { border-bottom: none; }
+  .map-link-item:hover { color: var(--gold); }
+  .map-link-item::before { content: "📍"; font-size: 0.85rem; }
+
+  .tip-item {
+    display: flex; gap: 0.6rem; padding: 0.4rem 0;
+    font-size: 0.8rem; color: var(--text); line-height: 1.45;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .tip-item:last-child { border-bottom: none; }
+
+  /* ── PHOTO STRIP ── */
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    height: 200px;
+  }
+
+  .photo-strip-img {
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s;
+  }
+  .photo-strip-img:hover { opacity: 0.85; }
+  .photo-strip-img:first-child { border-radius: 0; }
+
+  /* ── FUEL PAGE ── */
+  #fuel { background: var(--teal-dark); }
+  #fuel .section-title { color: white; }
+  #fuel .section-label { color: var(--gold-light); }
+
+  .fuel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .fuel-stop-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .fuel-stop-card:hover { background: rgba(255,255,255,0.12); }
+
+  .fuel-stop-num {
+    background: var(--gold);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .fuel-stop-info h4 { color: white; font-size: 0.9rem; margin-bottom: 0.15rem; }
+  .fuel-stop-info p { color: rgba(255,255,255,0.6); font-size: 0.78rem; line-height: 1.4; }
+  .fuel-cost { color: var(--gold-light); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem; }
+
+  .fuel-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .fuel-stat { background: rgba(255,255,255,0.05); padding: 1.2rem; text-align: center; }
+  .fuel-stat .fs-val { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-light); }
+  .fuel-stat .fs-label { font-size: 0.72rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
+
+  .fuel-tip {
+    background: rgba(200,146,42,0.15);
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.8rem;
+    line-height: 1.5;
+  }
+  .fuel-tip strong { color: var(--gold-light); }
+
+  /* ── FEES TABLE ── */
+  #fees { background: var(--cream); }
+
+  .fees-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .fees-table th {
+    background: var(--teal-dark);
+    color: white;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .fees-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+  }
+
+  .fees-table tr:last-child td { border-bottom: none; }
+  .fees-table tr:nth-child(even) td { background: #fafafa; }
+  .fees-table tr:hover td { background: #f0fafa; }
+
+  .fee-free { color: var(--green); font-weight: 600; }
+  .fee-paid { color: var(--orange); font-weight: 600; }
+
+  .fees-total {
+    background: var(--teal-dark);
+    color: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 0 12px 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.9rem;
+  }
+  .fees-total strong { color: var(--gold-light); font-size: 1.1rem; }
+
+  /* ── BOOKINGS ── */
+  #bookings { background: white; }
+
+  .booking-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .booking-card {
+    border: 2px solid var(--cream-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .booking-card:hover { border-color: var(--teal-light); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+
+  .booking-card-top {
+    background: var(--teal);
+    padding: 1rem 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .booking-emoji { font-size: 1.8rem; }
+  .booking-name { color: white; font-weight: 700; font-size: 0.95rem; }
+  .booking-when { color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 0.1rem; }
+
+  .booking-card-body { padding: 1rem 1.2rem; }
+
+  .booking-detail {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 0.83rem;
+  }
+  .booking-detail:last-child { border-bottom: none; }
+  .booking-detail span:first-child { color: var(--muted); }
+  .booking-detail span:last-child { font-weight: 600; color: var(--dark); }
+  .booking-phone { color: var(--teal) !important; }
+  .booking-cost { color: var(--orange) !important; }
+  .booking-note {
+    background: #fff8e1;
+    border-left: 3px solid var(--gold);
+    padding: 0.5rem 0.7rem;
+    font-size: 0.76rem;
+    color: #7a5a00;
+    margin-top: 0.6rem;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.4;
+  }
+
+  /* ── ACCOMMODATION ── */
+  #accommodation { background: var(--cream); }
+
+  .accom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .accom-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .accom-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+  .accom-night {
+    background: var(--teal-dark);
+    color: white;
+    width: 60px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  .accom-night .night-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; line-height: 1; color: var(--gold-light); }
+
+  .accom-info { padding: 1rem 1.1rem; }
+  .accom-date { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+  .accom-place { font-weight: 700; font-size: 0.95rem; color: var(--dark); margin-bottom: 0.25rem; }
+  .accom-why { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  footer strong { color: var(--gold-light); }
+
+  /* ── DIVIDERS ── */
+  .section-divider {
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    nav, .scroll-hint { display: none; }
+    .day-header { height: 280px; }
+    .day-sidebar { position: static; }
+    .day-content { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-flag">🇮🇳 ✈️ 🇱🇰</div>
+    <div class="hero-names">Sowmya &amp; Ashin's Grand Adventure</div>
+    <h1 class="hero-title">Sri <span>Lanka</span></h1>
+    <p class="hero-subtitle">The Pearl of the Indian Ocean</p>
+    <div class="hero-pills">
+      <span class="pill">📅 28 March – 3 April 2026</span>
+      <span class="pill">🛺 Self-Driven Tuk Tuk</span>
+      <span class="pill">🗺️ ~680 km</span>
+      <span class="pill">✈️ SriLankan Airlines UL122/UL123</span>
+      <span class="pill">🔖 Ref: 7ZGMRX</span>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ scroll to explore ↓</div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#tuktuk">🛺 Rentals</a>
+  <a href="#glance">Itinerary</a>
+  <a href="#day1">Day 1</a>
+  <a href="#day2">Day 2</a>
+  <a href="#day3">Day 3</a>
+  <a href="#day4">Day 4</a>
+  <a href="#day5">Day 5</a>
+  <a href="#day6">Day 6</a>
+  <a href="#day7">Day 7</a>
+  <a href="#fuel">⛽ Fuel</a>
+  <a href="#fees">🎟 Fees</a>
+  <a href="#bookings">📞 Bookings</a>
+  <a href="#accommodation">🏨 Stays</a>
+</nav>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="section-label">Trip Summary</div>
+    <h2 class="section-title">Your Adventure at a Glance</h2>
+    <div class="overview-grid">
+      <div class="overview-card"><span class="oc-icon">✈️</span><div class="oc-label">Arrival Flight</div><div class="oc-value">UL122 Chennai → CMB<br>28 Mar, lands 11:05 AM</div></div>
+      <div class="overview-card"><span class="oc-icon">✈️</span><div class="oc-label">Return Flight</div><div class="oc-value">UL123 CMB → Chennai<br>3 Apr, departs 6:45 PM</div></div>
+      <div class="overview-card"><span class="oc-icon">🔖</span><div class="oc-label">Booking Ref</div><div class="oc-value">SriLankan Airlines<br>Ref: <strong style="color:var(--gold-light)">7ZGMRX</strong></div></div>
+      <div class="overview-card"><span class="oc-icon">🛺</span><div class="oc-label">Transport</div><div class="oc-value">Self-driven Tuk Tuk<br>~680 km total</div></div>
+      <div class="overview-card"><span class="oc-icon">📅</span><div class="oc-label">Duration</div><div class="oc-value">7 Days · 6 Nights<br>28 Mar – 3 Apr 2026</div></div>
+      <div class="overview-card"><span class="oc-icon">🌊</span><div class="oc-label">Water Adventures</div><div class="oc-value">Whale Watch · Surfing<br>Rafting · Infinity Pools</div></div>
+      <div class="overview-card"><span class="oc-icon">🧗</span><div class="oc-label">Abseils</div><div class="oc-value">Gartmore 25m (Day 5)<br>Laxapana 126m (Day 6)</div></div>
+      <div class="overview-card"><span class="oc-icon">⛽</span><div class="oc-label">Fuel Budget</div><div class="oc-value">6 petrol stops<br>~INR 2,900 total</div></div>
+      <div class="overview-card"><span class="oc-icon">🥗</span><div class="oc-label">Food Note</div><div class="oc-value">One vegetarian traveller<br>"Without fish, without meat"</div></div>
+      <div class="overview-card"><span class="oc-icon">🏨</span><div class="oc-label">Nights</div><div class="oc-value">Bentota · Weligama (×2)<br>Diyaluma · Maskeliya · Kitulgala</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ITINERARY AT A GLANCE -->
+<section id="glance">
+  <div class="container">
+    <div class="section-label">Full Schedule</div>
+    <h2 class="section-title">7 Days, One Epic Island</h2>
+    <div class="toc-grid">
+      <a class="toc-row" href="#day1">
+        <div class="toc-day"><div class="day-num">1</div><div>Day</div></div>
+        <div class="toc-date">28 Mar</div>
+        <div class="toc-info"><div class="toc-route">Colombo → Bentota</div><div class="toc-desc">Airport landing • Mangrove boat ride • First beach sunset</div></div>
+      </a>
+      <a class="toc-row" href="#day2">
+        <div class="toc-day"><div class="day-num">2</div><div>Day</div></div>
+        <div class="toc-date">29 Mar</div>
+        <div class="toc-info"><div class="toc-route">Bentota → Weligama via Galle</div><div class="toc-desc">Bawa estates • Baby turtles • Hikkaduwa • Galle Fort at sunset</div></div>
+      </a>
+      <a class="toc-row" href="#day3">
+        <div class="toc-day"><div class="day-num">3</div><div>Day</div></div>
+        <div class="toc-date">30 Mar</div>
+        <div class="toc-info"><div class="toc-route">Weligama (Stay)</div><div class="toc-desc">🐋 Whale Watching • 🏄 Surfing • Parrot Rock golden hour</div></div>
+      </a>
+      <a class="toc-row" href="#day4">
+        <div class="toc-day"><div class="day-num">4</div><div>Day</div></div>
+        <div class="toc-date">31 Mar</div>
+        <div class="toc-info"><div class="toc-route">Weligama → Diyaluma Falls</div><div class="toc-desc">Coconut Hill sunrise • Hiriketiya cove • Ravana Falls<span class="new-badge">NEW</span> • Mountain drive</div></div>
+      </a>
+      <a class="toc-row" href="#day5">
+        <div class="toc-day"><div class="day-num">5</div><div>Day</div></div>
+        <div class="toc-date">1 Apr</div>
+        <div class="toc-info"><div class="toc-route">Diyaluma → Bambarakanda → Maskeliya</div><div class="toc-desc">Infinity pools at cliff edge • Lipton's Seat<span class="new-badge">NEW</span> • First abseil!</div></div>
+      </a>
+      <a class="toc-row" href="#day6">
+        <div class="toc-day"><div class="day-num">6</div><div>Day</div></div>
+        <div class="toc-date">2 Apr</div>
+        <div class="toc-info"><div class="toc-route">Maskeliya → Kitulgala</div><div class="toc-desc">🧗 Laxapana 126m Abseil • Prehistoric cave • Rainforest walk • Rock pools</div></div>
+      </a>
+      <a class="toc-row" href="#day7">
+        <div class="toc-day"><div class="day-num">7</div><div>Day</div></div>
+        <div class="toc-date">3 Apr</div>
+        <div class="toc-info"><div class="toc-route">Kitulgala → Colombo → ✈️ Home</div><div class="toc-desc">🚣 White Water Rafting • Galle Face Green • Flight home</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ════════════════ DAY 1 ════════════════ -->
+<div class="day-section" id="day1">
+  <div class="day-header">
+    <div class="day-header-img"></div>
+    <div class="day-header-overlay"></div>
+    <div class="day-header-content">
+      <div class="day-number-label">Day 1 · 28 March 2026</div>
+      <h2 class="day-title">Colombo → Bentota</h2>
+      <div class="day-route">Arrival · Mangrove River · First Beach Sunset <span class="day-km-badge">94 km</span></div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+  </div>
+  <div class="day-body">
+    <div class="day-content">
+      <div>
+        <ul class="stops-list">
+          <li class="stop-item">
+            <div class="stop-icon">✈️</div>
+            <div class="stop-text"><strong>11:05 AM — Land at Colombo Airport (CMB)</strong><p>Get a SIM card right inside arrivals — Mobitel or Dialog both work great. Download the PickMe app — it's like Uber for tuk tuks!</p></div>
+          </li>
+          <li class="stop-item">
+            <div class="stop-icon">🥥</div>
+            <div class="stop-text"><strong>King Coconut outside arrivals</strong><p>Bright orange coconuts called "thambili" — they taste incredible and cost about INR 28. Your first taste of Sri Lanka!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div>
+          </li>
+          <li class="stop-item">
+            <div class="stop-icon">⛽</div>
+            <div class="stop-text"><strong>PETROL STOP — Fill up FULL near airport</strong><p>CEYPETCO or IOC station on Galle Road before leaving Colombo. Fill the whole tank — it's only a 7.5 litre tank!</p><div class="stop-meta"><span class="meta-tag meta-petrol">Petrol Stop 1 · INR 645</span></div></div>
+          </li>
+          <li class="stop-item">
+            <div class="stop-icon">🛺</div>
+            <div class="stop-text"><strong>2:30 PM — Drive south to Bentota</strong><p>94 km down the beautiful Galle Road coastal highway. About 2.5 hours in the tuk tuk. Keep the ocean on your right!</p><div class="stop-meta"><span class="meta-tag meta-km">📏 94 km · ~2.5 hrs</span></div></div>
+          </li>
+          <li class="stop-item">
+            <div class="stop-icon">🏖️</div>
+            <div class="stop-text"><strong>5:00 PM — Bentota River Mouth Beach Walk</strong><p>A 45-minute walk where the river meets the ocean. The sun turns everything golden at this hour. This is your first proper Sri Lanka beach moment!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div>
+          </li>
+          <li class="stop-item">
+            <div class="stop-icon">🚣</div>
+            <div class="stop-text"><strong>6:00 PM — Mangrove River Boat Ride</strong><p>A 1-hour boat safari through the mangrove jungle. You'll spot monitor lizards sunbathing on roots, kingfishers darting like jewels, and giant fruit bats taking off at dusk. Ask your hotel to arrange it.</p><div class="stop-meta"><span class="meta-tag meta-paid">~INR 1,700/boat</span></div></div>
+          </li>
+          <li class="stop-item">
+            <div class="stop-icon">🍛</div>
+            <div class="stop-text"><strong>7:30 PM — Dinner: Local Rice &amp; Curry</strong><p>Order rice and curry at any local spot. Say "without fish, without meat" clearly. Sri Lankan rice &amp; curry is just warm, spicy heaven.</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="day-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📍 Google Maps</div>
+          <div class="sidebar-card-body">
+            <a class="map-link-item" href="https://maps.google.com/?q=Bandaranaike+International+Airport+Sri+Lanka" target="_blank">Colombo Airport (CMB)</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Bentota+Beach+Sri+Lanka" target="_blank">Bentota River Beach</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Bentota+River+Boat+Safari+Sri+Lanka" target="_blank">Mangrove Boat Safari</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">💡 Tips</div>
+          <div class="sidebar-card-body">
+            <div class="tip-item"><span>💡</span><span>Lunch is served on the SriLankan Airlines flight — no need to stop for lunch today!</span></div>
+            <div class="tip-item"><span>💡</span><span>The mangrove boat is best arranged through your Bentota hotel — ask at check-in.</span></div>
+            <div class="tip-item"><span>💡</span><span>Carry small notes for tips. Tuk tuk drivers and boat operators love it!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ DAY 2 ════════════════ -->
+<div class="day-section" id="day2">
+  <div class="day-header">
+    <div class="day-header-img"></div>
+    <div class="day-header-overlay"></div>
+    <div class="day-header-content">
+      <div class="day-number-label">Day 2 · 29 March 2026</div>
+      <h2 class="day-title">Bentota → Galle → Weligama</h2>
+      <div class="day-route">Bawa Gardens · Baby Turtles · UNESCO Fort · Coastal Drive <span class="day-km-badge">~98 km</span></div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+  </div>
+  <div class="day-body">
+    <div class="day-content">
+      <div>
+        <ul class="stops-list">
+          <li class="stop-item"><div class="stop-icon">🏊</div><div class="stop-text"><strong>7:00 AM — Morning swim at Bentota Beach</strong><p>30 min in the cool morning ocean. Barely anyone around — pure bliss before the day begins.</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🌿</div><div class="stop-text"><strong>7:45 AM — Lunuganga Estate (Geoffrey Bawa)</strong><p>Sri Lanka's most famous architect built this dreamy garden on a rubber estate — terraced lawns, ancient trees, colonial house. Like walking into a painting.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $3 (INR 255)</span><span class="meta-tag meta-km">📏 From hotel · 15 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🎨</div><div class="stop-text"><strong>10:00 AM — Brief Garden (Bevis Bawa)</strong><p>Geoffrey's eccentric brother Bevis created this surrealist jungle full of strange sculptures and whimsical art. 1.5 hrs to wander around properly.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $3 (INR 255)</span><span class="meta-tag meta-km">📏 12 km · 20 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🐢</div><div class="stop-text"><strong>11:45 AM — Kosgoda Turtle Conservation</strong><p>Baby sea turtles the size of your palm! They hatch eggs here and release the babies into the ocean. You can hold one gently.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $5 (INR 425)</span><span class="meta-tag meta-km">📏 10 km · 15 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🏄</div><div class="stop-text"><strong>1:00 PM — Hikkaduwa Beach &amp; Lunch</strong><p>Great snorkelling reef right off the beach. Check the menu for vegetarian options — it's a seafood-heavy area. Buy lunch here before heading south.</p><div class="stop-meta"><span class="meta-tag meta-free">Beach FREE</span><span class="meta-tag meta-petrol">⛽ Petrol Stop 2 here — INR 335</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🏰</div><div class="stop-text"><strong>3:30 PM — Unawatuna Beach</strong><p>A perfect horseshoe bay — calm water, beautiful curve of sand. Safe for swimming. 1 hour stop.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 25 km · 30 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">⚓</div><div class="stop-text"><strong>4:45 PM — Galle Dutch Fort at Sunset</strong><p>A UNESCO World Heritage Site — an entire colonial town inside ancient walls. Walk the ramparts as the sun drops over the ocean. The lighthouse glows gold. The cafes inside are great for vegetarians!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE entry</span><span class="meta-tag meta-km">📏 6 km · 10 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>7:15 PM — Drive to Weligama</strong><p>40 km, about 1 hour. Check in, rest up — tomorrow you're hunting blue whales.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 40 km · 1 hr</span></div></div></li>
+        </ul>
+      </div>
+      <div class="day-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📍 Google Maps</div>
+          <div class="sidebar-card-body">
+            <a class="map-link-item" href="https://maps.google.com/?q=Lunuganga+Bentota+Sri+Lanka" target="_blank">Lunuganga Estate</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Brief+Garden+Henarathgoda+Sri+Lanka" target="_blank">Brief Garden (Bevis Bawa)</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Kosgoda+Sea+Turtle+Conservation+Project" target="_blank">Kosgoda Turtle Hatchery</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Hikkaduwa+Beach+Sri+Lanka" target="_blank">Hikkaduwa Beach</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Unawatuna+Beach+Sri+Lanka" target="_blank">Unawatuna Beach</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Galle+Fort+Sri+Lanka" target="_blank">Galle Dutch Fort</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">💡 Tips</div>
+          <div class="sidebar-card-body">
+            <div class="tip-item"><span>💡</span><span>Busiest driving day — start early at 7 AM sharp!</span></div>
+            <div class="tip-item"><span>💡</span><span>At Galle Fort, walk the ocean-facing rampart wall — it's the best spot at sunset.</span></div>
+            <div class="tip-item"><span>💡</span><span>Vegetarian cafes inside Galle Fort: The Heritage and Pedlar's Inn are both excellent.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ DAY 3 ════════════════ -->
+<div class="day-section" id="day3">
+  <div class="day-header">
+    <div class="day-header-img"></div>
+    <div class="day-header-overlay"></div>
+    <div class="day-header-content">
+      <div class="day-number-label">Day 3 · 30 March 2026</div>
+      <h2 class="day-title">Weligama — The Big Day</h2>
+      <div class="day-route">🐋 Whale Watching · 🏄 Surfing · Parrot Rock Sunset <span class="day-km-badge">0 km driving</span></div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+  </div>
+  <div class="day-body">
+    <div class="day-content">
+      <div>
+        <ul class="stops-list">
+          <li class="stop-item"><div class="stop-icon">🐋</div><div class="stop-text"><strong>6:00 AM — WHALE WATCHING (3–5 hours at sea!)</strong><p>Blue whales are the biggest animals that have EVER lived on Earth — longer than 3 city buses parked end to end. March/April is the absolute best time to see them off Mirissa. The boat goes far out into deep ocean water. Bring sunscreen!</p><div class="stop-meta"><span class="meta-tag meta-paid">~$50/person (INR 4,250)</span><span class="meta-tag meta-book">📞 Book ahead!</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🥤</div><div class="stop-text"><strong>Important: Confirm vegetarian snacks when booking</strong><p>The boat serves breakfast — confirm no fish or meat products. Raja &amp; Whales: +94 71 046 0399. Book at least 2 weeks before travel!</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🍽️</div><div class="stop-text"><strong>11:30 AM — Return, shower, rest &amp; lunch</strong><p>Vegetarian kottu roti — chopped flatbread stir-fried with vegetables, eggs, and spices on a hot iron plate. The sound of the iron scrapers is part of the experience!</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🏄</div><div class="stop-text"><strong>1:30 PM — Surf Lesson at Weligama Beach</strong><p>Weligama is called the best beginner surf beach in all of Asia. The waves are gentle, the instructors are brilliant, and you WILL stand up on your first day. 1.5 hour lesson.</p><div class="stop-meta"><span class="meta-tag meta-paid">~INR 1,700/person</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🌴</div><div class="stop-text"><strong>3:30 PM — Explore Weligama Town</strong><p>Wander the streets, try fresh tropical fruits, buy a coconut, watch stilt fishermen if you can spot them from the shore.</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🦜</div><div class="stop-text"><strong>5:15 PM — Parrot Rock Golden Hour</strong><p>A giant rock island just off the beach that turns deep orange in the sunset. Sit on the beach and watch the colours change. One of Sri Lanka's most iconic sunset views.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🍛</div><div class="stop-text"><strong>7:00 PM — Dinner</strong><p>Ask for pumpkin curry, dhal, pol sambol, and string hoppers. Best vegetarian combo in Sri Lanka.</p></div></li>
+        </ul>
+      </div>
+      <div class="day-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📍 Google Maps</div>
+          <div class="sidebar-card-body">
+            <a class="map-link-item" href="https://maps.google.com/?q=Mirissa+Harbour+Sri+Lanka" target="_blank">Mirissa Harbour (Whale Watching)</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Weligama+Beach+Sri+Lanka" target="_blank">Weligama Beach (Surf)</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Parrot+Rock+Weligama+Sri+Lanka" target="_blank">Parrot Rock, Weligama</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">💡 Tips</div>
+          <div class="sidebar-card-body">
+            <div class="tip-item"><span>🐋</span><span>Book whale watching at least 2 weeks in advance. March/April = peak blue whale season. You are very lucky!</span></div>
+            <div class="tip-item"><span>💡</span><span>No driving today — rest your tuk tuk arms! Weligama is small enough to walk everywhere.</span></div>
+            <div class="tip-item"><span>💡</span><span>Bring motion sickness tablets if either of you gets seasick — the whale boat goes to deep water.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ DAY 4 ════════════════ -->
+<div class="day-section" id="day4">
+  <div class="day-header">
+    <div class="day-header-img"></div>
+    <div class="day-header-overlay"></div>
+    <div class="day-header-content">
+      <div class="day-number-label">Day 4 · 31 March 2026</div>
+      <h2 class="day-title">Into the Mountains</h2>
+      <div class="day-route">Coconut Hill · Hiriketiya · Ravana Falls ⭐ · Diyaluma <span class="day-km-badge">~168 km</span></div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+  </div>
+  <div class="day-body">
+    <div class="day-content">
+      <div>
+        <ul class="stops-list">
+          <li class="stop-item"><div class="stop-icon">🌅</div><div class="stop-text"><strong>6:00 AM — Coconut Tree Hill, Mirissa</strong><p>A small hill completely covered in tall coconut trees that lean dramatically out over the cliff. Watch the sun rise out of the ocean from here. Absolutely breathtaking — one of those views you'll never forget.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 7 km · 15 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">⛵</div><div class="stop-text"><strong>6:45 AM — Mirissa Fishing Harbour</strong><p>Walk down from Coconut Hill to watch fishermen bringing in the morning catch as the golden sun paints the colourful boats. A quiet magical moment.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 10 min walk from Coconut Hill</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🍳</div><div class="stop-text"><strong>7:30 AM — Breakfast + Check Out</strong><p>Egg hoppers (bowl-shaped crispy crepes with egg cooked inside) + pol sambol (spiced coconut paste). The best Sri Lankan breakfast.</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🏊</div><div class="stop-text"><strong>10:15 AM — Hiriketiya Beach</strong><p>A SECRET hidden cove only discovered recently — the ocean wraps around like a perfect turquoise bowl. Shallow, calm, beautiful. One of the most unique beaches in all of Asia.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 45 km · 1 hr</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🌊</div><div class="stop-text"><strong>12:00 PM — Tangalle Beach &amp; Lunch</strong><p>Beautiful wide beach. IMPORTANT for the vegetarian: say "without fish, without meat, without Maldive fish" very clearly — Tangalle is an intense seafood town and hidden fish seasoning is everywhere.</p><div class="stop-meta"><span class="meta-tag meta-petrol">⛽ Petrol Stop 3 here — INR 430</span><span class="meta-tag meta-km">📏 25 km · 35 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🗿</div><div class="stop-text"><strong>3:00 PM — Buduruwagala Rock Carvings</strong><p>Seven giant Buddhas carved directly into a jungle rock face 1,200 years ago. They're enormous — the central standing Buddha is 15 metres tall! Hidden behind a quiet forest path.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: $5 (INR 425)</span><span class="meta-tag meta-km">📏 60 km · 1.5 hrs</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">💧</div><div class="stop-text"><strong>NEW ⭐ — Ravana Falls (20 min stop)</strong><p>A stunning 25-metre waterfall that you can see RIGHT FROM THE ROAD — just pull the tuk tuk over! Named after the demon king Ravana from the Ramayana. Totally free, zero effort, completely beautiful.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 20 km · 30 min</span><span class="meta-tag meta-highlight">⭐ NEW</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🏨</div><div class="stop-text"><strong>4:30 PM — Diyaluma Falls &amp; Check In</strong><p>Arrive at your guesthouse near Sri Lanka's second-tallest waterfall. Eat early, sleep early — tomorrow morning you'll be swimming at the TOP of it.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 15 km · 20 min</span></div></div></li>
+        </ul>
+      </div>
+      <div class="day-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📍 Google Maps</div>
+          <div class="sidebar-card-body">
+            <a class="map-link-item" href="https://maps.google.com/?q=Coconut+Tree+Hill+Mirissa+Sri+Lanka" target="_blank">Coconut Tree Hill, Mirissa</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Mirissa+Harbour+Sri+Lanka" target="_blank">Mirissa Fishing Harbour</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Hiriketiya+Beach+Dikwella+Sri+Lanka" target="_blank">Hiriketiya Beach</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Tangalle+Beach+Sri+Lanka" target="_blank">Tangalle Beach</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Buduruwagala+Sri+Lanka" target="_blank">Buduruwagala Rock Carvings</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Rawana+Ella+Falls+Sri+Lanka" target="_blank">Ravana Falls ⭐</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Diyaluma+Falls+Sri+Lanka" target="_blank">Diyaluma Falls</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">💡 Tips</div>
+          <div class="sidebar-card-body">
+            <div class="tip-item"><span>💡</span><span>Longest driving day — 168 km. Start at 6 AM sharp to make it comfortably.</span></div>
+            <div class="tip-item"><span>💡</span><span>Ravana Falls needs zero effort — just pull over on the A23 road and stare!</span></div>
+            <div class="tip-item"><span>🥗</span><span>Tangalle is a seafood town — be extra specific about vegetarian needs here.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ DAY 5 ════════════════ -->
+<div class="day-section" id="day5">
+  <div class="day-header">
+    <div class="day-header-img"></div>
+    <div class="day-header-overlay"></div>
+    <div class="day-header-content">
+      <div class="day-number-label">Day 5 · 1 April 2026</div>
+      <h2 class="day-title">Highland Wonders</h2>
+      <div class="day-route">Infinity Pools · Bambarakanda · Lipton's Seat ⭐ · First Abseil! <span class="day-km-badge">~110 km</span></div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+  </div>
+  <div class="day-body">
+    <div class="day-content">
+      <div>
+        <ul class="stops-list">
+          <li class="stop-item"><div class="stop-icon">🌊</div><div class="stop-text"><strong>6:30 AM — Upper Diyaluma Infinity Pools</strong><p>Natural swimming pools right at the edge of a 220-metre cliff! You literally swim and look DOWN at the whole valley. Take the Poonagala road to the top, then 30 minutes walk down to the pools. Guide Saman knows every pool!</p><div class="stop-meta"><span class="meta-tag meta-paid">Guide fee ~INR 255</span><span class="meta-tag meta-book">📞 Saman: +94 71 430 4910</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🍳</div><div class="stop-text"><strong>8:15 AM — Breakfast + Check Out</strong><p>Ask for early breakfast at 8 AM when you check in. String hoppers are perfect highland fuel.</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🏔️</div><div class="stop-text"><strong>11:00 AM — Bambarakanda Falls</strong><p>Sri Lanka's TALLEST waterfall at 263 metres — taller than the Eiffel Tower! It's a thin silver ribbon dropping from the sky into a misty pool. Quick 45-minute stop — photos and awe, then move on.</p><div class="stop-meta"><span class="meta-tag meta-paid">Entry: LKR 350 (INR 97)</span><span class="meta-tag meta-km">📏 40 km · 1 hr</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🍵</div><div class="stop-text"><strong>NEW ⭐ — 12:30 PM — Lipton's Seat Tea Estate</strong><p>Drive through endless rolling green tea plantations to a hilltop where Sir Thomas Lipton (the tea brand!) used to watch over his entire estate. On a clear April day you can see all the way to the southern coast. The road up through the Dambatenne Tea Factory is one of the most scenic drives in Sri Lanka.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">📏 30 km · 45 min</span><span class="meta-tag meta-highlight">⭐ NEW</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🍛</div><div class="stop-text"><strong>1:30 PM — Maskeliya Lunch</strong><p>Vegetarian rice and curry in the highlands is exceptional — the pumpkin, dhal, and jackfruit curries up here are spiced differently than the coast. Best vegetarian food of the trip!</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🧗</div><div class="stop-text"><strong>2:30 PM — Gartmore Falls Abseil 25m!</strong><p>Your FIRST abseil! Walk backwards off a 25-metre waterfall into a pool overlooking the Maskeliya Reservoir. It sounds terrifying but the guides are incredible. This is the confidence-builder before the big one tomorrow!</p><div class="stop-meta"><span class="meta-tag meta-paid">~$30/person (INR 2,550)</span><span class="meta-tag meta-book">📞 Ceylon Extreme: +94 70 7900 700</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🚶</div><div class="stop-text"><strong>4:15 PM — Maskeliya Reservoir Walk</strong><p>A serene lake completely surrounded by misty tea-estate mountains. 45 minutes strolling the edge with the cool highland air around you.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🏨</div><div class="stop-text"><strong>5:15 PM — Check In Maskeliya/Hatton</strong><p>Dinner: string hoppers + pol sambol + dhal + pumpkin curry. The absolute BEST vegetarian meal of the entire trip. Sleep well — tomorrow is the BIG abseil!</p><div class="stop-meta"><span class="meta-tag meta-petrol">⛽ Petrol Stop 4 &amp; 5 · Wellawaya + Hatton · INR 415+335</span></div></div></li>
+        </ul>
+      </div>
+      <div class="day-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📍 Google Maps</div>
+          <div class="sidebar-card-body">
+            <a class="map-link-item" href="https://maps.google.com/?q=Diyaluma+Falls+Upper+Pools+Koslanda" target="_blank">Upper Diyaluma Pools</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Bambarakanda+Falls+Sri+Lanka" target="_blank">Bambarakanda Falls</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Lipton%27s+Seat+Haputale+Sri+Lanka" target="_blank">Lipton's Seat ⭐</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Gartmore+Falls+Maskeliya+Sri+Lanka" target="_blank">Gartmore Falls</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Maskeliya+Reservoir+Sri+Lanka" target="_blank">Maskeliya Reservoir</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">💡 Tips</div>
+          <div class="sidebar-card-body">
+            <div class="tip-item"><span>💡</span><span>Book Gartmore AND Laxapana together: Ceylon Extreme +94 70 7900 700.</span></div>
+            <div class="tip-item"><span>🍵</span><span>Lipton's Seat is best in the morning — afternoon clouds can cover the view.</span></div>
+            <div class="tip-item"><span>💡</span><span>It gets cold up here at night — pack a light jacket in the tuk tuk from Day 4 onwards!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ DAY 6 ════════════════ -->
+<div class="day-section" id="day6">
+  <div class="day-header">
+    <div class="day-header-img"></div>
+    <div class="day-header-overlay"></div>
+    <div class="day-header-content">
+      <div class="day-number-label">Day 6 · 2 April 2026</div>
+      <h2 class="day-title">The Big Abseil Day</h2>
+      <div class="day-route">🧗 Laxapana 126m · Prehistoric Cave · Rainforest · Rock Pools <span class="day-km-badge">~80 km</span></div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+  </div>
+  <div class="day-body">
+    <div class="day-content">
+      <div>
+        <ul class="stops-list">
+          <li class="stop-item"><div class="stop-icon">🧗</div><div class="stop-text"><strong>8:00 AM — LAXAPANA FALLS ABSEIL · 126 METRES!!</strong><p>THE moment of the trip. The highest free-falling waterfall abseil in Sri Lanka. You walk backwards off the top of a 126-metre cliff with the waterfall thundering next to you. The valley opens up below you as you descend. Professional guides, full safety gear, 3 hours total. Like becoming a superhero — for real.</p><div class="stop-meta"><span class="meta-tag meta-paid">~$60/person (INR 5,100)</span><span class="meta-tag meta-book">📞 Ceylon Extreme: +94 70 7900 700</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>11:30 AM — Drive to Kitulgala</strong><p>About 80 km, 2 hours on winding mountain roads through tea estates and misty valleys. One of the most beautiful drives in Sri Lanka.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 80 km · ~2 hrs</span><span class="meta-tag meta-petrol">⛽ Petrol Stop 5 in Hatton before leaving · INR 335</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🍛</div><div class="stop-text"><strong>1:30 PM — Arrive Kitulgala, Lunch</strong><p>Vegetarian kottu roti — ask clearly for no fish. Sit by the Kelani River and feel the achievement of the morning sinking in!</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🦴</div><div class="stop-text"><strong>2:30 PM — Belilena Prehistoric Cave</strong><p>People lived in this cave 32,000 YEARS AGO. They found the skeleton of "Balangoda Man" here — the oldest human remains in Sri Lanka. You walk through a rubber estate to reach it. Small, quiet, genuinely mind-bending to stand where ancient humans cooked food and slept.</p><div class="stop-meta"><span class="meta-tag meta-paid">~$2 (INR 170)</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🌿</div><div class="stop-text"><strong>4:00 PM — Makandawa Rainforest Walk</strong><p>Giant ancient trees whose canopy blocks the sky. Endemic birds that exist ONLY in Sri Lanka. The sounds of the forest — cicadas, hornbills, rushing streams. 1 hour walk on marked paths.</p><div class="stop-meta"><span class="meta-tag meta-paid">LKR 200 (INR 56)</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">💦</div><div class="stop-text"><strong>5:15 PM — Kataran Oya Natural Rock Pools</strong><p>Seven natural pools connected by a 5-metre slide of smooth rock, plus a jumping waterfall. Like a natural water park carved by the river. Perfect way to wash off the abseil adrenaline!</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🏨</div><div class="stop-text"><strong>7:30 PM — Dinner at Riverside Eco-Lodge</strong><p>Tell them vegetarian when you book. Many Kitulgala lodges are right on the Kelani River — dinner with the sound of rushing water is perfect after an epic day.</p></div></li>
+        </ul>
+      </div>
+      <div class="day-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📍 Google Maps</div>
+          <div class="sidebar-card-body">
+            <a class="map-link-item" href="https://maps.google.com/?q=Laxapana+Falls+Sri+Lanka" target="_blank">Laxapana Falls Abseil</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Belilena+Cave+Kitulgala+Sri+Lanka" target="_blank">Belilena Cave</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Makandawa+Rainforest+Kitulgala" target="_blank">Makandawa Rainforest</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Kataran+Oya+Kitulgala+Sri+Lanka" target="_blank">Kataran Oya Rock Pools</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">💡 Tips</div>
+          <div class="sidebar-card-body">
+            <div class="tip-item"><span>🧗</span><span>After the 126m abseil your legs may feel like jelly — completely normal! Sit, eat something sweet, drink water.</span></div>
+            <div class="tip-item"><span>🎬</span><span>Kitulgala is where 'The Bridge on the River Kwai' (1957 Oscar winner) was filmed!</span></div>
+            <div class="tip-item"><span>💡</span><span>Book the Kitulgala eco-lodge in advance — riverside rooms sell out fast.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ DAY 7 ════════════════ -->
+<div class="day-section" id="day7">
+  <div class="day-header">
+    <div class="day-header-img"></div>
+    <div class="day-header-overlay"></div>
+    <div class="day-header-content">
+      <div class="day-number-label">Day 7 · 3 April 2026 · Final Day</div>
+      <h2 class="day-title">Rafting &amp; Goodbye</h2>
+      <div class="day-route">🚣 White Water Rafting · Galle Face Green · ✈️ Home <span class="day-km-badge">~84 km</span></div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+    <div class="photo-strip-img"></div>
+  </div>
+  <div class="day-body">
+    <div class="day-content">
+      <div>
+        <ul class="stops-list">
+          <li class="stop-item"><div class="stop-icon">🚣</div><div class="stop-text"><strong>8:00 AM SHARP — White Water Rafting, Kelani River</strong><p>Grade 2–3 rapids — splashing, screaming, laughing for 5 km down the same river where Bridge on the River Kwai was filmed. 2.5 hours of pure adrenaline and joy. The river is fast, the guides are hilarious, and the jungle on both banks is absolutely beautiful. CONFIRM the 8 AM slot strictly — you have a flight!</p><div class="stop-meta"><span class="meta-tag meta-paid">~$25/person (INR 2,125)</span><span class="meta-tag meta-book">📞 Adventure LK: +94 76 686 7707</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🚿</div><div class="stop-text"><strong>10:30 AM — Shower + Pack + Check Out</strong><p>Pack everything carefully — the tuk tuk journey back to Colombo is 84 km on smoother roads.</p></div></li>
+          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>12:00 PM — DEPART for Colombo</strong><p>The A7 highway — much smoother than the mountain roads! 84 km, about 2 hours. Last tuk tuk drive of the adventure.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 84 km · ~2 hrs</span><span class="meta-tag meta-petrol">⛽ Petrol Stop 6 · INR 220</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🌊</div><div class="stop-text"><strong>2:15 PM — Galle Face Green, Colombo</strong><p>A long seaside lawn where all of Colombo comes in the evening. Buy a king coconut — your last one! Buy isso vadai (spiced lentil fritters — vegetarian and delicious). Stand at the edge and look at the Indian Ocean one final time.</p><div class="stop-meta"><span class="meta-tag meta-free">FREE</span><span class="meta-tag meta-km">30 min stop — don't linger!</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">🚗</div><div class="stop-text"><strong>2:45 PM — Drive to Airport</strong><p>35 km from Galle Face Green, about 45 minutes. Drop off the tuk tuk, go to the SriLankan Airlines counter.</p><div class="stop-meta"><span class="meta-tag meta-km">📏 35 km · 45 min</span></div></div></li>
+          <li class="stop-item"><div class="stop-icon">✅</div><div class="stop-text"><strong>3:30 PM — Arrive Airport</strong><p>You made it — within the 4 PM deadline with 30 minutes to spare! Eat at the CMB departure lounge — plenty of vegetarian options.</p></div></li>
+          <li class="stop-item"><div class="stop-icon">✈️</div><div class="stop-text"><strong>6:45 PM — Board UL123 to Chennai</strong><p>Arrive Chennai at 8:10 PM. 7 days, ~680 km, 2 waterfall abseils, 1 blue whale, countless memories. Trip complete! 🎉</p></div></li>
+        </ul>
+      </div>
+      <div class="day-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📍 Google Maps</div>
+          <div class="sidebar-card-body">
+            <a class="map-link-item" href="https://maps.google.com/?q=Adventure+Lanka+Kitulgala+Sri+Lanka" target="_blank">Adventure LK Rafting</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Galle+Face+Green+Colombo+Sri+Lanka" target="_blank">Galle Face Green</a>
+            <a class="map-link-item" href="https://maps.google.com/?q=Bandaranaike+International+Airport+Sri+Lanka" target="_blank">Colombo Airport (CMB)</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">⚠️ Critical Timing</div>
+          <div class="sidebar-card-body">
+            <div class="tip-item"><span>⏰</span><span>Rafting MUST start at 8 AM — call Adventure LK the night before to reconfirm.</span></div>
+            <div class="tip-item"><span>⏰</span><span>Leave Kitulgala by 12 PM latest. Do not be late — you have a flight.</span></div>
+            <div class="tip-item"><span>⏰</span><span>You need to be at CMB by 4 PM. Timeline gives you 30 min buffer — use it wisely!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- TUK TUK RENTALS -->
+<section id="tuktuk" style="background: white;">
+  <div class="container">
+    <div class="section-label">Book Before You Fly</div>
+    <h2 class="section-title">🛺 Tuk Tuk Rental Companies</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.5rem;max-width:720px;">All four companies below handle your Sri Lankan driving permit, give you a driving lesson on Day 1, and offer 24/7 WhatsApp support. Book at least 2–3 weeks before travel — good tuk tuks get reserved fast in peak season (March/April).</p>
+    <div style="background:#fff8e1;border-left:4px solid var(--gold);padding:0.8rem 1.2rem;border-radius:0 8px 8px 0;font-size:0.82rem;color:#7a5a00;margin-bottom:2rem;max-width:720px;">
+      ⚠️ <strong>Indian licence note:</strong> As of April 2025, the AA of Sri Lanka only accepts the <strong>1949 International Driving Permit (IDP)</strong> — not just your Indian licence. Get your IDP from AA India before you travel. The rental company will then get you a local Sri Lankan recognition permit.
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-bottom:2rem;">
+
+      <!-- Card 1: TukTuk Ceylon Ride -->
+      <div style="border:2px solid var(--cream-dark);border-radius:14px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;" onmouseover="this.style.borderColor='#12a3a3';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#f5e8d4';this.style.boxShadow='none'">
+        <div style="background:var(--teal);padding:1.1rem 1.3rem;display:flex;align-items:center;gap:0.8rem;">
+          <div style="font-size:2rem;">🏆</div>
+          <div>
+            <div style="color:white;font-weight:700;font-size:1rem;">TukTuk Ceylon Ride</div>
+            <div style="color:var(--gold-light);font-size:0.72rem;font-weight:500;letter-spacing:0.05em;">Most Popular · 2025 New Models Available</div>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.9rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Daily rate (7 days)</span>
+              <span style="font-weight:700;color:var(--orange);">$17/day (~INR 1,445)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">New 2025 model (7 days)</span>
+              <span style="font-weight:700;color:var(--orange);">$17/day (~INR 1,445)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Deposit (refundable)</span>
+              <span style="font-weight:600;color:var(--dark);">$100 USD</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">WhatsApp / Phone</span>
+              <span style="font-weight:600;color:var(--teal);">+94 771 777 321</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;">
+              <span style="color:var(--muted);">Email</span>
+              <span style="font-weight:600;color:var(--teal);font-size:0.78rem;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f084859b84859b9395899c9f9e82999495b0979d91999cde939f9d">[email&#160;protected]</a></span>
+            </div>
+          </div>
+          <div style="background:#e8f5e9;border-radius:8px;padding:0.6rem 0.8rem;font-size:0.77rem;color:#1e5a2f;margin-bottom:0.8rem;line-height:1.5;">
+            ✅ Unlimited km · Driving lesson included · Permit arranged · 24/7 WhatsApp · Pickup from airport · 2 offices (Negombo & Kandy)
+          </div>
+          <a href="https://tuktukceylonride.com" target="_blank" style="display:block;text-align:center;background:var(--teal);color:white;padding:0.6rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#064f4f'" onmouseout="this.style.background='var(--teal)'">🌐 tuktukceylonride.com</a>
+        </div>
+      </div>
+
+      <!-- Card 2: Tuk Tuk Rental Ceylon -->
+      <div style="border:2px solid var(--cream-dark);border-radius:14px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;" onmouseover="this.style.borderColor='#12a3a3';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#f5e8d4';this.style.boxShadow='none'">
+        <div style="background:var(--teal-dark);padding:1.1rem 1.3rem;display:flex;align-items:center;gap:0.8rem;">
+          <div style="font-size:2rem;">⭐</div>
+          <div>
+            <div style="color:white;font-weight:700;font-size:1rem;">Tuk Tuk Rental Ceylon</div>
+            <div style="color:var(--gold-light);font-size:0.72rem;font-weight:500;letter-spacing:0.05em;">Best Value · WhatsApp Group for Travellers</div>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.9rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Daily rate (7 days)</span>
+              <span style="font-weight:700;color:var(--orange);">~$15–18/day (~INR 1,275–1,530)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Deposit (refundable)</span>
+              <span style="font-weight:600;color:var(--dark);">$100–150 USD</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Email</span>
+              <span style="font-weight:600;color:var(--teal);font-size:0.78rem;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ea8885858183848daa9e9f819e9f81988f849e8b86898f93868584c4898587">[email&#160;protected]</a></span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;">
+              <span style="color:var(--muted);">Website</span>
+              <span style="font-weight:600;color:var(--teal);font-size:0.78rem;">tuktukrentalceylon.com</span>
+            </div>
+          </div>
+          <div style="background:#e8f5e9;border-radius:8px;padding:0.6rem 0.8rem;font-size:0.77rem;color:#1e5a2f;margin-bottom:0.8rem;line-height:1.5;">
+            ✅ Unlimited km · Full insurance incl. third party · Travellers WhatsApp group · Flexible pickup/drop-off locations · Train transfer service $30
+          </div>
+          <a href="https://tuktukrentalceylon.com" target="_blank" style="display:block;text-align:center;background:var(--teal-dark);color:white;padding:0.6rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#0a6e6e'" onmouseout="this.style.background='var(--teal-dark)'">🌐 tuktukrentalceylon.com</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Tuk Tuk Rentals Sri Lanka (Ranga) -->
+      <div style="border:2px solid var(--cream-dark);border-radius:14px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;" onmouseover="this.style.borderColor='#12a3a3';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#f5e8d4';this.style.boxShadow='none'">
+        <div style="background:#5a3e1a;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:0.8rem;">
+          <div style="font-size:2rem;">🤝</div>
+          <div>
+            <div style="color:white;font-weight:700;font-size:1rem;">Tuk Tuk Rentals Sri Lanka</div>
+            <div style="color:var(--gold-light);font-size:0.72rem;font-weight:500;letter-spacing:0.05em;">Most Personal · Ask for Ranga</div>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.9rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Daily rate</span>
+              <span style="font-weight:700;color:var(--orange);">From $8/day (~INR 680)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Deposit (refundable)</span>
+              <span style="font-weight:600;color:var(--dark);">Negotiable</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Phone / WhatsApp</span>
+              <span style="font-weight:600;color:var(--teal);">+94 70 677 4454</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;">
+              <span style="color:var(--muted);">Email</span>
+              <span style="font-weight:600;color:var(--teal);font-size:0.78rem;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e676068614e7a7b657a7b657c6b607a6f627d7d7c67626f60656f206d6163">[email&#160;protected]</a></span>
+            </div>
+          </div>
+          <div style="background:#e8f5e9;border-radius:8px;padding:0.6rem 0.8rem;font-size:0.77rem;color:#1e5a2f;margin-bottom:0.8rem;line-height:1.5;">
+            ✅ Most affordable rates · 24/7 roadside assistance · Ranga personally travels to fix issues · Driving lesson · Based in Kandy (ideal for this route)
+          </div>
+          <a href="https://www.tuktukrentalssrilanka.com" target="_blank" style="display:block;text-align:center;background:#5a3e1a;color:white;padding:0.6rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#7a5a2a'" onmouseout="this.style.background='#5a3e1a)'">🌐 tuktukrentalssrilanka.com</a>
+        </div>
+      </div>
+
+      <!-- Card 4: TukTuk SL Rental -->
+      <div style="border:2px solid var(--cream-dark);border-radius:14px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;" onmouseover="this.style.borderColor='#12a3a3';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#f5e8d4';this.style.boxShadow='none'">
+        <div style="background:#1a3a5c;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:0.8rem;">
+          <div style="font-size:2rem;">🗺️</div>
+          <div>
+            <div style="color:white;font-weight:700;font-size:1rem;">TukTuk SL Rental</div>
+            <div style="color:var(--gold-light);font-size:0.72rem;font-weight:500;letter-spacing:0.05em;">Island-Wide Delivery · Verified 2026 Reviews</div>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.9rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Daily rate</span>
+              <span style="font-weight:700;color:var(--orange);">From $12/day (~INR 1,020)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Deposit (refundable)</span>
+              <span style="font-weight:600;color:var(--dark);">$100–200 USD</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Contact (Nilanka)</span>
+              <span style="font-weight:600;color:var(--teal);">via tuktukslr.com</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;">
+              <span style="color:var(--muted);">Website</span>
+              <span style="font-weight:600;color:var(--teal);font-size:0.78rem;">tuktukslr.com</span>
+            </div>
+          </div>
+          <div style="background:#e8f5e9;border-radius:8px;padding:0.6rem 0.8rem;font-size:0.77rem;color:#1e5a2f;margin-bottom:0.8rem;line-height:1.5;">
+            ✅ Island-wide delivery & collection · Comprehensive printed guide given on pickup · Driving lesson (1 hr) · Permit arranged · Pay at pickup
+          </div>
+          <a href="https://tuktukslr.com" target="_blank" style="display:block;text-align:center;background:#1a3a5c;color:white;padding:0.6rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#2a5a8c'" onmouseout="this.style.background='#1a3a5c'">🌐 tuktukslr.com</a>
+        </div>
+      </div>
+
+      <!-- Card 5: Noha Tuk Tuk -->
+      <div style="border:2px solid var(--cream-dark);border-radius:14px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;" onmouseover="this.style.borderColor='#12a3a3';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#f5e8d4';this.style.boxShadow='none'">
+        <div style="background:#2d5a27;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:0.8rem;">
+          <div style="font-size:2rem;">🌿</div>
+          <div>
+            <div style="color:white;font-weight:700;font-size:1rem;">Noha Tuk Tuk Rental</div>
+            <div style="color:var(--gold-light);font-size:0.72rem;font-weight:500;letter-spacing:0.05em;">Small & Personal · Flat Tyre Roadside Help</div>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.9rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Daily rate</span>
+              <span style="font-weight:700;color:var(--orange);">~$12–18/day (~INR 1,020–1,530)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Deposit (refundable)</span>
+              <span style="font-weight:600;color:var(--dark);">$100 USD</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">WhatsApp / Contact</span>
+              <span style="font-weight:600;color:var(--teal);">via nohatuktuk.com</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;">
+              <span style="color:var(--muted);">Website</span>
+              <span style="font-weight:600;color:var(--teal);font-size:0.78rem;">nohatuktuk.com</span>
+            </div>
+          </div>
+          <div style="background:#e8f5e9;border-radius:8px;padding:0.6rem 0.8rem;font-size:0.77rem;color:#1e5a2f;margin-bottom:0.8rem;line-height:1.5;">
+            ✅ Locally-run family business · Drove spare wheel to flat-tyre traveller · Hotel delivery & pickup · Sri Lankan licence handled · Also rents scooters
+          </div>
+          <a href="https://nohatuktuk.com" target="_blank" style="display:block;text-align:center;background:#2d5a27;color:white;padding:0.6rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#3d7a37'" onmouseout="this.style.background='#2d5a27'">🌐 nohatuktuk.com</a>
+        </div>
+      </div>
+
+      <!-- Card 6: TukTuk Rental (tuktukrental.com) -->
+      <div style="border:2px solid var(--cream-dark);border-radius:14px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;" onmouseover="this.style.borderColor='#12a3a3';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='#f5e8d4';this.style.boxShadow='none'">
+        <div style="background:#5c2d00;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:0.8rem;">
+          <div style="font-size:2rem;">⚡</div>
+          <div>
+            <div style="color:white;font-weight:700;font-size:1rem;">TukTuk Rental (tuktukrental.com)</div>
+            <div style="color:var(--gold-light);font-size:0.72rem;font-weight:500;letter-spacing:0.05em;">Social Enterprise · Electric Option Available</div>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.9rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Regular tuk (7 days)</span>
+              <span style="font-weight:700;color:var(--orange);">~$15–20/day (~INR 1,275–1,700)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Electric tuk option</span>
+              <span style="font-weight:600;color:var(--green);">Yes — ElectricTuk available</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;border-bottom:1px solid #f5f5f5;">
+              <span style="color:var(--muted);">Deposit (refundable)</span>
+              <span style="font-weight:600;color:var(--dark);">$150 USD (excess cover opt.)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.83rem;padding:0.3rem 0;">
+              <span style="color:var(--muted);">Website</span>
+              <span style="font-weight:600;color:var(--teal);font-size:0.78rem;">tuktukrental.com</span>
+            </div>
+          </div>
+          <div style="background:#e8f5e9;border-radius:8px;padding:0.6rem 0.8rem;font-size:0.77rem;color:#1e5a2f;margin-bottom:0.8rem;line-height:1.5;">
+            ✅ Social enterprise — rents from local owners · RegularTuk / CabrioTuk / ElectricTuk · 1000+ location digital map included · Insurance standard $150 excess (removable) · 24/7 support
+          </div>
+          <a href="https://tuktukrental.com" target="_blank" style="display:block;text-align:center;background:#5c2d00;color:white;padding:0.6rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#7c4d20'" onmouseout="this.style.background='#5c2d00'">🌐 tuktukrental.com</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Comparison table -->
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--dark);">Quick Comparison</h3>
+    <div style="overflow-x:auto;">
+    <table class="fees-table" style="font-size:0.82rem;">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Rate (7-day trip)</th>
+          <th>7 Days Total</th>
+          <th>In INR (approx.)</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>TukTuk Ceylon Ride</strong></td>
+          <td style="color:var(--orange);font-weight:700;">$17/day</td>
+          <td style="font-weight:700;">~$119</td>
+          <td style="font-weight:700;color:var(--teal);">~INR 10,115</td>
+          <td>New 2025 model, great 24/7 support</td>
+        </tr>
+        <tr>
+          <td><strong>Tuk Tuk Rental Ceylon</strong></td>
+          <td style="color:var(--orange);font-weight:700;">$15–18/day</td>
+          <td style="font-weight:700;">~$105–126</td>
+          <td style="font-weight:700;color:var(--teal);">~INR 8,925–10,710</td>
+          <td>Full insurance incl. third party, travellers group</td>
+        </tr>
+        <tr>
+          <td><strong>Tuk Tuk Rentals Sri Lanka (Ranga)</strong></td>
+          <td style="color:var(--green);font-weight:700;">From $8/day</td>
+          <td style="font-weight:700;">~$56+</td>
+          <td style="font-weight:700;color:var(--teal);">~INR 4,760+</td>
+          <td>Most affordable, Ranga drives out to fix issues</td>
+        </tr>
+        <tr>
+          <td><strong>TukTuk SL Rental</strong></td>
+          <td style="color:var(--orange);font-weight:700;">From $12/day</td>
+          <td style="font-weight:700;">~$84</td>
+          <td style="font-weight:700;color:var(--teal);">~INR 7,140</td>
+          <td>Pay at pickup, island-wide delivery</td>
+        </tr>
+        <tr>
+          <td><strong>Noha Tuk Tuk Rental</strong></td>
+          <td style="color:var(--orange);font-weight:700;">$12–18/day</td>
+          <td style="font-weight:700;">~$84–126</td>
+          <td style="font-weight:700;color:var(--teal);">~INR 7,140–10,710</td>
+          <td>Small family biz, exceptional personal care</td>
+        </tr>
+        <tr>
+          <td><strong>TukTuk Rental (tuktukrental.com)</strong></td>
+          <td style="color:var(--orange);font-weight:700;">$15–20/day</td>
+          <td style="font-weight:700;">~$105–140</td>
+          <td style="font-weight:700;color:var(--teal);">~INR 8,925–11,900</td>
+          <td>Social enterprise, electric tuk option, 1000+ map</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.76rem;color:var(--muted);margin-top:0.6rem;">* All prices in USD, approx. INR at ₹85/USD. Refundable deposit ($100–200) not included above. Fuel (~INR 2,900) is separate.</p>
+
+    <!-- Licence note -->
+    <div style="margin-top:1.5rem;background:var(--cream);border-radius:12px;padding:1.3rem 1.5rem;border:1px solid var(--cream-dark);">
+      <strong style="color:var(--teal-dark);display:block;margin-bottom:0.7rem;">🪪 Licence Checklist for Indian Citizens</strong>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.6rem;">
+        <div style="font-size:0.83rem;display:flex;gap:0.5rem;align-items:flex-start;"><span>✅</span><span><strong>Indian driving licence</strong> — valid, original</span></div>
+        <div style="font-size:0.83rem;display:flex;gap:0.5rem;align-items:flex-start;"><span>✅</span><span><strong>1949 IDP</strong> from Automobile Association of India — get this BEFORE travel</span></div>
+        <div style="font-size:0.83rem;display:flex;gap:0.5rem;align-items:flex-start;"><span>✅</span><span><strong>Sri Lankan recognition permit</strong> — rental company arranges this (~$25–30)</span></div>
+        <div style="font-size:0.83rem;display:flex;gap:0.5rem;align-items:flex-start;"><span>✅</span><span><strong>Passport + visa copy</strong> — send to company 1 week before arrival</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FUEL PAGE -->
+<section id="fuel">
+  <div class="container">
+    <div class="section-label">Tuk Tuk Petrol Guide</div>
+    <h2 class="section-title">⛽ Fuel Your Adventure</h2>
+    <div class="fuel-stats">
+      <div class="fuel-stat"><div class="fs-val">92</div><div class="fs-label">Octane Petrol</div></div>
+      <div class="fuel-stat"><div class="fs-val">7.5L</div><div class="fs-label">Tank Size</div></div>
+      <div class="fuel-stat"><div class="fs-val">~100km</div><div class="fs-label">Per Full Tank</div></div>
+      <div class="fuel-stat"><div class="fs-val">INR 86</div><div class="fs-label">Per Litre</div></div>
+      <div class="fuel-stat"><div class="fs-val">INR 430</div><div class="fs-label">Per 100 km</div></div>
+      <div class="fuel-stat"><div class="fs-val">~INR 2,900</div><div class="fs-label">Total Fuel Cost</div></div>
+    </div>
+    <div class="fuel-grid">
+      <div class="fuel-stop-card"><div class="fuel-stop-num">1</div><div class="fuel-stop-info"><h4>Day 1 — Near Colombo Airport</h4><p>CEYPETCO or IOC station on Galle Road. Fill up FULL before leaving the city.</p><div class="fuel-cost">LKR 2,318 · INR 645</div></div></div>
+      <div class="fuel-stop-card"><div class="fuel-stop-num">2</div><div class="fuel-stop-info"><h4>Day 2 — Hikkaduwa Town</h4><p>Top up before heading to Galle and Weligama. Multiple stations on the main road.</p><div class="fuel-cost">LKR 1,200 · INR 335</div></div></div>
+      <div class="fuel-stop-card"><div class="fuel-stop-num">3</div><div class="fuel-stop-info"><h4>Day 4 — Tangalle Town</h4><p>Fill up before the mountain roads begin! Last easy petrol before Buduruwagala and Diyaluma.</p><div class="fuel-cost">LKR 1,545 · INR 430</div></div></div>
+      <div class="fuel-stop-card"><div class="fuel-stop-num">4</div><div class="fuel-stop-info"><h4>Day 5 — Wellawaya Town</h4><p>Top up before Bambarakanda and Maskeliya. On the A2 highway, easy to find.</p><div class="fuel-cost">LKR 1,500 · INR 415</div></div></div>
+      <div class="fuel-stop-card"><div class="fuel-stop-num">5</div><div class="fuel-stop-info"><h4>Day 5/6 — Hatton / Maskeliya</h4><p>Fill before descending to Kitulgala. Hatton has good stations near the tea estates.</p><div class="fuel-cost">LKR 1,200 · INR 335</div></div></div>
+      <div class="fuel-stop-card"><div class="fuel-stop-num">6</div><div class="fuel-stop-info"><h4>Day 7 — Kitulgala Exit</h4><p>Small top-up for the Colombo journey after rafting, before the A7 highway.</p><div class="fuel-cost">LKR 800 · INR 220</div></div></div>
+    </div>
+    <div class="fuel-tip">⚠️ <strong>SCAM ALERT:</strong> Always ask the attendant to <strong>RESET the pump to ZERO</strong> before they start filling. Watch them do it — some stations try to start from a non-zero reading. Also use <strong>CEYPETCO (green)</strong> or <strong>IOC (red)</strong> chains — they're the most reliable. A faulty fuel gauge is common in tuk tuks — record your odometer reading at each fill.</div>
+    <div class="fuel-tip">💡 Use <strong>92 Octane</strong> petrol — it's cheaper (INR 86/L) and works perfectly fine in a tuk tuk. No need to use the more expensive 95 Octane.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ENTRY FEES -->
+<section id="fees">
+  <div class="container">
+    <div class="section-label">What You'll Pay</div>
+    <h2 class="section-title">🎟 Entry Fees Guide</h2>
+    <p style="margin-bottom:1.5rem;color:var(--muted);font-size:0.9rem;">Sri Lanka is very kind to SAARC travellers (that's us — India!). Many places offer discounts. Prices below are per person.</p>
+    <table class="fees-table">
+      <thead>
+        <tr><th>Place</th><th>Day</th><th>Fee (USD)</th><th>In INR</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Lunuganga Estate (Bawa)</td><td>Day 2</td><td class="fee-paid">$3</td><td class="fee-paid">INR 255</td><td>Geoffrey Bawa's heritage garden</td></tr>
+        <tr><td>Brief Garden (Bevis Bawa)</td><td>Day 2</td><td class="fee-paid">$3</td><td class="fee-paid">INR 255</td><td>Surrealist jungle sculptures</td></tr>
+        <tr><td>Kosgoda Turtle Hatchery</td><td>Day 2</td><td class="fee-paid">$5</td><td class="fee-paid">INR 425</td><td>Baby turtles you can hold!</td></tr>
+        <tr><td>Galle Dutch Fort</td><td>Day 2</td><td class="fee-free">FREE</td><td class="fee-free">FREE</td><td>UNESCO World Heritage Site</td></tr>
+        <tr><td>Coconut Tree Hill, Mirissa</td><td>Day 4</td><td class="fee-free">FREE</td><td class="fee-free">FREE</td><td>Sunrise viewpoint</td></tr>
+        <tr><td>Ravana Falls ⭐</td><td>Day 4</td><td class="fee-free">FREE</td><td class="fee-free">FREE</td><td>Visible from the road!</td></tr>
+        <tr><td>Buduruwagala Rock Carvings</td><td>Day 4</td><td class="fee-paid">$5</td><td class="fee-paid">INR 425</td><td>9th century Buddhist giants</td></tr>
+        <tr><td>Upper Diyaluma Pools + Guide</td><td>Day 5</td><td class="fee-paid">~$3</td><td class="fee-paid">INR 255</td><td>Guide Saman: +94 71 430 4910</td></tr>
+        <tr><td>Bambarakanda Falls</td><td>Day 5</td><td class="fee-paid">LKR 350</td><td class="fee-paid">INR 97</td><td>Sri Lanka's tallest waterfall</td></tr>
+        <tr><td>Lipton's Seat ⭐</td><td>Day 5</td><td class="fee-free">FREE</td><td class="fee-free">FREE</td><td>Tea estate panorama</td></tr>
+        <tr><td>Gartmore Abseil (25m)</td><td>Day 5</td><td class="fee-paid">~$30</td><td class="fee-paid">INR 2,550</td><td>Book with Laxapana together</td></tr>
+        <tr><td>Laxapana Abseil (126m)</td><td>Day 6</td><td class="fee-paid">~$60</td><td class="fee-paid">INR 5,100</td><td>⭐ Most important booking!</td></tr>
+        <tr><td>Belilena Prehistoric Cave</td><td>Day 6</td><td class="fee-paid">~$2</td><td class="fee-paid">INR 170</td><td>32,000 year old history</td></tr>
+        <tr><td>Makandawa Rainforest</td><td>Day 6</td><td class="fee-paid">LKR 200</td><td class="fee-paid">INR 56</td><td>Endemic birds &amp; giant trees</td></tr>
+        <tr><td>Whale Watching</td><td>Day 3</td><td class="fee-paid">~$50</td><td class="fee-paid">INR 4,250</td><td>Book ahead! 3–5 hrs at sea</td></tr>
+        <tr><td>Surfing Lesson</td><td>Day 3</td><td class="fee-paid">~$20</td><td class="fee-paid">INR 1,700</td><td>Best beginner surf in Asia</td></tr>
+        <tr><td>White Water Rafting</td><td>Day 7</td><td class="fee-paid">~$25</td><td class="fee-paid">INR 2,125</td><td>Adventure LK, Kitulgala</td></tr>
+        <tr><td>Galle Face Green</td><td>Day 7</td><td class="fee-free">FREE</td><td class="fee-free">FREE</td><td>Last ocean view before flight</td></tr>
+      </tbody>
+    </table>
+    <div class="fees-total">
+      <span>Total entry fees (2 people) incl. all activities</span>
+      <strong>~INR 30,000–35,000</strong>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BOOKINGS -->
+<section id="bookings">
+  <div class="container">
+    <div class="section-label">Do These Before You Travel</div>
+    <h2 class="section-title">📞 Critical Bookings</h2>
+    <p style="margin-bottom:1.5rem;color:var(--muted);font-size:0.9rem;">These 5 bookings <strong>must</strong> be made before 28 March. If you miss any of them, that activity won't happen — especially abseiling and whale watching.</p>
+    <div class="booking-cards">
+      <div class="booking-card">
+        <div class="booking-card-top"><div class="booking-emoji">🐋</div><div><div class="booking-name">Whale Watching</div><div class="booking-when">Day 3 · 30 March · 6:00 AM</div></div></div>
+        <div class="booking-card-body">
+          <div class="booking-detail"><span>Operator</span><span>Raja &amp; Whales / Whale Watching Club</span></div>
+          <div class="booking-detail"><span>Phone</span><span class="booking-phone">+94 71 046 0399</span></div>
+          <div class="booking-detail"><span>Cost</span><span class="booking-cost">~$50/person (INR 4,250)</span></div>
+          <div class="booking-note">⚠️ Confirm vegetarian snacks on the boat when booking!</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-card-top"><div class="booking-emoji">🌊</div><div><div class="booking-name">Upper Diyaluma Guide</div><div class="booking-when">Day 5 · 1 April · 6:30 AM</div></div></div>
+        <div class="booking-card-body">
+          <div class="booking-detail"><span>Guide</span><span>Saman (WhatsApp)</span></div>
+          <div class="booking-detail"><span>Phone</span><span class="booking-phone">+94 71 430 4910</span></div>
+          <div class="booking-detail"><span>Cost</span><span class="booking-cost">~INR 255 guide fee</span></div>
+          <div class="booking-note">⚠️ Book 3–4 days in advance via WhatsApp message</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-card-top"><div class="booking-emoji">🧗</div><div><div class="booking-name">Gartmore Abseil (25m)</div><div class="booking-when">Day 5 · 1 April · 2:30 PM</div></div></div>
+        <div class="booking-card-body">
+          <div class="booking-detail"><span>Operator</span><span>Ceylon Extreme Adventures</span></div>
+          <div class="booking-detail"><span>Phone</span><span class="booking-phone">+94 70 7900 700</span></div>
+          <div class="booking-detail"><span>Cost</span><span class="booking-cost">~$30/person (INR 2,550)</span></div>
+          <div class="booking-note">⚠️ Book BOTH Gartmore + Laxapana together in one call!</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-card-top"><div class="booking-emoji">🧗</div><div><div class="booking-name">Laxapana Abseil (126m)</div><div class="booking-when">Day 6 · 2 April · 8:00 AM</div></div></div>
+        <div class="booking-card-body">
+          <div class="booking-detail"><span>Operator</span><span>Ceylon Extreme Adventures</span></div>
+          <div class="booking-detail"><span>Phone</span><span class="booking-phone">+94 70 7900 700</span></div>
+          <div class="booking-detail"><span>Cost</span><span class="booking-cost">~$60/person (INR 5,100)</span></div>
+          <div class="booking-note">⚠️ MOST IMPORTANT booking of the entire trip. Book weeks early!</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="booking-card-top"><div class="booking-emoji">🚣</div><div><div class="booking-name">White Water Rafting</div><div class="booking-when">Day 7 · 3 April · 8:00 AM SHARP</div></div></div>
+        <div class="booking-card-body">
+          <div class="booking-detail"><span>Operator</span><span>Adventure LK</span></div>
+          <div class="booking-detail"><span>Phone</span><span class="booking-phone">+94 76 686 7707</span></div>
+          <div class="booking-detail"><span>Cost</span><span class="booking-cost">~$25/person (INR 2,125)</span></div>
+          <div class="booking-note">⚠️ Confirm 8 AM slot strictly — you have a flight at 6:45 PM!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ACCOMMODATION -->
+<section id="accommodation">
+  <div class="container">
+    <div class="section-label">Where You Sleep</div>
+    <h2 class="section-title">🏨 6 Nights Across Sri Lanka</h2>
+    <div class="accom-grid">
+      <div class="accom-card"><div class="accom-night"><div class="night-num">1</div><div>Night</div></div><div class="accom-info"><div class="accom-date">28 March</div><div class="accom-place">Bentota</div><div class="accom-why">Soft landing by the river — calm beaches, mangroves, perfect first night</div></div></div>
+      <div class="accom-card"><div class="accom-night"><div class="night-num">2</div><div>Night</div></div><div class="accom-info"><div class="accom-date">29 March</div><div class="accom-place">Weligama</div><div class="accom-why">2-night base for whale watching and surfing — don't change hotels mid-adventure</div></div></div>
+      <div class="accom-card"><div class="accom-night"><div class="night-num">3</div><div>Night</div></div><div class="accom-info"><div class="accom-date">30 March</div><div class="accom-place">Weligama</div><div class="accom-why">Stay put — big whale watching day, no need to pack and move</div></div></div>
+      <div class="accom-card"><div class="accom-night"><div class="night-num">4</div><div>Night</div></div><div class="accom-info"><div class="accom-date">31 March</div><div class="accom-place">Near Diyaluma Falls</div><div class="accom-why">Sleep near Sri Lanka's 2nd tallest waterfall — morning infinity pools need an early start</div></div></div>
+      <div class="accom-card"><div class="accom-night"><div class="night-num">5</div><div>Night</div></div><div class="accom-info"><div class="accom-date">1 April</div><div class="accom-place">Maskeliya / Hatton</div><div class="accom-why">Highland mountain air, tea estates, perfect base for the Laxapana abseil morning</div></div></div>
+      <div class="accom-card"><div class="accom-night"><div class="night-num">6</div><div>Night</div></div><div class="accom-info"><div class="accom-date">2 April</div><div class="accom-place">Kitulgala Riverside Eco-Lodge</div><div class="accom-why">Sleep by the Kelani River — wake up to the sound of rapids before morning rafting</div></div></div>
+    </div>
+    <div style="margin-top:1.5rem;padding:1.2rem 1.5rem;background:white;border-radius:12px;border:1px solid var(--cream-dark);">
+      <strong style="color:var(--teal);display:block;margin-bottom:0.7rem;">🏨 Hotel Booking Tips</strong>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+        <li style="font-size:0.85rem;color:var(--text);">💡 Always tell the hotel <strong>one traveller is vegetarian</strong> when booking — especially in Maskeliya and Kitulgala</li>
+        <li style="font-size:0.85rem;color:var(--text);">💡 Book the Kitulgala eco-lodge well in advance — riverside rooms sell out fast. Ask for a room facing the river!</li>
+        <li style="font-size:0.85rem;color:var(--text);">💡 Diyaluma guesthouse: Simple and clean. Ask for early breakfast at 8 AM when you check in.</li>
+        <li style="font-size:0.85rem;color:var(--text);">💡 Maskeliya/Hatton: Choose a guesthouse near the town centre for easy petrol access next morning.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="font-size:1.5rem;margin-bottom:0.8rem;">🇮🇳 ✈️ 🇱🇰</div>
+  <strong>Sowmya &amp; Ashin's Sri Lanka Adventure 2026</strong><br>
+  28 March – 3 April · SriLankan Airlines UL122/UL123 · Booking Ref: 7ZGMRX<br><br>
+  <span style="font-size:0.75rem;opacity:0.6;">All prices approximate. Entry fees subject to change. Book all activities well in advance. Have an incredible trip! 🌊</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── WIKIPEDIA IMAGE LOADER ──────────────────────────────────────────────────
+  // Each entry: { element CSS selector, Wikipedia article title, bgPos (optional) }
+  const wikiImages = [
+    // Hero cover
+    { sel: '.hero-bg',            title: 'Mirissa',               pos: 'center 40%' },
+
+    // Day headers
+    { sel: '#day1 .day-header-img', title: ['Bentota', 'Bentota_Beach'],             pos: 'center 60%' },
+    { sel: '#day2 .day-header-img', title: ['Galle_Fort', 'Galle'],          pos: 'center 50%' },
+    { sel: '#day3 .day-header-img', title: ['Mirissa', 'Weligama'],          pos: 'center 40%' },
+    { sel: '#day4 .day-header-img', title: ['Diyaluma_Falls', 'Ella,_Sri_Lanka'],      pos: 'center 50%' },
+    { sel: '#day5 .day-header-img', title: ['Bambarakanda_Falls', 'Haputale'],  pos: 'center 40%' },
+    { sel: '#day6 .day-header-img', title: ['Laxapana_Falls', 'Kitulgala'],      pos: 'center 50%' },
+    { sel: '#day7 .day-header-img', title: ['Kitulgala', 'Kelani_River'],        pos: 'center 50%' },
+
+    // Day 1 photo strip
+    { sel: '#day1 .photo-strip .photo-strip-img:nth-child(1)', title: ['Bandaranaike_International_Airport', 'Colombo'] },
+    { sel: '#day1 .photo-strip .photo-strip-img:nth-child(2)', title: ['Bentota', 'Bentota_Beach'] },
+    { sel: '#day1 .photo-strip .photo-strip-img:nth-child(3)', title: ['Mangrove_forest', 'Mangrove', 'Bentota_River'] },
+
+    // Day 2 photo strip
+    { sel: '#day2 .photo-strip .photo-strip-img:nth-child(1)', title: ['Geoffrey_Bawa', 'Lunuganga', 'Bentota'] },
+    { sel: '#day2 .photo-strip .photo-strip-img:nth-child(2)', title: ['Sea_turtle', 'Kosgoda', 'Olive_ridley_sea_turtle'] },
+    { sel: '#day2 .photo-strip .photo-strip-img:nth-child(3)', title: ['Galle_Fort', 'Galle'] },
+
+    // Day 3 photo strip
+    { sel: '#day3 .photo-strip .photo-strip-img:nth-child(1)', title: ['Blue_whale', 'Sperm_whale'] },
+    { sel: '#day3 .photo-strip .photo-strip-img:nth-child(2)', title: ['Surfing_in_Sri_Lanka', 'Surfing', 'Weligama'] },
+    { sel: '#day3 .photo-strip .photo-strip-img:nth-child(3)', title: ['Weligama', 'Mirissa'] },
+
+    // Day 4 photo strip
+    { sel: '#day4 .photo-strip .photo-strip-img:nth-child(1)', title: ['Mirissa', 'Coconut_tree'] },
+    { sel: '#day4 .photo-strip .photo-strip-img:nth-child(2)', title: ['Dickwella', 'Tangalle', 'Hiriketiya'] },
+    { sel: '#day4 .photo-strip .photo-strip-img:nth-child(3)', title: ['Ravana_Ella', 'Diyaluma_Falls', 'Ella,_Sri_Lanka'] },
+
+    // Day 5 photo strip
+    { sel: '#day5 .photo-strip .photo-strip-img:nth-child(1)', title: ['Diyaluma_Falls', 'Koslanda'] },
+    { sel: '#day5 .photo-strip .photo-strip-img:nth-child(2)', title: ['Haputale', 'Tea_plantation', 'Nuwara_Eliya'] },
+    { sel: '#day5 .photo-strip .photo-strip-img:nth-child(3)', title: ['Bambarakanda_Falls', 'Waterfall'] },
+
+    // Day 6 photo strip
+    { sel: '#day6 .photo-strip .photo-strip-img:nth-child(1)', title: ['Laxapana_Falls', 'Waterfall'] },
+    { sel: '#day6 .photo-strip .photo-strip-img:nth-child(2)', title: ['Kitulgala', 'Kelani_River'] },
+    { sel: '#day6 .photo-strip .photo-strip-img:nth-child(3)', title: ['Sinharaja_Forest_Reserve', 'Rainforest'] },
+
+    // Day 7 photo strip
+    { sel: '#day7 .photo-strip .photo-strip-img:nth-child(1)', title: ['Kelani_River', 'Kitulgala'] },
+    { sel: '#day7 .photo-strip .photo-strip-img:nth-child(2)', title: ['Galle_Face_Green', 'Colombo'] },
+    { sel: '#day7 .photo-strip .photo-strip-img:nth-child(3)', title: ['Bandaranaike_International_Airport', 'Colombo'] },
+  ];
+
+  // Fallback gradient colours per day if Wikipedia has no image
+  const fallbacks = {
+    '.hero-bg': 'linear-gradient(135deg,#0a6e6e,#12a3a3)',
+    '#day1 .day-header-img': 'linear-gradient(135deg,#0a4a6e,#12a3a3)',
+    '#day2 .day-header-img': 'linear-gradient(135deg,#064f4f,#12a3a3)',
+    '#day3 .day-header-img': 'linear-gradient(135deg,#003d5c,#0a6e6e)',
+    '#day4 .day-header-img': 'linear-gradient(135deg,#2d4a1e,#5c8a3a)',
+    '#day5 .day-header-img': 'linear-gradient(135deg,#1e3a4a,#3a6a8a)',
+    '#day6 .day-header-img': 'linear-gradient(135deg,#2a3a1e,#4a6a2a)',
+    '#day7 .day-header-img': 'linear-gradient(135deg,#0a3a5c,#1a7a8a)',
+  };
+
+  async function loadWikiImage(item) {
+    const el = document.querySelector(item.sel);
+    if (!el) return;
+
+    el.style.background = 'linear-gradient(90deg,#1a3a3a 25%,#2a5a5a 50%,#1a3a3a 75%)';
+    el.style.backgroundSize = '200% 100%';
+    el.style.animation = 'shimmer 1.5s infinite';
+
+    // Try each title in order until one returns an image
+    const titles = Array.isArray(item.title) ? item.title : [item.title];
+
+    for (const title of titles) {
+      try {
+        const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${title}&prop=pageimages&format=json&pithumbsize=1200&pilimit=1&origin=*`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+        const pages = data.query.pages;
+        const page = Object.values(pages)[0];
+        const imgUrl = page?.thumbnail?.source;
+
+        if (imgUrl) {
+          const hiRes = imgUrl.replace(/\/\d+px-/, '/1200px-');
+          el.style.animation = 'none';
+          el.style.backgroundImage = `url('${hiRes}')`;
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = item.pos || 'center center';
+          return; // success — stop trying
+        }
+      } catch(e) { /* try next title */ }
+    }
+
+    // All titles exhausted — use gradient fallback
+    el.style.animation = 'none';
+    el.style.background = fallbacks[item.sel] || 'linear-gradient(135deg,#0a6e6e,#12a3a3)';
+  }
+
+  // Add shimmer keyframe
+  const shimmerStyle = document.createElement('style');
+  shimmerStyle.textContent = `@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }`;
+  document.head.appendChild(shimmerStyle);
+
+  // Load all images (stagger slightly to avoid rate-limit)
+  wikiImages.forEach((item, i) => {
+    setTimeout(() => loadWikiImage(item), i * 80);
+  });
+
+  // ── SMOOTH SCROLL ──────────────────────────────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ── ACTIVE NAV HIGHLIGHT ───────────────────────────────────────────────────
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => { l.style.color = ''; l.style.borderColor = ''; });
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) { active.style.color = '#e8b84b'; active.style.borderColor = '#e8b84b'; }
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // ── STOP ITEM FADE-IN ──────────────────────────────────�
