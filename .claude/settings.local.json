@@ -24,7 +24,8 @@
       "Bash(python3 fix_all2.py)",
       "Bash(python3 fix_nav.py)",
       "Bash(python3 -:*)",
-      "Bash(python3 fix_index.py)"
+      "Bash(python3 fix_index.py)",
+      "WebSearch"
     ]
   }
 }
