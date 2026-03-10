@@ -25,7 +25,12 @@
       "Bash(python3 fix_nav.py)",
       "Bash(python3 -:*)",
       "Bash(python3 fix_index.py)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=10&format=json&srsearch=Japanese+Peace+Pagoda+Unawatuna+Sri+Lanka\" -H \"User-Agent: Mozilla/5.0 TripPlanner/1.0\")",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&titles=File:Japanese%20Peace%20Pagoda%20Rumassala.jpg|File:Japanese%20peace%20pagoda%20in%20Rumassala%2CUnawatuna.jpg|File:Japanese%20Peace%20Pagoda%20Temple.jpg&prop=imageinfo&iiprop=url|size|mime&format=json\" -H \"User-Agent: Mozilla/5.0 TripPlanner/1.0\")",
+      "Bash(curl -L -o /Users/ashinasok/Desktop/Trip/images/loc/peace-pagoda.jpg \"https://upload.wikimedia.org/wikipedia/commons/4/4c/Japanese_peace_pagoda_in_Rumassala%2CUnawatuna.jpg\" -H \"User-Agent: Mozilla/5.0 TripPlanner/1.0\" --progress-bar)",
+      "Bash(sips -Z 1200 -s format jpeg -s formatOptions 80 /Users/ashinasok/Desktop/Trip/images/loc/peace-pagoda.jpg)"
     ]
   }
 }
