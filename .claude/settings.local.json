@@ -59,7 +59,11 @@
       "WebFetch(domain:www.agoda.com)",
       "WebFetch(domain:www.google.com)",
       "WebFetch(domain:www.booking.com)",
-      "WebFetch(domain:kithul-cob-hideaway.srilankahotel.net)"
+      "WebFetch(domain:kithul-cob-hideaway.srilankahotel.net)",
+      "WebFetch(domain:www.tripadvisor.com)",
+      "WebFetch(domain:planetofhotels.com)",
+      "WebFetch(domain:www.hotels.com)",
+      "WebFetch(domain:www.a-hotel.com)"
     ]
   }
 }
