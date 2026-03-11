@@ -55,7 +55,11 @@
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=10&format=json&srsearch=Taprobane+Island+Weligama+Sri+Lanka\" -A \"Mozilla/5.0 \\(compatible; research bot\\)\")",
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&titles=File:Weligama%20Island.jpg|File:TAPROBANE%20ISLAND%20NEAR%20KOGGLA%20SRI%20LANKA%20AT%20SUNRISE%20JAN2013%20\\(8510160462\\).jpg|File:TAPROBANE%20ISLAND%20NEAR%20KOGGLA%20SRI%20LANKA%20JAN%202013%20\\(8491428227\\).jpg|File:Taprobane%20Island%20-%2001.jpg&prop=imageinfo&iiprop=url|size|mime&format=json\" -A \"Mozilla/5.0 \\(compatible; research bot\\)\")",
       "Bash(curl -L -o /Users/ashinasok/Desktop/Trip/images/loc/taprobane-island.jpg \"https://upload.wikimedia.org/wikipedia/commons/e/ec/TAPROBANE_ISLAND_NEAR_KOGGLA_SRI_LANKA_AT_SUNRISE_JAN2013_%288510160462%29.jpg\" -A \"Mozilla/5.0 \\(compatible; research bot\\)\" --progress-bar)",
-      "Bash(sips -Z 1200 -s format jpeg -s formatOptions 80 /Users/ashinasok/Desktop/Trip/images/loc/taprobane-island.jpg)"
+      "Bash(sips -Z 1200 -s format jpeg -s formatOptions 80 /Users/ashinasok/Desktop/Trip/images/loc/taprobane-island.jpg)",
+      "WebFetch(domain:www.agoda.com)",
+      "WebFetch(domain:www.google.com)",
+      "WebFetch(domain:www.booking.com)",
+      "WebFetch(domain:kithul-cob-hideaway.srilankahotel.net)"
     ]
   }
 }
