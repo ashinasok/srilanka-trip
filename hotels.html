@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Costs | Sri Lanka 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day-template.css">
+<style>
+.hotels-hero {
+  position: relative;
+  padding: 5.5rem 1.5rem 3.5rem;
+  text-align: center;
+  background: linear-gradient(160deg, #0b1a2e 0%, #132035 55%, #0a2035 100%);
+  overflow: hidden;
+}
+.hotels-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(200,146,42,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hotels-hero-eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+  font-family: 'DM Mono', monospace;
+}
+.hotels-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+}
+.hotels-hero-sub {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 1.8rem;
+}
+.cost-stats {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.cost-stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,146,42,0.22);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  min-width: 110px;
+  text-align: center;
+}
+.cost-stat-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.1;
+}
+.cost-stat-lbl {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.3rem;
+}
+.stay-block {
+  margin-bottom: 2rem;
+}
+.stay-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+.stay-night-pill {
+  background: rgba(200,146,42,0.1);
+  border: 1.5px solid rgba(200,146,42,0.35);
+  border-radius: 8px;
+  padding: 0.3rem 0.85rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.stay-date-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.stay-date-label a {
+  color: var(--gold);
+  text-decoration: none;
+}
+.stay-date-label a:hover {
+  text-decoration: underline;
+}
+.cost-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin: 2rem 0;
+}
+.total-bar {
+  background: rgba(200,146,42,0.06);
+  border: 1.5px solid rgba(200,146,42,0.3);
+  border-radius: 14px;
+  padding: 1.4rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+.total-bar-left {}
+.total-bar-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'DM Mono', monospace;
+}
+.total-bar-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+.total-bar-amount {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.unbooked-note {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1rem 1.4rem;
+  margin-top: 1.5rem;
+  font-size: 0.83rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+}
+.unbooked-note strong {
+  color: var(--text);
+}
+.unbooked-note a {
+  color: var(--gold);
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" id="siteNav">
+  <div class="nav-brand"><a href="index.html">&#8592; Sri Lanka 2026</a></div>
+  <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#overview">Overview</a>
+    <a href="index.html#accommodation">Stays</a>
+    <a href="index.html#tuktuk">Rentals</a>
+    <a href="index.html#fuel">Fuel</a>
+    <a href="index.html#fees">Fees</a>
+    <a href="index.html#bookings">Bookings</a>
+    <a href="hotels.html" class="active">Hotels</a>
+    <div class="nav-dropdown" id="itinDropdown">
+      <button class="nav-dropdown-btn" id="itinBtn">Itinerary <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="day1.html">Day 1 &middot; Colombo &rarr; Bentota</a>
+        <a href="day2.html">Day 2 &middot; Bentota &rarr; Weligama</a>
+        <a href="day3.html">Day 3 &middot; Weligama &mdash; The Big Day</a>
+        <a href="day4.html">Day 4 &middot; Into the Mountains</a>
+        <a href="day5.html">Day 5 &middot; Highland Wonders</a>
+        <a href="day6.html">Day 6 &middot; The Big Abseil Day</a>
+        <a href="day7.html">Day 7 &middot; Rafting &amp; Goodbye</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hotels-hero">
+  <div class="hotels-hero-eyebrow">28 March – 3 April 2026 &nbsp;·&nbsp; 6 Nights Total</div>
+  <h1 class="hotels-hero-title">Hotel Costs</h1>
+  <p class="hotels-hero-sub">5 nights confirmed · 1 night still to book</p>
+  <div class="cost-stats">
+    <div class="cost-stat">
+      <div class="cost-stat-val">5</div>
+      <div class="cost-stat-lbl">Nights Booked</div>
+    </div>
+    <div class="cost-stat">
+      <div class="cost-stat-val">$117.82</div>
+      <div class="cost-stat-lbl">Total USD</div>
+    </div>
+    <div class="cost-stat">
+      <div class="cost-stat-val">~₹10,133</div>
+      <div class="cost-stat-lbl">Total INR</div>
+    </div>
+    <div class="cost-stat">
+      <div class="cost-stat-val">$23.56</div>
+      <div class="cost-stat-lbl">Avg / Night</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider-bar"></div>
+
+<main>
+  <div class="page-container">
+    <div class="section-block">
+      <div class="section-eyebrow">Confirmed Stays</div>
+      <h2 class="section-heading">Booked Hotels</h2>
+
+      <!-- ── NIGHT 1 ── -->
+      <div class="stay-block">
+        <div class="stay-header">
+          <span class="stay-night-pill">Night 1</span>
+          <span class="stay-date-label">28 March 2026 &nbsp;·&nbsp; Bentota &nbsp;·&nbsp; <a href="day1.html">Day 1 →</a></span>
+        </div>
+        <div class="hotel-card" style="border:2px solid var(--gold);box-shadow:0 4px 24px rgba(200,146,42,0.15);">
+          <div class="hotel-card-top">
+            <div class="hotel-name">Villa Freiheit Himmel</div>
+            <span class="hotel-price-badge">$20.66 &nbsp;·&nbsp; ~₹1,777</span>
+          </div>
+          <div class="hotel-card-body">
+            <div class="hotel-rating-row">
+              <span class="stars">★★★★★</span>
+              <span class="review-count">9.1 / 10 · Booking.com</span>
+              <span class="tag tag-book" style="margin-left:auto;">✓ Booked</span>
+            </div>
+            <ul class="hotel-highlights">
+              <li>500 m from Bentota Beach — jungle surrounds</li>
+              <li>Balcony with garden &amp; treetop views</li>
+              <li>Monkeys spotted from the rooftop restaurant 🐒</li>
+              <li>Veg / vegan breakfast available ✓</li>
+              <li>AC · Free WiFi · Built 2021</li>
+            </ul>
+            <p class="hotel-note">176 Pitaramba Road, Bentota · 5-min walk to beach</p>
+            <a href="https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka" target="_blank" class="maps-btn">📍 Google Maps →</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cost-divider">
+
+      <!-- ── NIGHTS 2 & 3 ── -->
+      <div class="stay-block">
+        <div class="stay-header">
+          <span class="stay-night-pill">Nights 2 &amp; 3</span>
+          <span class="stay-date-label">29–30 March 2026 &nbsp;·&nbsp; Weligama &nbsp;·&nbsp; <a href="day2.html">Day 2</a> &amp; <a href="day3.html">Day 3 →</a></span>
+        </div>
+        <div class="hotel-card" style="border:2px solid var(--gold);box-shadow:0 4px 24px rgba(200,146,42,0.15);">
+          <div class="hotel-card-top">
+            <div class="hotel-name">Riverwood Villa</div>
+            <span class="hotel-price-badge">$14.80/night &nbsp;·&nbsp; $29.60 total &nbsp;·&nbsp; ~₹2,546</span>
+          </div>
+          <div class="hotel-card-body">
+            <div class="hotel-rating-row">
+              <span class="stars">★★★★★</span>
+              <span class="review-count">9.0 / 10 · Booking.com · 89 reviews</span>
+              <span class="tag tag-book" style="margin-left:auto;">✓ Booked</span>
+            </div>
+            <ul class="hotel-highlights">
+              <li>7-min walk to Weligama Beach</li>
+              <li>Balcony overlooking the river — watch a <strong>crocodile drift by 🐊</strong></li>
+              <li>Birds, chipmunks, lizards, butterflies &amp; fireflies in the garden</li>
+              <li>Breakfast included: Sri Lankan or European</li>
+              <li>AC rooms · Free WiFi · Mosquito nets</li>
+              <li>Cash only (LKR / USD / EUR) · Tuk-tuk accessible</li>
+            </ul>
+            <p class="hotel-note">No check-out on Day 3 — same room both nights.</p>
+            <a href="https://www.agoda.com/riverwood-villa/hotel/all/mirissa-lk.html" target="_blank" class="maps-btn">🛏️ View on Agoda →</a>
+            &nbsp;
+            <a href="https://maps.google.com/?q=Riverwood+Villa+Weligama+Sri+Lanka" target="_blank" class="maps-btn">📍 Google Maps →</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cost-divider">
+
+      <!-- ── NIGHT 4 ── -->
+      <div class="stay-block">
+        <div class="stay-header">
+          <span class="stay-night-pill">Night 4</span>
+          <span class="stay-date-label">31 March 2026 &nbsp;·&nbsp; Beragala / Diyaluma &nbsp;·&nbsp; <a href="day4.html">Day 4 →</a></span>
+        </div>
+        <div class="hotel-card" style="border:2px solid var(--gold);box-shadow:0 4px 24px rgba(200,146,42,0.15);">
+          <div class="hotel-card-top">
+            <div class="hotel-name">Kithul Cob Hideaway</div>
+            <span class="hotel-price-badge">$48.34 &nbsp;·&nbsp; ~₹4,157</span>
+          </div>
+          <div class="hotel-card-body">
+            <div class="hotel-rating-row">
+              <span class="stars">★★★★★</span>
+              <span class="review-count">9.0 / 10 · Superb · Travelmyth</span>
+              <span class="tag tag-book" style="margin-left:auto;">✓ Booked</span>
+            </div>
+            <ul class="hotel-highlights">
+              <li>Unique <strong>eco cob house</strong> built from natural earth &amp; clay 🌿</li>
+              <li><strong>Private waterfall &amp; natural rock swimming pool</strong> on-site</li>
+              <li>River-view rooms with balcony, spa bathtub &amp; fireplace</li>
+              <li>Italian breakfast included every morning</li>
+              <li>Free WiFi · Dog-friendly · Free parking</li>
+              <li>Easy access to Diyaluma &amp; Bambarakanda Falls + hiking trails</li>
+            </ul>
+            <p class="hotel-note">Beragala Junction, Beragala — near Diyaluma Falls.</p>
+            <a href="https://www.booking.com/hotel/lk/kithul-cob-hideaway.html" target="_blank" class="maps-btn">🛏️ View on Booking.com →</a>
+            &nbsp;
+            <a href="https://maps.google.com/?q=Kithul+Cob+Hideaway+Beragala+Sri+Lanka" target="_blank" class="maps-btn">📍 Google Maps →</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cost-divider">
+
+      <!-- ── NIGHT 5 ── -->
+      <div class="stay-block">
+        <div class="stay-header">
+          <span class="stay-night-pill">Night 5</span>
+          <span class="stay-date-label">1 April 2026 &nbsp;·&nbsp; Maskeliya &nbsp;·&nbsp; <a href="day5.html">Day 5 →</a></span>
+        </div>
+        <div class="hotel-card" style="border:2px solid var(--gold);box-shadow:0 4px 24px rgba(200,146,42,0.15);">
+          <div class="hotel-card-top">
+            <div class="hotel-name">Heaven Hills Guest House</div>
+            <span class="hotel-price-badge">₹1,653 &nbsp;·&nbsp; ~$19.22</span>
+          </div>
+          <div class="hotel-card-body">
+            <div class="hotel-rating-row">
+              <span class="stars">★★★★★</span>
+              <span class="review-count">9.3 / 10 · Booking.com</span>
+              <span class="tag tag-book" style="margin-left:auto;">✓ Booked</span>
+            </div>
+            <ul class="hotel-highlights">
+              <li>Stunning views of Maskeliya Lake from the balcony</li>
+              <li>Quiet hillside location — 5-min walk to town centre</li>
+              <li>Breakfast available: local specialities, pancakes &amp; fruit</li>
+              <li>Hosts arrange tuk-tuks to Adam's Peak &amp; waterfalls</li>
+              <li>Free WiFi · Free parking · 24-hr front desk · Cash only</li>
+              <li>3 km from Gartmore Falls · 13 km from Adam's Peak</li>
+            </ul>
+            <p class="hotel-note">No. 21/5 Norton Road, Maskeliya — family-run with famously warm hospitality. Guests keep extending their stays.</p>
+            <a href="https://www.booking.com/hotel/lk/heaven-hills-guest-house.html" target="_blank" class="maps-btn">🛏️ View on Booking.com →</a>
+            &nbsp;
+            <a href="https://maps.google.com/?q=Heaven+Hills+Guest+House+Maskeliya+Sri+Lanka" target="_blank" class="maps-btn">📍 Google Maps →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOTAL BAR -->
+      <div class="total-bar">
+        <div class="total-bar-left">
+          <div class="total-bar-label">Total — 5 Nights Booked</div>
+          <div class="total-bar-sub">~₹10,133 &nbsp;·&nbsp; avg $23.56 / night</div>
+        </div>
+        <div class="total-bar-amount">$117.82</div>
+      </div>
+
+      <!-- UNBOOKED NOTE -->
+      <div class="unbooked-note">
+        <strong>Night 6 not yet booked</strong> — 2 April · Kitulgala &nbsp;·&nbsp; see <a href="day6.html">Day 6</a> for options
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div style="font-size:1.5rem;margin-bottom:0.8rem;">🇮🇳 ✈️ 🇱🇰</div>
+  <strong>Sowmya &amp; Ashin's Sri Lanka Adventure 2026</strong><br>
+  28 March – 3 April · UL122/UL123 CMB · 7 Days · ~680 km by Tuk Tuk 🛺<br><br>
+  <span style="font-size:0.75rem;opacity:0.6;">All prices approximate. Entry fees subject to change. Book all activities well in advance. Have an incredible trip! 🌊</span>
+</footer>
+
+<script>
+(function () {
+  var toggle   = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  var dropdown = document.getElementById('itinDropdown');
+  var dropBtn  = document.getElementById('itinBtn');
+
+  function closeAll() {
+    if (navLinks) navLinks.classList.remove('open');
+    if (toggle)   toggle.classList.remove('open');
+    if (dropdown) dropdown.classList.remove('open');
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = navLinks.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      if (!isOpen && dropdown) dropdown.classList.remove('open');
+    });
+  }
+
+  if (dropBtn) {
+    dropBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+  }
+
+  if (navLinks) {
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { closeAll(); });
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var nav = document.getElementById('siteNav');
+    if (nav && !nav.contains(e.target)) closeAll();
+  });
+})();
+</script>
+</body>
+</html>
