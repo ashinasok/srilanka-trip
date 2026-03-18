@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Budget | Sri Lanka 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="day-template.css">
+<style>
+
+/* ── HERO ── */
+.budget-hero {
+  position: relative;
+  padding: 5.5rem 1.5rem 3.5rem;
+  text-align: center;
+  background: linear-gradient(160deg, #0b1a2e 0%, #132035 55%, #0a1a2e 100%);
+  overflow: hidden;
+}
+.budget-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(200,146,42,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.budget-hero-eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+  font-family: 'DM Mono', monospace;
+}
+.budget-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: white;
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+}
+.budget-hero-sub {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1.8rem;
+}
+.budget-hero-total {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin: 1.2rem 0 0.4rem;
+  letter-spacing: -0.02em;
+}
+.budget-hero-total-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 2rem;
+}
+
+/* ── STAT CHIPS ── */
+.cost-stats {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.cost-stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,146,42,0.22);
+  border-radius: 12px;
+  padding: 0.85rem 1.3rem;
+  min-width: 100px;
+  text-align: center;
+}
+.cost-stat-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.1;
+}
+.cost-stat-lbl {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.3rem;
+}
+
+/* ── CONTENT ── */
+.budget-body {
+  background: var(--cream);
+  padding: 3rem 1.5rem 5rem;
+}
+.budget-container {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* ── CATEGORY CARDS ── */
+.budget-category {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1.5px solid var(--cream-dark);
+}
+.cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem 1.6rem;
+  border-bottom: 1.5px solid var(--cream-dark);
+}
+.cat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.cat-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.cat-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+.cat-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+.cat-subtotal {
+  text-align: right;
+}
+.cat-subtotal-amt {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--teal);
+}
+.cat-subtotal-lbl {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── ITEM TABLE ── */
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.87rem;
+}
+.budget-table thead tr {
+  background: #f9f5ef;
+}
+.budget-table thead th {
+  padding: 0.6rem 1.6rem;
+  text-align: left;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.budget-table thead th:last-child {
+  text-align: right;
+}
+.budget-table tbody tr {
+  border-bottom: 1px solid #f5f0e8;
+  transition: background 0.15s;
+}
+.budget-table tbody tr:last-child {
+  border-bottom: none;
+}
+.budget-table tbody tr:hover {
+  background: #fdf9f2;
+}
+.budget-table td {
+  padding: 0.75rem 1.6rem;
+  color: var(--text);
+  vertical-align: middle;
+}
+.budget-table td:last-child {
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+}
+.budget-table .td-day {
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.budget-table .td-note {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: italic;
+}
+.shared-badge {
+  display: inline-block;
+  background: rgba(10,110,110,0.08);
+  color: var(--teal);
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.45rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+}
+.est-badge {
+  display: inline-block;
+  background: rgba(212,80,10,0.08);
+  color: var(--orange);
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.45rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+}
+
+/* ── FOOD ESTIMATE BOX ── */
+.food-estimate-note {
+  background: #fff8f0;
+  border-left: 3px solid var(--orange);
+  padding: 0.9rem 1.4rem;
+  margin: 0.5rem 1.6rem 1rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.82rem;
+  color: #7a4000;
+  line-height: 1.6;
+}
+
+/* ── GRAND TOTAL ── */
+.grand-total-bar {
+  background: linear-gradient(135deg, #0a1a2e 0%, #0f2540 100%);
+  border: 1.5px solid rgba(200,146,42,0.35);
+  border-radius: 18px;
+  padding: 2rem 2.2rem;
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.gt-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.gt-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+}
+.gt-row-label {
+  color: rgba(255,255,255,0.55);
+  min-width: 140px;
+  font-size: 0.82rem;
+}
+.gt-row-amt {
+  font-family: 'DM Mono', monospace;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+}
+.gt-total-section {
+  text-align: right;
+}
+.gt-total-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+  font-family: 'DM Mono', monospace;
+}
+.gt-total-inr {
+  font-family: 'DM Mono', monospace;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin: 0.3rem 0 0.2rem;
+}
+.gt-total-usd {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ── DISCLAIMER ── */
+.budget-disclaimer {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 12px;
+  padding: 1.1rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ── CATEGORY SUMMARY GRID ── */
+.cat-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+.cat-summary-chip {
+  background: white;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+.csc-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+.csc-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
+.csc-amt { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--teal); margin-top: 0.2rem; }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" id="siteNav">
+  <div class="nav-brand"><a href="index.html">&#8592; Sri Lanka 2026</a></div>
+  <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#overview">Overview</a>
+    <div class="nav-dropdown" id="itinDropdown">
+      <button class="nav-dropdown-btn" id="itinBtn">Itinerary <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="day1.html">Day 1 &middot; Colombo &rarr; Bentota</a>
+        <a href="day2.html">Day 2 &middot; Bentota &rarr; Weligama</a>
+        <a href="day3.html">Day 3 &middot; Weligama &mdash; The Big Day</a>
+        <a href="day4.html">Day 4 &middot; Into the Mountains</a>
+        <a href="day5.html">Day 5 &middot; Highland Wonders</a>
+        <a href="day6.html">Day 6 &middot; The Big Abseil Day</a>
+        <a href="day7.html">Day 7 &middot; Rafting &amp; Goodbye</a>
+      </div>
+    </div>
+    <a href="hotels.html">Hotels</a>
+    <a href="budget.html" class="active">Budget</a>
+    <a href="index.html#bookings">Bookings</a>
+    <a href="index.html#fees">Fees</a>
+    <a href="index.html#fuel">Fuel</a>
+    <a href="index.html#tuktuk">Rentals</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="budget-hero">
+  <div class="budget-hero-eyebrow">28 March – 3 April 2026 &nbsp;·&nbsp; Per Person &nbsp;·&nbsp; Excl. Flight</div>
+  <h1 class="budget-hero-title">Trip Budget</h1>
+  <div class="budget-hero-total">₹47,138</div>
+  <div class="budget-hero-total-sub">~$548 USD per person, excluding flight</div>
+  <div class="cost-stats">
+    <div class="cost-stat">
+      <div class="cost-stat-val">₹6,368</div>
+      <div class="cost-stat-lbl">6 Nights Stay</div>
+    </div>
+    <div class="cost-stat">
+      <div class="cost-stat-val">₹6,567</div>
+      <div class="cost-stat-lbl">Transport</div>
+    </div>
+    <div class="cost-stat">
+      <div class="cost-stat-val">₹23,297</div>
+      <div class="cost-stat-lbl">Experiences</div>
+    </div>
+    <div class="cost-stat">
+      <div class="cost-stat-val">₹2,406</div>
+      <div class="cost-stat-lbl">Entry Fees</div>
+    </div>
+    <div class="cost-stat">
+      <div class="cost-stat-val">~₹8,500</div>
+      <div class="cost-stat-lbl">Food (Est.)</div>
+    </div>
+  </div>
+  <p class="budget-hero-sub" style="margin-top:1.5rem;">Hotel costs shared equally between 2 people · Rates: ₹86/USD · ₹3.6/LKR</p>
+</div>
+
+<!-- BODY -->
+<div class="budget-body">
+  <div class="budget-container">
+
+    <!-- CATEGORY SUMMARY CHIPS -->
+    <div class="cat-summary-grid" style="margin-top:0.5rem;">
+      <div class="cat-summary-chip">
+        <div class="csc-icon">🏨</div>
+        <div class="csc-label">Stays</div>
+        <div class="csc-amt">₹6,368</div>
+      </div>
+      <div class="cat-summary-chip">
+        <div class="csc-icon">🛺</div>
+        <div class="csc-label">Transport</div>
+        <div class="csc-amt">₹6,567</div>
+      </div>
+      <div class="cat-summary-chip">
+        <div class="csc-icon">🎯</div>
+        <div class="csc-label">Experiences</div>
+        <div class="csc-amt">₹23,297</div>
+      </div>
+      <div class="cat-summary-chip">
+        <div class="csc-icon">🎟️</div>
+        <div class="csc-label">Entry Fees</div>
+        <div class="csc-amt">₹2,406</div>
+      </div>
+      <div class="cat-summary-chip">
+        <div class="csc-icon">🍛</div>
+        <div class="csc-label">Food (Est.)</div>
+        <div class="csc-amt">~₹8,500</div>
+      </div>
+    </div>
+
+    <!-- ── STAYS ── -->
+    <div class="budget-category">
+      <div class="cat-header">
+        <div class="cat-header-left">
+          <div class="cat-icon">🏨</div>
+          <div>
+            <div class="cat-name">Stays</div>
+            <div class="cat-note">6 nights · hotel cost split between 2 people</div>
+          </div>
+        </div>
+        <div class="cat-subtotal">
+          <div class="cat-subtotal-amt">₹6,368</div>
+          <div class="cat-subtotal-lbl">your share</div>
+        </div>
+      </div>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Hotel</th>
+            <th>Night</th>
+            <th>Room Rate</th>
+            <th>Your Share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Villa Freiheit Himmel, Bentota</td>
+            <td class="td-day">Night 1 · 28 Mar</td>
+            <td class="td-note">$20.66</td>
+            <td>₹888</td>
+          </tr>
+          <tr>
+            <td>Riverwood Villa, Weligama</td>
+            <td class="td-day">Night 2 · 29 Mar</td>
+            <td class="td-note">$14.80/night</td>
+            <td>₹636</td>
+          </tr>
+          <tr>
+            <td>Riverwood Villa, Weligama</td>
+            <td class="td-day">Night 3 · 30 Mar</td>
+            <td class="td-note">$14.80/night</td>
+            <td>₹636</td>
+          </tr>
+          <tr>
+            <td>Kithul Cob Hideaway, Diyaluma</td>
+            <td class="td-day">Night 4 · 31 Mar</td>
+            <td class="td-note">$48.34</td>
+            <td>₹2,079</td>
+          </tr>
+          <tr>
+            <td>Heaven Hills Guest House, Maskeliya</td>
+            <td class="td-day">Night 5 · 1 Apr</td>
+            <td class="td-note">₹1,653</td>
+            <td>₹827</td>
+          </tr>
+          <tr>
+            <td>Old Bridge Riverside Hotel, Kitulgala</td>
+            <td class="td-day">Night 6 · 2 Apr</td>
+            <td class="td-note">₹2,603</td>
+            <td>₹1,302</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── TRANSPORT ── -->
+    <div class="budget-category">
+      <div class="cat-header">
+        <div class="cat-header-left">
+          <div class="cat-icon">🛺</div>
+          <div>
+            <div class="cat-name">Transport</div>
+            <div class="cat-note">Tuk-tuk rental + fuel · shared between 2 people</div>
+          </div>
+        </div>
+        <div class="cat-subtotal">
+          <div class="cat-subtotal-amt">₹6,567</div>
+          <div class="cat-subtotal-lbl">your share</div>
+        </div>
+      </div>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Detail</th>
+            <th>Total Cost</th>
+            <th>Your Share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tuk-tuk Rental <span class="shared-badge">Shared</span></td>
+            <td class="td-note">7 days × $17/day · permit + lesson included</td>
+            <td class="td-note">$119 ≈ ₹10,234</td>
+            <td>₹5,117</td>
+          </tr>
+          <tr>
+            <td>Fuel — 6 Stops <span class="shared-badge">Shared</span></td>
+            <td class="td-note">~680 km total · 92 Octane · 6 fill-ups</td>
+            <td class="td-note">₹2,900</td>
+            <td>₹1,450</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── EXPERIENCES ── -->
+    <div class="budget-category">
+      <div class="cat-header">
+        <div class="cat-header-left">
+          <div class="cat-icon">🎯</div>
+          <div>
+            <div class="cat-name">Experiences</div>
+            <div class="cat-note">Activities · all priced per person</div>
+          </div>
+        </div>
+        <div class="cat-subtotal">
+          <div class="cat-subtotal-amt">₹23,297</div>
+          <div class="cat-subtotal-lbl">per person</div>
+        </div>
+      </div>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th>Day</th>
+            <th>Notes</th>
+            <th>Per Person</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mangrove River Boat Safari <span class="shared-badge">Shared</span></td>
+            <td class="td-day">Day 1</td>
+            <td class="td-note">Boat rate ÷ 2 · Book via hotel</td>
+            <td>₹850</td>
+          </tr>
+          <tr>
+            <td>Blue Whale Watching</td>
+            <td class="td-day">Day 3</td>
+            <td class="td-note">Raja &amp; Whales · 15,000 LKR/person</td>
+            <td>₹4,167</td>
+          </tr>
+          <tr>
+            <td>Surf Lesson</td>
+            <td class="td-day">Day 3</td>
+            <td class="td-note">Weligama Beach · 1.5 hrs</td>
+            <td>₹1,700</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Laxapana Falls Abseil — 126m ⭐</td>
+            <td class="td-day">Day 6</td>
+            <td class="td-note">Ceylon Extreme · 50,400 LKR/person</td>
+            <td style="color:var(--orange);">₹14,000</td>
+          </tr>
+          <tr>
+            <td>White Water Rafting</td>
+            <td class="td-day">Day 7</td>
+            <td class="td-note">Adventure LK · $30/person</td>
+            <td>₹2,580</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── ENTRY FEES ── -->
+    <div class="budget-category">
+      <div class="cat-header">
+        <div class="cat-header-left">
+          <div class="cat-icon">🎟️</div>
+          <div>
+            <div class="cat-name">Entry Fees</div>
+            <div class="cat-note">Sites, guides &amp; gear · per person</div>
+          </div>
+        </div>
+        <div class="cat-subtotal">
+          <div class="cat-subtotal-amt">₹2,406</div>
+          <div class="cat-subtotal-lbl">per person</div>
+        </div>
+      </div>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Attraction</th>
+            <th>Day</th>
+            <th></th>
+            <th>Per Person</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lunuganga Estate (Geoffrey Bawa)</td>
+            <td class="td-day">Day 2</td>
+            <td></td>
+            <td>₹255</td>
+          </tr>
+          <tr>
+            <td>Brief Garden (Bevis Bawa)</td>
+            <td class="td-day">Day 2</td>
+            <td></td>
+            <td>₹255</td>
+          </tr>
+          <tr>
+            <td>Kosgoda Turtle Hatchery</td>
+            <td class="td-day">Day 2</td>
+            <td></td>
+            <td>₹425</td>
+          </tr>
+          <tr>
+            <td>Hikkaduwa Snorkel Gear Rental</td>
+            <td class="td-day">Day 2</td>
+            <td></td>
+            <td>₹425</td>
+          </tr>
+          <tr>
+            <td>Koggala Stilt Fishermen Photo Tip</td>
+            <td class="td-day">Day 2</td>
+            <td class="td-note">Customary tip to fishermen</td>
+            <td>₹170</td>
+          </tr>
+          <tr>
+            <td>Buduruwagala Rock Carvings</td>
+            <td class="td-day">Day 4</td>
+            <td></td>
+            <td>₹425</td>
+          </tr>
+          <tr>
+            <td>Upper Diyaluma Guide (Saman) <span class="shared-badge">Shared</span></td>
+            <td class="td-day">Day 5</td>
+            <td class="td-note">Flat guide fee ÷ 2</td>
+            <td>₹128</td>
+          </tr>
+          <tr>
+            <td>Bambarakanda Falls Entry</td>
+            <td class="td-day">Day 5</td>
+            <td></td>
+            <td>₹97</td>
+          </tr>
+          <tr>
+            <td>Belilena Prehistoric Cave</td>
+            <td class="td-day">Day 6</td>
+            <td></td>
+            <td>₹170</td>
+          </tr>
+          <tr>
+            <td>Makandawa Rainforest Walk</td>
+            <td class="td-day">Day 6</td>
+            <td></td>
+            <td>₹56</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── FOOD ── -->
+    <div class="budget-category">
+      <div class="cat-header">
+        <div class="cat-header-left">
+          <div class="cat-icon">🍛</div>
+          <div>
+            <div class="cat-name">Food <span class="est-badge">Estimate</span></div>
+            <div class="cat-note">Lunch + dinner · several hotels include breakfast</div>
+          </div>
+        </div>
+        <div class="cat-subtotal">
+          <div class="cat-subtotal-amt">~₹8,500</div>
+          <div class="cat-subtotal-lbl">per person</div>
+        </div>
+      </div>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Meal</th>
+            <th>Coverage</th>
+            <th>Est. Cost/Meal</th>
+            <th>7-Day Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Breakfast</td>
+            <td class="td-note">Included at 4 of 6 hotels — budget for 3 days</td>
+            <td class="td-note">₹300–500</td>
+            <td>~₹1,200</td>
+          </tr>
+          <tr>
+            <td>Lunch</td>
+            <td class="td-note">Rice &amp; curry · roadside local restaurants</td>
+            <td class="td-note">₹400–700</td>
+            <td>~₹3,850</td>
+          </tr>
+          <tr>
+            <td>Dinner</td>
+            <td class="td-note">Guesthouse meals or local restaurants</td>
+            <td class="td-note">₹500–900</td>
+            <td>~₹3,500</td>
+          </tr>
+          <tr>
+            <td>Drinks, snacks, coconuts</td>
+            <td class="td-note">King coconuts (~₹60 each), bottled water, chai</td>
+            <td class="td-note">₹100–200/day</td>
+            <td>~₹700</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="food-estimate-note">
+        💡 <strong>Sri Lanka is extremely affordable for food.</strong> A full rice &amp; curry meal with multiple curries costs ₹400–600 at local restaurants. Eating at hotel restaurants is slightly more (₹700–1,200) but still very reasonable. Stick to local spots and you'll spend less.
+      </div>
+    </div>
+
+    <!-- ── GRAND TOTAL ── -->
+    <div class="grand-total-bar">
+      <div class="gt-rows">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.4);font-family:'DM Mono',monospace;margin-bottom:0.6rem;">Breakdown</div>
+        <div class="gt-row">
+          <span class="gt-row-label">🏨 Stays (6 nights)</span>
+          <span class="gt-row-amt">₹6,368</span>
+        </div>
+        <div class="gt-row">
+          <span class="gt-row-label">🛺 Transport</span>
+          <span class="gt-row-amt">₹6,567</span>
+        </div>
+        <div class="gt-row">
+          <span class="gt-row-label">🎯 Experiences</span>
+          <span class="gt-row-amt">₹23,297</span>
+        </div>
+        <div class="gt-row">
+          <span class="gt-row-label">🎟️ Entry Fees</span>
+          <span class="gt-row-amt">₹2,406</span>
+        </div>
+        <div class="gt-row">
+          <span class="gt-row-label">🍛 Food (estimate)</span>
+          <span class="gt-row-amt">~₹8,500</span>
+        </div>
+      </div>
+      <div class="gt-total-section">
+        <div class="gt-total-label">Total per person</div>
+        <div class="gt-total-inr">₹47,138</div>
+        <div class="gt-total-usd">~$548 USD &nbsp;·&nbsp; Excl. flight</div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="budget-disclaimer">
+      All prices are approximate. <strong>Experiences</strong> (abseil, whale watching, rafting) are the biggest variable — these are locked in at the prices shown.
+      <strong>Food</strong> is an estimate — actual spend may be ±₹2,000 depending on where you eat.
+      Exchange rates used: ₹86 per USD · ₹3.6 per LKR. <strong>Flight excluded.</strong>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Sri Lanka 2026 🌴</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="hotels.html">Hotels</a>
+      <a href="budget.html">Budget</a>
+      <a href="day1.html">Day 1</a>
+    </div>
+    <div class="footer-copy">Made with love for Sowmya &amp; Ashin &nbsp;·&nbsp; 28 Mar – 3 Apr 2026</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var toggle   = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  var dropdown = document.getElementById('itinDropdown');
+  var dropBtn  = document.getElementById('itinBtn');
+
+  function closeAll() {
+    if (navLinks) navLinks.classList.remove('open');
+    if (toggle)   toggle.classList.remove('open');
+    if (dropdown) dropdown.classList.remove('open');
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = navLinks.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      if (!isOpen && dropdown) dropdown.classList.remove('open');
+    });
+  }
+
+  if (dropBtn) {
+    dropBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+  }
+
+  document.addEventListener('click', closeAll);
+})();
+</script>
+</body>
+</html>
