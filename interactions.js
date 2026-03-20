@@ -1103,14 +1103,16 @@
         var name = item.title.split(/\s[—–:]\s/)[0].trim();
         var div  = document.createElement('div');
         div.className = 'spend-item';
-        var midUSD = item.usdMax ? (item.usd + item.usdMax) / 2 : item.usd;
+        var midUSD   = item.usdMax ? (item.usd + item.usdMax) / 2 : item.usd;
+        var amtAttrs = ' data-price-usd="' + item.usd.toFixed(2) + '"' +
+          (item.usdMax ? ' data-price-usd-max="' + item.usdMax.toFixed(2) + '"' : '');
         div.innerHTML =
           '<span class="spend-dot" style="background:' + col + '"></span>' +
           '<div class="spend-item-info">' +
             '<div class="spend-item-name">' + name + '</div>' +
             '<div class="spend-item-sub">' + item.sub + '</div>' +
           '</div>' +
-          '<div class="spend-item-amount" data-price-usd="' + midUSD.toFixed(2) + '">' +
+          '<div class="spend-item-amount"' + amtAttrs + '>' +
             fmt(item.usd, item.usdMax) +
           '</div>';
         itemsEl.appendChild(div);
