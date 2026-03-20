@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Sri Lanka Trip",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "3000", "/Users/ashinasok/Desktop/Trip"],
+      "port": 3000
+    }
+  ]
+}

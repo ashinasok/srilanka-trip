@@ -1095,3 +1095,942 @@ a { text-decoration: none; }
 @media (max-width: 700px) {
   .stop-icon-placeholder { width: 100%; min-width: unset; height: 200px; min-height: 180px; }
 }
+
+/* ════════════════════════════════════════════════════════════
+   IMMERSIVE STOP CARDS  ·  .timeline-immersive
+   Full-width card · background photo · frosted-glass panel
+   ════════════════════════════════════════════════════════════ */
+
+/* Override timeline container */
+.timeline-immersive {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.timeline-immersive::before { display: none; }
+
+/* ── Base stop card ── */
+.timeline-immersive .stop {
+  position: relative;
+  min-height: 310px;
+  margin-bottom: 0;
+  background: var(--teal-dark);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+  overflow: hidden;
+  cursor: default;
+  transition: box-shadow 0.3s ease;
+}
+.timeline-immersive .stop:hover {
+  transform: none;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.32);
+}
+.timeline-immersive .stop::before,
+.timeline-immersive .stop.highlight::before { display: none; }
+
+/* ── Background image layer ── */
+.stop-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);
+  will-change: transform;
+}
+.timeline-immersive .stop:hover .stop-bg { transform: scale(1.05); }
+
+/* Icon-emoji backgrounds for stops without photos */
+.stop-bg-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 48%;          /* keep emoji left of the panel */
+  font-size: 7rem;
+  opacity: 0.45;
+  transition: none !important;
+}
+.timeline-immersive .stop:hover .stop-bg.stop-bg-icon { transform: none; }
+
+.stop-bg-airport { background: linear-gradient(135deg,#0a0a3c 0%,#1a2a8c 55%,#0a3a6c 100%); }
+.stop-bg-tuktuk  { background: linear-gradient(135deg,#2a1a00 0%,#7c4a00 55%,#5c3000 100%); }
+.stop-bg-petrol  { background: linear-gradient(135deg,#2d2d00 0%,#5a5200 55%,#3a3600 100%); }
+.stop-bg-drive   { background: linear-gradient(135deg,#0a1a4c 0%,#1a4a8c 55%,#0a2a5c 100%); }
+.stop-bg-food    { background: linear-gradient(135deg,#4a1a00 0%,#8a3a00 55%,#6a2200 100%); }
+
+/* ── Gradient overlay: transparent left → dark right ── */
+.stop-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(6,30,30,0.06) 0%,
+    rgba(6,30,30,0.18) 38%,
+    rgba(6,30,30,0.84) 66%,
+    rgba(6,30,30,0.94) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.timeline-immersive .stop.highlight .stop-gradient {
+  background: linear-gradient(
+    105deg,
+    rgba(6,30,30,0.05) 0%,
+    rgba(6,30,30,0.14) 36%,
+    rgba(6,30,30,0.82) 64%,
+    rgba(6,30,30,0.91) 100%
+  );
+}
+
+/* ── Frosted-glass info panel — right side ── */
+.stop-panel {
+  position: absolute;
+  right: 2.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 46%;
+  max-width: 500px;
+  min-width: 280px;
+  background: rgba(6,28,28,0.70);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border-radius: 16px;
+  padding: 1.9rem 2rem 1.6rem;
+  border: 1px solid rgba(255,255,255,0.13);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.32),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.timeline-immersive .stop.highlight .stop-panel {
+  border-color: rgba(200,146,42,0.32);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.32),
+    0 0 0 1px rgba(200,146,42,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* ── Panel header row: icon pill + tag badges ── */
+.stop-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.95rem;
+}
+.stop-icon-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.20);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+/* ── Title & description inside panel ── */
+.stop-panel .stop-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.55rem;
+  line-height: 1.25;
+  cursor: default;
+}
+.stop-panel .stop-title .stop-chev { display: none; }
+.timeline-immersive .stop.highlight .stop-panel .stop-title { color: var(--gold-light); }
+
+.stop-panel .stop-desc {
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.76);
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Footer: tags row + maps button ── */
+.stop-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.stop-panel .stop-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0;
+}
+
+/* ── Google Maps button — frosted pill ── */
+.stop-maps-btn-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255,255,255,0.11);
+  border: 1.5px solid rgba(255,255,255,0.26);
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+  letter-spacing: 0.03em;
+  align-self: flex-start;
+  backdrop-filter: blur(6px);
+}
+.stop-maps-btn-hero:hover {
+  background: rgba(255,255,255,0.94);
+  color: var(--teal-dark);
+  border-color: rgba(255,255,255,0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+}
+
+/* ════════════════════════════════════════════════════════════
+   TAG SYSTEM — light base classes + dark panel overrides
+   ════════════════════════════════════════════════════════════ */
+
+/* New base classes (light backgrounds for use outside panels) */
+.tag-arrive {
+  background: rgba(18,163,163,0.12);
+  color: var(--teal);
+  border: 1px solid rgba(18,163,163,0.30);
+}
+
+/* Dark panel overrides — all tags */
+.stop-panel .tag {
+  font-size: 0.68rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: 100px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.stop-panel .tag-arrive {
+  background: rgba(18,163,163,0.22);
+  color: #6ee8e8;
+  border: 1px solid rgba(18,163,163,0.40);
+}
+.stop-panel .tag-leaveby {
+  background: rgba(200,146,42,0.22);
+  color: #e8c05a;
+  border: 1px solid rgba(200,146,42,0.44);
+}
+.stop-panel .tag-leaveby-urgent {
+  background: rgba(192,57,43,0.22);
+  color: #ff9090;
+  border: 1px solid rgba(192,57,43,0.46);
+  animation: pulse-border 1.8s ease-in-out infinite;
+}
+.stop-panel .tag-free {
+  background: rgba(30,122,74,0.22);
+  color: #6ae8a4;
+  border: 1px solid rgba(30,122,74,0.38);
+}
+.stop-panel .tag-paid {
+  background: rgba(212,80,10,0.22);
+  color: #f09878;
+  border: 1px solid rgba(212,80,10,0.40);
+}
+.stop-panel .tag-km {
+  background: rgba(21,101,192,0.22);
+  color: #82c4ff;
+  border: 1px solid rgba(21,101,192,0.40);
+}
+.stop-panel .tag-petrol {
+  background: rgba(198,40,40,0.22);
+  color: #ff9898;
+  border: 1px solid rgba(198,40,40,0.40);
+}
+.stop-panel .tag-book {
+  background: rgba(106,27,154,0.22);
+  color: #d8a0ff;
+  border: 1px solid rgba(106,27,154,0.40);
+}
+.stop-panel .tag-star {
+  background: rgba(200,146,42,0.32);
+  color: #ffd47a;
+  border: 1px solid rgba(200,146,42,0.50);
+}
+
+/* ════════════════════════════════════════════════════════════
+   DAY SPEND — full-screen budget breakdown
+   ════════════════════════════════════════════════════════════ */
+.day-spend-section {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #071c1c 0%, #0b2e2e 55%, #071c1c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2.5rem;
+}
+
+.day-spend-inner {
+  max-width: 1060px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* ── Left: expense list ── */
+.spend-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.6rem;
+}
+.spend-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 2.2rem;
+}
+.spend-items {
+  display: flex;
+  flex-direction: column;
+}
+.spend-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.spend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.spend-item-info { flex: 1; min-width: 0; }
+.spend-item-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.88);
+}
+.spend-item-sub {
+  font-size: 0.70rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 0.15rem;
+}
+.spend-item-amount {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ── Total row ── */
+.spend-total-row {
+  margin-top: 1.8rem;
+  padding-top: 1.2rem;
+  border-top: 1.5px solid rgba(200,146,42,0.32);
+}
+.spend-total-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.35rem;
+}
+.spend-total-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1.15;
+  margin-bottom: 0.3rem;
+}
+.spend-total-note {
+  font-size: 0.66rem;
+  color: rgba(255,255,255,0.28);
+}
+
+/* ── Right: donut chart ── */
+.spend-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+}
+.spend-donut-wrap {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  flex-shrink: 0;
+}
+.spend-donut {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  /* Petrol 22% · gap · Safari 58% · gap · Dinner 20% */
+  background: conic-gradient(
+    #f0a060 0% 22%,
+    #071c1c 22% 23.3%,
+    #12a3a3 23.3% 81%,
+    #071c1c 81% 82.3%,
+    #e8b84b 82.3% 100%
+  );
+  box-shadow: 0 0 60px rgba(18,163,163,0.18), 0 0 0 1px rgba(255,255,255,0.06);
+}
+.spend-donut-hole {
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background: #0b2a2a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.18rem;
+}
+.donut-center-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  text-align: center;
+  line-height: 1.3;
+}
+.donut-center-lbl {
+  font-size: 0.50rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── Legend with progress bars ── */
+.spend-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 270px;
+}
+.spend-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.spend-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.spend-legend-name {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.70);
+  flex: 1;
+  white-space: nowrap;
+}
+.spend-legend-bar-wrap {
+  flex: 2;
+  background: rgba(255,255,255,0.08);
+  border-radius: 100px;
+  height: 5px;
+  overflow: hidden;
+}
+.spend-legend-bar {
+  display: block;
+  height: 100%;
+  border-radius: 100px;
+}
+.spend-legend-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.38);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ── Responsive ── */
+@media (max-width: 820px) {
+  .day-spend-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .spend-right { order: -1; }
+  .spend-donut-wrap { width: 200px; height: 200px; }
+  .spend-donut { width: 200px; height: 200px; }
+}
+@media (max-width: 480px) {
+  .day-spend-section { padding: 3.5rem 1.4rem; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCROLL-REVEAL ANIMATIONS  (sl-hidden / sl-revealed)
+   ════════════════════════════════════════════════════════════ */
+.sl-hidden {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: none !important;
+}
+.sl-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+}
+
+/* Panel slides in from right when the card is revealed */
+.stop.sl-hidden .stop-panel {
+  opacity: 0;
+  transform: translateY(-50%) translateX(30px);
+  transition: none !important;
+}
+.stop.sl-revealed .stop-panel {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  transition:
+    opacity 0.55s ease 0.22s,
+    transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) 0.22s !important;
+}
+
+/* ── Responsive — tablet ── */
+@media (max-width: 860px) {
+  .stop-panel {
+    width: 55%;
+    right: 1.4rem;
+    padding: 1.5rem 1.5rem 1.3rem;
+  }
+  .stop-panel .stop-title { font-size: 1.08rem; }
+  .stop-bg-icon { padding-right: 56%; font-size: 5.5rem; }
+}
+
+/* ── Responsive — mobile (stacked timeline) ── */
+@media (max-width: 640px) {
+  .timeline-immersive .stop {
+    min-height: 460px;
+    border-radius: 16px;
+  }
+  .stop-gradient,
+  .timeline-immersive .stop.highlight .stop-gradient {
+    background: linear-gradient(
+      175deg,
+      rgba(6,30,30,0.10) 0%,
+      rgba(6,30,30,0.22) 38%,
+      rgba(6,30,30,0.88) 62%,
+      rgba(6,30,30,0.96) 100%
+    );
+  }
+  .stop-panel {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+    border-radius: 0 0 16px 16px;
+    padding: 1.3rem 1.4rem 1.4rem;
+  }
+  .stop-bg-icon {
+    padding-right: 0;
+    padding-top: 12%;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 5.5rem;
+    opacity: 0.40;
+  }
+  .stop.sl-hidden .stop-panel  { opacity: 0; transform: translateY(20px); }
+  .stop.sl-revealed .stop-panel { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   FULL-SCREEN STOP CAROUSEL  ·  #stopCarousel
+   Each stop fills the viewport — navigate with arrows / dots
+   ════════════════════════════════════════════════════════════ */
+
+.stop-carousel {
+  position: relative;
+  width: 100%;
+  height: 100dvh;               /* true full viewport */
+  margin-top: -52px;            /* pull up behind sticky nav */
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--teal-dark);
+}
+
+/* Nav becomes a glassy overlay when carousel page is active */
+body.has-carousel .site-nav {
+  background: rgba(6, 20, 20, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(200, 146, 42, 0.4);
+  transition: background 0.35s, border-bottom-color 0.35s;
+}
+/* Restore solid nav once user scrolls past carousel */
+body.has-carousel .site-nav.nav-scrolled {
+  background: var(--teal-dark);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: var(--gold);
+}
+
+/* ── Individual slide ── */
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.7s ease;
+}
+.carousel-slide.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 1;
+}
+
+/* Ken Burns zoom on the active slide's bg image */
+.carousel-slide .stop-bg {
+  transition: transform 0.7s ease;   /* for prev/next crossfade */
+}
+.carousel-slide.active .stop-bg {
+  animation: carouselKenBurns 9s ease-in-out forwards;
+}
+@keyframes carouselKenBurns {
+  from { transform: scale(1.00); }
+  to   { transform: scale(1.07); }
+}
+
+/* Icon emoji bg — no Ken Burns */
+.carousel-slide.active .stop-bg.stop-bg-icon { animation: none; }
+
+/* ── Panel entrance on active slide ── */
+.carousel-slide .stop-panel {
+  opacity: 0;
+  transform: translateY(-50%) translateX(22px);
+  transition:
+    opacity  0.5s ease 0.25s,
+    transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.25s;
+}
+.carousel-slide.active .stop-panel {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Gradient — identical logic, applied to slides ── */
+.carousel-slide .stop-gradient {
+  background: linear-gradient(
+    105deg,
+    rgba(6,30,30,0.04) 0%,
+    rgba(6,30,30,0.16) 36%,
+    rgba(6,30,30,0.84) 66%,
+    rgba(6,30,30,0.94) 100%
+  );
+}
+.carousel-slide.highlight .stop-gradient {
+  background: linear-gradient(
+    105deg,
+    rgba(6,30,30,0.04) 0%,
+    rgba(6,30,30,0.12) 34%,
+    rgba(6,30,30,0.80) 63%,
+    rgba(6,30,30,0.90) 100%
+  );
+}
+
+/* ── Left / Right arrow buttons ── */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.38);
+  color: rgba(255,255,255,0.90);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  line-height: 1;
+}
+.carousel-arrow:hover {
+  background: rgba(255,255,255,0.30);
+  border-color: rgba(255,255,255,0.60);
+  transform: translateY(-50%) scale(1.08);
+}
+.carousel-arrow:disabled {
+  opacity: 0.20;
+  pointer-events: none;
+}
+.carousel-prev { left: 1.2rem; }
+.carousel-next { right: 1.2rem; }
+
+/* Vertical carousel: lock body scroll while navigating slides */
+body.carousel-locked {
+  overflow: hidden;
+}
+
+
+/* Panel — no arrows in vertical mode, use standard right offset */
+.stop-carousel .stop-panel {
+  right: 2.8rem;
+}
+
+/* ── Carousel panel: centered layout + gold border on all slides ── */
+.stop-carousel .stop-panel {
+  text-align: center;
+  border-color: rgba(200, 146, 42, 0.38);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.32),
+    0 0 0 1px rgba(200,146,42,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* Gold title on every stop slide */
+.stop-carousel .stop-panel .stop-title {
+  color: var(--gold-light);
+}
+
+/* Hide icon pill + badge row above the title */
+.stop-carousel .stop-header-row {
+  display: none;
+}
+
+/* Centre the stat-cards row */
+.stop-carousel .stop-stats-row {
+  justify-content: center;
+}
+
+/* Maps button: full-width, white bg, dark text, centred */
+.stop-carousel .stop-maps-btn-hero {
+  background: #ffffff;
+  color: var(--teal-dark);
+  border-color: #ffffff;
+  align-self: stretch;
+  justify-content: center;
+  font-weight: 700;
+}
+.stop-carousel .stop-maps-btn-hero:hover {
+  background: rgba(255,255,255,0.88);
+  color: var(--teal-dark);
+  border-color: rgba(255,255,255,0.88);
+}
+
+/* ── Stop stat cards (Arrive · Leave · Price) just above Maps button ── */
+.stop-stats-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+.stop-stat {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 0.55rem 0.5rem 0.5rem;
+  text-align: center;
+  min-width: 0;
+}
+.stop-stat-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+.stop-stat-label {
+  font-size: 0.56rem;
+  color: rgba(255, 255, 255, 0.50);
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  font-family: 'DM Mono', monospace;
+  margin-top: 0.22rem;
+  white-space: nowrap;
+}
+/* Price colour variants */
+.stop-stat.stat-paid .stop-stat-value  { color: #f0c060; }
+.stop-stat.stat-free .stop-stat-value  { color: #6ae8a4; }
+/* Highlight slide: gold border on stat cards */
+.carousel-slide.highlight .stop-stat {
+  border-color: rgba(200, 146, 42, 0.28);
+}
+
+/* ── Bottom bar: dots + stop counter ── */
+.carousel-bottom {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  padding: 0 2rem;            /* no arrows in vertical mode */
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.32);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: width 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
+}
+.carousel-dot.active {
+  width: 28px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.92);
+}
+
+.carousel-counter {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.70rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.50);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+/* ── Eyebrow label — top left, below the nav overlay ── */
+.carousel-label {
+  position: absolute;
+  top: calc(1.6rem + 52px);
+  left: 1.8rem;
+  z-index: 20;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.50);
+  pointer-events: none;
+}
+
+/* ── Highlight slide: gold border on panel ── */
+.carousel-slide.highlight .stop-panel {
+  border-color: rgba(200,146,42,0.32);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.32),
+    0 0 0 1px rgba(200,146,42,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.carousel-slide.highlight .stop-panel .stop-title { color: var(--gold-light); }
+
+/* ── Tablet: slightly narrower panel ── */
+@media (max-width: 820px) {
+  .stop-carousel .stop-panel {
+    width: 56%;
+    right: 2rem;
+    padding: 1.5rem 1.5rem 1.3rem;
+  }
+  .stop-panel .stop-title { font-size: 1.08rem; }
+}
+
+/* ── Mobile: stacked layout — full image at top, panel below ── */
+@media (max-width: 640px) {
+  .stop-carousel {
+    height: 100dvh;
+    min-height: 480px;
+  }
+
+  /* Each slide becomes a vertical flex column */
+  .stop-carousel .carousel-slide {
+    display: flex;
+    flex-direction: column;
+    padding-top: 52px;           /* clear the nav overlay */
+  }
+
+  /* Image takes the top portion — position:relative to flow into flex */
+  .stop-carousel .stop-bg {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 42vh;
+    flex: none;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  /* Emoji icon backgrounds on mobile */
+  .stop-carousel .stop-bg-icon {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 42vh;
+    flex: none;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    opacity: 0.65;
+  }
+
+  /* Gradient hidden in stacked layout */
+  .stop-carousel .stop-gradient { display: none; }
+
+  /* Panel fills remaining height below image */
+  .stop-carousel .stop-panel {
+    position: relative;
+    flex: 1;
+    bottom: auto; left: auto; right: auto; top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+    max-height: none;
+    border-radius: 0;
+    overflow-y: auto;
+    background: rgba(6, 20, 20, 0.97);
+    padding: 1.2rem 1.4rem 4.8rem; /* bottom padding for dots overlay */
+  }
+
+  /* Panel fade-in on active slide */
+  .stop-carousel .carousel-slide .stop-panel {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.45s ease 0.2s, transform 0.45s ease 0.2s;
+  }
+  .stop-carousel .carousel-slide.active .stop-panel {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Dots overlay near the bottom */
+  .carousel-bottom {
+    bottom: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  /* Label: sits below the nav inside the image area */
+  .carousel-label {
+    top: calc(0.8rem + 52px);
+  }
+}

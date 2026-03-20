@@ -63,7 +63,15 @@
       "WebFetch(domain:www.tripadvisor.com)",
       "WebFetch(domain:planetofhotels.com)",
       "WebFetch(domain:www.hotels.com)",
-      "WebFetch(domain:www.a-hotel.com)"
+      "WebFetch(domain:www.a-hotel.com)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(ffmpeg -i \"/Users/ashinasok/Desktop/Screen Recording 2026-03-20 at 3.32.13 PM.mov\" -vf \"fps=1\" -frames:v 8 /tmp/frame_%02d.jpg)",
+      "Read(//Users/ashinasok/Desktop/**)",
+      "Bash(ffmpeg -i \"/Users/ashinasok/Desktop/Screen Recording 2026-03-20 at 3.32.13 PM.mov\" -vf \"fps=1\" -frames:v 8 /tmp/frame_%02d.jpg -y)",
+      "Bash(cp \"/Users/ashinasok/Desktop/Screen Recording 2026-03-20 at 3.32.13 PM.mov\" /tmp/recording.mov)",
+      "Bash(ffmpeg -i /tmp/recording.mov -vf \"fps=0.5\" -frames:v 8 /tmp/frame_%02d.jpg -y)",
+      "Bash(qlmanage -t -s 800 -o /tmp/ \"/Users/ashinasok/Desktop/Screen Recording 2026-03-20 at 3.32.13 PM.mov\")",
+      "Bash(ls /Users/ashinasok/Desktop/Trip/*.html)"
     ]
   }
 }
