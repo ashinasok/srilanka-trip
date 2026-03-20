@@ -498,7 +498,7 @@
       '  text-transform: uppercase;',
       '  cursor: pointer;',
       '  padding: 0.75rem 1.4rem;',
-      '  margin: 0.4rem auto 0.7rem;',
+      '  margin: 0.4rem 0.8rem 0.7rem;',
       '  display: block;',
       '  width: calc(100% - 1.6rem);',
       '  text-align: center;',
@@ -1054,12 +1054,25 @@
       var titleEl = slide.querySelector('.stop-title');
       if (!valEl || !titleEl) return;
 
+      var stopType = slide.getAttribute('data-stop-type') || '';
+      var isHalf   = (stopType === 'petrol' || stopType === 'hotel');
+      var subLabel = lblEl ? lblEl.textContent.trim() : 'Price';
+      if (isHalf) subLabel += ' ÷2 per person';
+
+      function halvePrice(str) {
+        if (!str) return str;
+        return str.replace(/([\d,]+)/g, function (m) {
+          var n = parseFloat(m.replace(/,/g, ''));
+          return isNaN(n) ? m : Math.round(n / 2).toLocaleString('en-IN');
+        });
+      }
+
       items.push({
         title : titleEl.textContent.trim(),
-        sub   : lblEl ? lblEl.textContent.trim() : 'Price',
-        inr   : valEl.getAttribute('data-inr') || valEl.textContent.trim(),
-        usd   : valEl.getAttribute('data-usd') || '',
-        lkr   : valEl.getAttribute('data-lkr') || ''
+        sub   : subLabel,
+        inr   : isHalf ? halvePrice(valEl.getAttribute('data-inr') || valEl.textContent.trim()) : (valEl.getAttribute('data-inr') || valEl.textContent.trim()),
+        usd   : isHalf ? halvePrice(valEl.getAttribute('data-usd') || '') : (valEl.getAttribute('data-usd') || ''),
+        lkr   : isHalf ? halvePrice(valEl.getAttribute('data-lkr') || '') : (valEl.getAttribute('data-lkr') || '')
       });
     });
 

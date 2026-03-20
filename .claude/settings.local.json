@@ -71,7 +71,8 @@
       "Bash(cp \"/Users/ashinasok/Desktop/Screen Recording 2026-03-20 at 3.32.13 PM.mov\" /tmp/recording.mov)",
       "Bash(ffmpeg -i /tmp/recording.mov -vf \"fps=0.5\" -frames:v 8 /tmp/frame_%02d.jpg -y)",
       "Bash(qlmanage -t -s 800 -o /tmp/ \"/Users/ashinasok/Desktop/Screen Recording 2026-03-20 at 3.32.13 PM.mov\")",
-      "Bash(ls /Users/ashinasok/Desktop/Trip/*.html)"
+      "Bash(ls /Users/ashinasok/Desktop/Trip/*.html)",
+      "Read(//Users/ashinasok/Desktop/Trip/**)"
     ]
   }
 }
