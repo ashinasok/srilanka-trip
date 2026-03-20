@@ -717,12 +717,14 @@
   /* — 15c. Currency application — */
   function applyCurrency(c) {
     var labels = { inr: '₹ INR', usd: '$ USD', lkr: 'රු LKR' };
-    document.querySelectorAll('[data-inr]').forEach(function (el) {
-      el.textContent = el.getAttribute('data-' + c) || el.getAttribute('data-inr');
-    });
     localStorage.setItem('sl-currency', c);
 
-    // Sync any standalone #currency-toggle button
+    /* Delegate conversion to CurrencyManager (currency.js) */
+    if (window.CurrencyManager) {
+      window.CurrencyManager.setCurrency(c);
+    }
+
+    /* Sync any standalone #currency-toggle button */
     var legacyBtn = document.getElementById('currency-toggle');
     if (legacyBtn) {
       legacyBtn.textContent = labels[c];
@@ -1059,47 +1061,38 @@
       var subLabel = lblEl ? lblEl.textContent.trim() : 'Price';
       if (isHalf) subLabel += ' ÷2 per person';
 
-      function halvePrice(str) {
-        if (!str) return str;
-        return str.replace(/([\d,]+)/g, function (m) {
-          var n = parseFloat(m.replace(/,/g, ''));
-          return isNaN(n) ? m : Math.round(n / 2).toLocaleString('en-IN');
-        });
-      }
+      /* Read base USD value — single source of truth */
+      var rawUSD = parseFloat(valEl.getAttribute('data-price-usd'));
+      if (isNaN(rawUSD)) return; /* skip if no USD base defined */
+      var usdVal = isHalf ? rawUSD / 2 : rawUSD;
+      /* For ranges, also halve the max if present */
+      var maxRaw = valEl.getAttribute('data-price-usd-max');
+      var usdMax = maxRaw ? (isHalf ? parseFloat(maxRaw) / 2 : parseFloat(maxRaw)) : null;
 
       items.push({
-        title : titleEl.textContent.trim(),
-        sub   : subLabel,
-        inr   : isHalf ? halvePrice(valEl.getAttribute('data-inr') || valEl.textContent.trim()) : (valEl.getAttribute('data-inr') || valEl.textContent.trim()),
-        usd   : isHalf ? halvePrice(valEl.getAttribute('data-usd') || '') : (valEl.getAttribute('data-usd') || ''),
-        lkr   : isHalf ? halvePrice(valEl.getAttribute('data-lkr') || '') : (valEl.getAttribute('data-lkr') || '')
+        title  : titleEl.textContent.trim(),
+        sub    : subLabel,
+        usd    : usdVal,
+        usdMax : usdMax   /* null for single prices */
       });
     });
 
     if (!items.length) return;
 
-    /* ── 2. Parse a price string to a number (uses midpoint for ranges) ── */
-    function parseNum(str) {
-      if (!str) return 0;
-      /* strip currency symbols, ~, spaces, commas, letters */
-      var s = str.replace(/[~₹$\s,]/g, '').replace(/LKR/gi, '').trim();
-      if (s.indexOf('–') >= 0) {
-        var p = s.split('–');
-        return ((parseFloat(p[0]) || 0) + (parseFloat(p[1]) || 0)) / 2;
+    /* ── 2. Format helper — delegates to CurrencyManager if available ── */
+    function fmt(usdAmt, usdAmtMax) {
+      if (window.CurrencyManager) {
+        return usdAmtMax
+          ? window.CurrencyManager.formatRange(usdAmt, usdAmtMax)
+          : window.CurrencyManager.format(usdAmt);
       }
-      return parseFloat(s) || 0;
+      /* Fallback: show raw INR approximate */
+      var approxINR = Math.round(usdAmt * 83.5);
+      return '~₹' + approxINR.toLocaleString('en-IN');
     }
 
-    function fmtINR(n) {
-      return '~₹' + Math.round(n).toLocaleString('en-IN');
-    }
-
-    var numsINR = items.map(function (it) { return parseNum(it.inr); });
-    var numsUSD = items.map(function (it) { return parseNum(it.usd); });
-    var numsLKR = items.map(function (it) { return parseNum(it.lkr); });
-    var totalINR = numsINR.reduce(function (a, b) { return a + b; }, 0);
+    var numsUSD  = items.map(function (it) { return it.usdMax ? (it.usd + it.usdMax) / 2 : it.usd; });
     var totalUSD = numsUSD.reduce(function (a, b) { return a + b; }, 0);
-    var totalLKR = numsLKR.reduce(function (a, b) { return a + b; }, 0);
 
     /* ── 3. Render spend items ── */
     var itemsEl = section.querySelector('.spend-items');
@@ -1107,21 +1100,19 @@
       itemsEl.innerHTML = '';
       items.forEach(function (item, i) {
         var col  = PALETTE[i % PALETTE.length];
-        /* Shorten long titles at — or : */
         var name = item.title.split(/\s[—–:]\s/)[0].trim();
         var div  = document.createElement('div');
         div.className = 'spend-item';
+        var midUSD = item.usdMax ? (item.usd + item.usdMax) / 2 : item.usd;
         div.innerHTML =
           '<span class="spend-dot" style="background:' + col + '"></span>' +
           '<div class="spend-item-info">' +
             '<div class="spend-item-name">' + name + '</div>' +
             '<div class="spend-item-sub">' + item.sub + '</div>' +
           '</div>' +
-          '<div class="spend-item-amount"' +
-            ' data-inr="' + item.inr + '"' +
-            (item.usd ? ' data-usd="' + item.usd + '"' : '') +
-            (item.lkr ? ' data-lkr="' + item.lkr + '"' : '') +
-          '>' + item.inr + '</div>';
+          '<div class="spend-item-amount" data-price-usd="' + midUSD.toFixed(2) + '">' +
+            fmt(item.usd, item.usdMax) +
+          '</div>';
         itemsEl.appendChild(div);
       });
     }
@@ -1129,19 +1120,17 @@
     /* ── 4. Update total ── */
     var totalAmtEl = section.querySelector('.spend-total-amount');
     if (totalAmtEl) {
-      totalAmtEl.setAttribute('data-inr', fmtINR(totalINR));
-      if (totalUSD) totalAmtEl.setAttribute('data-usd', '~$' + Math.round(totalUSD));
-      if (totalLKR) totalAmtEl.setAttribute('data-lkr', '~LKR ' + Math.round(totalLKR).toLocaleString('en-IN'));
-      totalAmtEl.textContent = fmtINR(totalINR);
+      totalAmtEl.setAttribute('data-price-usd', totalUSD.toFixed(2));
+      totalAmtEl.textContent = fmt(totalUSD);
     }
 
-    /* ── 5. Update donut chart ── */
+    /* ── 5. Update donut chart (proportions are currency-agnostic) ── */
     var donutEl = section.querySelector('.spend-donut');
-    if (donutEl && totalINR > 0) {
+    if (donutEl && totalUSD > 0) {
       var stops = '', cum = 0;
       items.forEach(function (item, i) {
         var col = PALETTE[i % PALETTE.length];
-        var pct = (numsINR[i] / totalINR) * 100;
+        var pct = (numsUSD[i] / totalUSD) * 100;
         if (i > 0) stops += ', ' + GAP_COL + ' ' + (cum - 1).toFixed(1) + '% ' + cum.toFixed(1) + '%, ';
         stops += col + ' ' + cum.toFixed(1) + '% ' + (cum + pct).toFixed(1) + '%';
         cum += pct;
@@ -1152,10 +1141,8 @@
     /* ── 6. Update donut centre ── */
     var centreEl = section.querySelector('.donut-center-val');
     if (centreEl) {
-      centreEl.setAttribute('data-inr', fmtINR(totalINR));
-      if (totalUSD) centreEl.setAttribute('data-usd', '~$' + Math.round(totalUSD));
-      if (totalLKR) centreEl.setAttribute('data-lkr', '~LKR ' + Math.round(totalLKR).toLocaleString('en-IN'));
-      centreEl.textContent = fmtINR(totalINR);
+      centreEl.setAttribute('data-price-usd', totalUSD.toFixed(2));
+      centreEl.textContent = fmt(totalUSD);
     }
 
     /* ── 7. Render legend ── */
@@ -1164,7 +1151,7 @@
       legendEl.innerHTML = '';
       items.forEach(function (item, i) {
         var col = PALETTE[i % PALETTE.length];
-        var pct = totalINR > 0 ? Math.round((numsINR[i] / totalINR) * 100) : 0;
+        var pct = totalUSD > 0 ? Math.round((numsUSD[i] / totalUSD) * 100) : 0;
         var name = item.title.split(/\s[—–:]\s/)[0].trim();
         var row = document.createElement('div');
         row.className = 'spend-legend-row';
@@ -1178,10 +1165,6 @@
         legendEl.appendChild(row);
       });
     }
-
-    /* ── 8. Apply current currency preference to all new [data-inr] elements ── */
-    var cur = localStorage.getItem('sl-currency') || 'inr';
-    if (['inr', 'usd', 'lkr'].indexOf(cur) >= 0) applyCurrency(cur);
   }
 
   /* ─────────────────────────────────────────
