@@ -348,10 +348,10 @@
       <div class="section-eyebrow">Where to Sleep</div>
       <h2 class="section-heading">Stay Tonight — Beragala / Diyaluma</h2>
       <div class="hotel-grid">
-        <div class="hotel-card" style="border: 2px solid var(--gold); box-shadow: 0 4px 24px rgba(200,146,42,0.15);">
+        <div class="hotel-card" id="night4-hotel-card" data-hotel-id="n4" style="border: 2px solid var(--gold); box-shadow: 0 4px 24px rgba(200,146,42,0.15);">
           <div class="hotel-card-top">
             <div class="hotel-name">Kithul Cob Hideaway</div>
-            <span class="hotel-price-badge">$48.34/night · ~₹4,157/night</span>
+            <span class="hotel-price-badge" data-price-usd="48.34" data-price-suffix="/night">$48.34/night · ~₹4,157/night</span>
           </div>
           <div class="hotel-card-body">
             <div class="hotel-rating-row">
@@ -455,6 +455,7 @@
   });
 })();
 </script>
+<script src="hotel-data.js"></script>
 <script src="currency.js"></script>
 <script src="interactions.js"></script>
 </body>

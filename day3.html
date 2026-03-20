@@ -507,10 +507,10 @@
       <h2 class="section-heading">Stay Tonight — Weligama ✦ 2 Nights</h2>
       <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;">2-night stay — no pack-up on the 30th. Wake up at 6 AM for whale watching, then catch Parrot Rock sunrise on the 31st before checking out.</p>
       <div class="hotel-grid">
-        <div class="hotel-card" style="border: 2px solid var(--gold); box-shadow: 0 4px 24px rgba(200,146,42,0.15);">
+        <div class="hotel-card" id="night3-hotel-card" data-hotel-id="n2" style="border: 2px solid var(--gold); box-shadow: 0 4px 24px rgba(200,146,42,0.15);">
           <div class="hotel-card-top">
             <div class="hotel-name">Riverwood Villa</div>
-            <span class="hotel-price-badge">$14.80/night · ~₹1,273/night</span>
+            <span class="hotel-price-badge" data-price-usd="14.80" data-price-suffix="/night">$14.80/night · ~₹1,273/night</span>
           </div>
           <div class="hotel-card-body">
             <div class="hotel-rating-row">
@@ -617,6 +617,7 @@
   });
 })();
 </script>
+<script src="hotel-data.js"></script>
 <script src="currency.js"></script>
 <script src="interactions.js"></script>
 </body>

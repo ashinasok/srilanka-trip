@@ -422,10 +422,10 @@
 
       <div class="hotel-grid">
 
-        <div class="hotel-card" style="border: 2px solid var(--gold); box-shadow: 0 4px 24px rgba(200,146,42,0.15);">
+        <div class="hotel-card" id="night5-hotel-card" data-hotel-id="n5" style="border: 2px solid var(--gold); box-shadow: 0 4px 24px rgba(200,146,42,0.15);">
           <div class="hotel-card-top">
             <div class="hotel-name">Heaven Hills Guest House</div>
-            <span class="hotel-price-badge">₹1,653/night · ~$19/night</span>
+            <span class="hotel-price-badge" data-price-usd="19.22" data-price-suffix="/night">₹1,653/night · ~$19/night</span>
           </div>
           <div class="hotel-card-body">
             <div class="hotel-rating-row">
@@ -529,6 +529,7 @@
   });
 })();
 </script>
+<script src="hotel-data.js"></script>
 <script src="currency.js"></script>
 <script src="interactions.js"></script>
 </body>

@@ -72,7 +72,19 @@
       "Bash(ffmpeg -i /tmp/recording.mov -vf \"fps=0.5\" -frames:v 8 /tmp/frame_%02d.jpg -y)",
       "Bash(qlmanage -t -s 800 -o /tmp/ \"/Users/ashinasok/Desktop/Screen Recording 2026-03-20 at 3.32.13 PM.mov\")",
       "Bash(ls /Users/ashinasok/Desktop/Trip/*.html)",
-      "Read(//Users/ashinasok/Desktop/Trip/**)"
+      "Read(//Users/ashinasok/Desktop/Trip/**)",
+      "Bash(grep -rn \"images/\" /Users/ashinasok/Desktop/Trip/*.html)",
+      "Bash(grep -rn images/ /Users/ashinasok/Desktop/Trip/*.css)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(sed -i '' -e \"s|images/food\\\\.webp|images/common/food.webp|g\" -e \"s|images/hero\\\\.jpg|images/common/hero.jpg|g\" -e \"s|images/petrol-pump\\\\.jpg|images/common/petrol-pump.jpg|g\" -e \"s|images/loc/|images/common/loc/|g\" -e \"s|images/day1-header\\\\.jpg|images/day1/header.jpg|g\" -e \"s|images/day1-hotel\\\\.jpg|images/day1/hotel.jpg|g\" -e \"s|images/day1-photo1\\\\.jpg|images/day1/photo1.jpg|g\" -e \"s|images/day1-photo2\\\\.jpg|images/day1/photo2.jpg|g\" -e \"s|images/day1-photo3\\\\.jpg|images/day1/photo3.jpg|g\" -e \"s|images/day1-photo4\\\\.jpg|images/day1/photo4.jpg|g\" -e \"s|images/day2-header\\\\.jpg|images/day2/header.jpg|g\" -e \"s|images/day2-photo1\\\\.jpg|images/day2/photo1.jpg|g\" -e \"s|images/day2-photo2\\\\.jpg|images/day2/photo2.jpg|g\" -e \"s|images/day2-photo3\\\\.jpg|images/day2/photo3.jpg|g\" -e \"s|images/day3-header\\\\.jpg|images/day3/header.jpg|g\" -e \"s|images/day3-photo1\\\\.jpg|images/day3/photo1.jpg|g\" -e \"s|images/day3-photo2\\\\.jpg|images/day3/photo2.jpg|g\" -e \"s|images/day3-photo3\\\\.jpg|images/day3/photo3.jpg|g\" -e \"s|images/day4-header\\\\.jpg|images/day4/header.jpg|g\" -e \"s|images/day4-photo1\\\\.jpg|images/day4/photo1.jpg|g\" -e \"s|images/day4-photo2\\\\.jpg|images/day4/photo2.jpg|g\" -e \"s|images/day4-photo3\\\\.jpg|images/day4/photo3.jpg|g\" -e \"s|images/day5-header\\\\.jpg|images/day5/header.jpg|g\" -e \"s|images/day5-photo1\\\\.jpg|images/day5/photo1.jpg|g\" -e \"s|images/day5-photo2\\\\.jpg|images/day5/photo2.jpg|g\" -e \"s|images/day5-photo3\\\\.jpg|images/day5/photo3.jpg|g\" -e \"s|images/day6-header\\\\.jpg|images/day6/header.jpg|g\" -e \"s|images/day6-photo1\\\\.jpg|images/day6/photo1.jpg|g\" -e \"s|images/day6-photo2\\\\.jpg|images/day6/photo2.jpg|g\" -e \"s|images/day6-photo3\\\\.jpg|images/day6/photo3.jpg|g\" -e \"s|images/day7-header\\\\.jpg|images/day7/header.jpg|g\" -e \"s|images/day7-photo1\\\\.jpg|images/day7/photo1.jpg|g\" -e \"s|images/day7-photo2\\\\.jpg|images/day7/photo2.jpg|g\" -e \"s|images/day7-photo3\\\\.jpg|images/day7/photo3.jpg|g\" \"$f\")",
+      "Bash(echo \"Updated $f\")",
+      "Bash(grep -h \"images/\" /Users/ashinasok/Desktop/Trip/*.html)",
+      "Bash(grep -v \"^--$\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(grep -rn \"stop-type=\"\"hotel\"\"\\\\|data-stop-type=\"\"hotel\"\"\" /Users/ashinasok/Desktop/Trip/day*.html)"
     ]
   }
 }

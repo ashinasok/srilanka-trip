@@ -158,6 +158,36 @@
   color: var(--gold);
   text-decoration: none;
 }
+
+/* ── Hotel Table ── */
+.ht-section { padding: 2.5rem 0 1rem; }
+.ht-wrap { overflow-x: auto; border-radius: 16px; border: 1.5px solid rgba(200,146,42,0.25); background: #fff; }
+.ht { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.ht thead tr { border-bottom: 1.5px solid rgba(200,146,42,0.3); background: rgba(200,146,42,0.07); }
+.ht th { padding: 0.9rem 1rem; text-align: left; font-family:'DM Mono',monospace; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:rgba(160,100,10,0.85); white-space:nowrap; }
+.ht td { padding: 0.85rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.07); color: var(--text); vertical-align: middle; background: #fff; }
+.ht tbody tr:hover td { background: rgba(200,146,42,0.06); }
+.ht tbody tr:last-child td { border-bottom: none; }
+.ht-night-pill { background:rgba(200,146,42,0.12); border:1px solid rgba(200,146,42,0.35); border-radius:6px; padding:0.2rem 0.65rem; font-family:'DM Mono',monospace; font-size:0.72rem; font-weight:600; color:#a06408; white-space:nowrap; }
+.ht-name { font-weight:500; min-width:150px; }
+.ht-price { font-family:'DM Mono',monospace; color:#a06408; font-weight:600; white-space:nowrap; }
+.ht-time { font-family:'DM Mono',monospace; font-size:0.85rem; white-space:nowrap; color:#555; }
+.ht-days { font-size:0.78rem; color:var(--muted); white-space:nowrap; }
+/* Sticky edit column */
+.ht th:last-child, .ht td:last-child { position:sticky; right:0; background:#fff; box-shadow:-2px 0 6px rgba(0,0,0,0.06); }
+.ht thead th:last-child { background:rgba(200,146,42,0.07); }
+.ht tbody tr:hover td:last-child { background:rgba(200,146,42,0.06); }
+.ht-edit-btn { background:rgba(200,146,42,0.1); border:1px solid rgba(200,146,42,0.3); border-radius:8px; padding:0.28rem 0.7rem; color:#a06408; cursor:pointer; font-size:0.8rem; transition:background 0.15s; font-family:inherit; }
+.ht-edit-btn:hover { background:rgba(200,146,42,0.22); }
+.ht-save-btn { background:#c8922a; border:none; border-radius:8px; padding:0.28rem 0.7rem; color:#fff; cursor:pointer; font-size:0.8rem; font-weight:700; font-family:inherit; margin-right:4px; }
+.ht-cancel-btn { background:rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.12); border-radius:8px; padding:0.28rem 0.6rem; color:var(--muted); cursor:pointer; font-size:0.8rem; font-family:inherit; }
+.ht-input { background:#fff; border:1.5px solid rgba(200,146,42,0.5); border-radius:6px; padding:0.28rem 0.5rem; color:var(--text); font-size:0.88rem; width:100%; min-width:130px; font-family:inherit; }
+.ht-input-sm { min-width:72px; }
+.ht-input:focus { outline:none; border-color:#c8922a; box-shadow:0 0 0 2px rgba(200,146,42,0.15); }
+.ht tfoot td { border-top: 2px solid rgba(200,146,42,0.3); border-bottom:none; background:rgba(200,146,42,0.06); font-family:'DM Mono',monospace; font-weight:700; color:#a06408; padding:0.95rem 1rem; }
+.ht tfoot td:last-child { background:rgba(200,146,42,0.06); box-shadow:none; }
+.ht-total-label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); font-weight:400; }
+.ht-note { font-size:0.78rem; color:var(--muted); margin-top:1rem; padding:0.8rem 1.2rem; background:rgba(200,146,42,0.04); border-radius:10px; border:1px solid rgba(200,146,42,0.15); }
 </style>
 </head>
 <body>
@@ -202,15 +232,15 @@
       <div class="cost-stat-lbl">Nights Booked</div>
     </div>
     <div class="cost-stat">
-      <div class="cost-stat-val">$148.08</div>
+      <div class="cost-stat-val" id="ht-total-usd">$148.08</div>
       <div class="cost-stat-lbl">Total USD</div>
     </div>
     <div class="cost-stat">
-      <div class="cost-stat-val">~₹12,736</div>
+      <div class="cost-stat-val" id="ht-total-inr">~₹12,736</div>
       <div class="cost-stat-lbl">Total INR</div>
     </div>
     <div class="cost-stat">
-      <div class="cost-stat-val">$24.68</div>
+      <div class="cost-stat-val" id="ht-avg">$24.68</div>
       <div class="cost-stat-lbl">Avg / Night</div>
     </div>
   </div>
@@ -220,9 +250,45 @@
 
 <main>
   <div class="page-container">
+
+    <!-- ── Hotel Table ── -->
+    <div class="ht-section">
+      <div class="section-eyebrow">Live Data</div>
+      <h2 class="section-heading">All Hotels</h2>
+      <div class="ht-wrap">
+        <table class="ht" id="hotelTable">
+          <thead>
+            <tr>
+              <th>Night</th>
+              <th>Hotel Name</th>
+              <th>Price / Night</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Days</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="hotelTableBody">
+            <!-- rendered by JS -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><span class="ht-total-label">Total · 6 Nights Booked ✓</span></td>
+              <td id="ht-tfoot-total" colspan="4"></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="ht-note">Click ✎ on any row to edit hotel details. Changes are saved locally and sync across all day pages instantly.</p>
+    </div>
+
+    <hr class="cost-divider">
+
+    <!-- ── Detail Cards ── -->
     <div class="section-block">
-      <div class="section-eyebrow">Confirmed Stays</div>
-      <h2 class="section-heading">Booked Hotels</h2>
+      <div class="section-eyebrow">Full Details</div>
+      <h2 class="section-heading">Confirmed Stays</h2>
 
       <!-- ── NIGHT 1 ── -->
       <div class="stay-block">
@@ -456,6 +522,145 @@
   });
 })();
 </script>
+
+<script>
+/* ── Hotel Table logic ── */
+(function () {
+  'use strict';
+
+  function fmt(usd) {
+    if (window.CurrencyManager) return window.CurrencyManager.format(usd);
+    return '$' + parseFloat(usd).toFixed(2);
+  }
+
+  function calcTotals(hotels) {
+    var totalUSD = 0;
+    hotels.forEach(function (h) { totalUSD += h.priceUSD * h.nights; });
+    var avgPerNight = totalUSD / 6;
+    return { totalUSD: totalUSD, avgPerNight: avgPerNight };
+  }
+
+  function updateHeroStats(hotels) {
+    var t = calcTotals(hotels);
+    var totalUSDEl = document.getElementById('ht-total-usd');
+    var totalINREl = document.getElementById('ht-total-inr');
+    var avgEl      = document.getElementById('ht-avg');
+    if (totalUSDEl) totalUSDEl.textContent = '$' + t.totalUSD.toFixed(2);
+    if (avgEl)      avgEl.textContent      = '$' + t.avgPerNight.toFixed(2);
+    if (totalINREl && window.CurrencyManager) {
+      /* show INR equivalent */
+      totalINREl.textContent = window.CurrencyManager.format(t.totalUSD);
+    }
+  }
+
+  function renderTable() {
+    if (!window.HotelData) return;
+    var hotels = window.HotelData.get();
+    var tbody  = document.getElementById('hotelTableBody');
+    var tfoot  = document.getElementById('ht-tfoot-total');
+    if (!tbody) return;
+
+    var t = calcTotals(hotels);
+    if (tfoot) tfoot.textContent = '$' + t.totalUSD.toFixed(2) + ' total · avg $' + (t.totalUSD / 6).toFixed(2) + '/night';
+
+    updateHeroStats(hotels);
+
+    tbody.innerHTML = '';
+    hotels.forEach(function (h, idx) {
+      var tr = document.createElement('tr');
+      tr.setAttribute('data-hotel-idx', idx);
+      tr.innerHTML =
+        '<td><span class="ht-night-pill">' + escHtml(h.nightLabel) + '</span></td>' +
+        '<td class="ht-name">' + escHtml(h.name) + '</td>' +
+        '<td class="ht-price">$' + h.priceUSD.toFixed(2) + '</td>' +
+        '<td class="ht-time">' + escHtml(h.checkIn) + '</td>' +
+        '<td class="ht-time">' + escHtml(h.checkOut) + '</td>' +
+        '<td class="ht-days">Day ' + h.days.join(', ') + '</td>' +
+        '<td><button class="ht-edit-btn" data-idx="' + idx + '">\u270e Edit</button></td>';
+      tbody.appendChild(tr);
+    });
+
+    /* attach edit listeners */
+    tbody.querySelectorAll('.ht-edit-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var idx = parseInt(this.getAttribute('data-idx'), 10);
+        openEditRow(idx);
+      });
+    });
+  }
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function openEditRow(idx) {
+    if (!window.HotelData) return;
+    var hotels = window.HotelData.get();
+    var h      = hotels[idx];
+    var tbody  = document.getElementById('hotelTableBody');
+    var tr     = tbody.querySelector('[data-hotel-idx="' + idx + '"]');
+    if (!tr) return;
+
+    tr.innerHTML =
+      '<td><span class="ht-night-pill">' + escHtml(h.nightLabel) + '</span></td>' +
+      '<td><input class="ht-input" id="ht-in-name" value="' + escHtml(h.name) + '"></td>' +
+      '<td><input class="ht-input ht-input-sm" id="ht-in-price" type="number" step="0.01" value="' + h.priceUSD + '"></td>' +
+      '<td><input class="ht-input ht-input-sm" id="ht-in-checkin" type="time" value="' + escHtml(h.checkIn) + '"></td>' +
+      '<td><input class="ht-input ht-input-sm" id="ht-in-checkout" type="time" value="' + escHtml(h.checkOut) + '"></td>' +
+      '<td class="ht-days">Day ' + h.days.join(', ') + '</td>' +
+      '<td style="white-space:nowrap">' +
+        '<button class="ht-save-btn" id="ht-save-' + idx + '">\u2713</button>' +
+        '<button class="ht-cancel-btn" id="ht-cancel-' + idx + '">\u2717</button>' +
+      '</td>';
+
+    document.getElementById('ht-save-' + idx).addEventListener('click', function () {
+      var name    = document.getElementById('ht-in-name').value.trim();
+      var price   = parseFloat(document.getElementById('ht-in-price').value);
+      var checkIn = document.getElementById('ht-in-checkin').value;
+      var checkOut= document.getElementById('ht-in-checkout').value;
+      if (!name || isNaN(price)) return;
+      hotels[idx].name     = name;
+      hotels[idx].priceUSD = price;
+      hotels[idx].checkIn  = checkIn;
+      hotels[idx].checkOut = checkOut;
+      window.HotelData.save(hotels);
+      renderTable();
+    });
+
+    document.getElementById('ht-cancel-' + idx).addEventListener('click', function () {
+      renderTable();
+    });
+  }
+
+  /* ── init ── */
+
+  function init() {
+    renderTable();
+  }
+
+  /* listen for hotel changes */
+  document.addEventListener('sl:hotelsChanged', function () {
+    renderTable();
+  });
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === 'sl2026_hotels') renderTable();
+  });
+
+  /* wait for HotelData to be available */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+}());
+</script>
+
+<script src="hotel-data.js"></script>
 <script src="currency.js"></script>
 <script src="interactions.js"></script>
 </body>

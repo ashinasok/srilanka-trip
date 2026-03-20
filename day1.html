@@ -52,7 +52,7 @@
 
     <!-- ─── Slide 0 · Overview (was hero) ─── -->
     <div class="carousel-slide carousel-intro active">
-      <div class="stop-bg" style="background-image: url('images/day1-header.jpg');"></div>
+      <div class="stop-bg" style="background-image: url('images/day1/header.jpg');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row" style="margin-bottom:.6rem">
@@ -77,7 +77,7 @@
 
     <!-- ─── Slide 1 · Colombo Airport ─── -->
     <div class="carousel-slide" data-stop-type="normal" data-lat="7.1803" data-lng="79.8838" data-name="Colombo Airport (CMB)" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1-photo1.jpg');"></div>
+      <div class="stop-bg" style="background-image: url('images/day1/photo1.jpg');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row">
@@ -108,7 +108,7 @@
 
     <!-- ─── Slide 2 · Petrol Stop ─── -->
     <div class="carousel-slide" data-stop-type="petrol" data-lat="6.8543" data-lng="79.8638" data-name="Petrol Stop 1" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/petrol-pump.jpg');"></div>
+      <div class="stop-bg" style="background-image: url('images/common/petrol-pump.jpg');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row">
@@ -135,7 +135,7 @@
 
     <!-- ─── Slide 3 · Coastal Drive ─── -->
     <div class="carousel-slide" data-stop-type="rest-stop" data-lat="6.7133" data-lng="79.9037" data-name="Panadura Beach" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1-photo2.jpg');"></div>
+      <div class="stop-bg" style="background-image: url('images/day1/photo2.jpg');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <h3 class="stop-title">Panadura Beach</h3>
@@ -162,7 +162,7 @@
 
     <!-- ─── Slide 4 · Hotel Check-in ─── -->
     <div class="carousel-slide highlight" data-stop-type="hotel" data-lat="6.4219" data-lng="79.9981" data-name="Villa Freiheit Himmel" data-type="hotel">
-      <div class="stop-bg" style="background-image: url('images/day1-hotel.jpg');"></div>
+      <div class="stop-bg" style="background-image: url('images/day1/hotel.jpg');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row">
@@ -193,7 +193,7 @@
 
     <!-- ─── Slide 6 · Dinner ─── -->
     <div class="carousel-slide" data-stop-type="food" data-lat="6.4270" data-lng="80.0039" data-name="Dinner — Bentota" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/food.webp');"></div>
+      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row">
@@ -254,7 +254,7 @@
 
     <!-- ─── Slide 7 · Breakfast ─── -->
     <div class="carousel-slide" data-stop-type="food" data-lat="6.4219" data-lng="79.9981" data-name="Breakfast" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/food.webp');"></div>
+      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row">
@@ -284,7 +284,7 @@
 
     <!-- ─── Slide 8 · Kande Viharaya Temple ─── -->
     <div class="carousel-slide highlight" data-stop-type="free" data-lat="6.4367" data-lng="80.0042" data-name="Kande Viharaya Temple" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1-photo3.jpg');"></div>
+      <div class="stop-bg" style="background-image: url('images/day1/photo3.jpg');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row">
@@ -377,7 +377,7 @@
 
     <!-- ─── Slide 11 · Checkout ─── -->
     <div class="carousel-slide" data-stop-type="normal" data-lat="6.4219" data-lng="79.9981" data-name="Checkout" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1-hotel.jpg');"></div>
+      <div class="stop-bg" style="background-image: url('images/common/hotel.jpg');"></div>
       <div class="stop-gradient"></div>
       <div class="stop-panel">
         <div class="stop-header-row">
@@ -500,47 +500,6 @@
   <span style="font-size:0.75rem;opacity:0.6;">All prices approximate. Entry fees subject to change. Book all activities well in advance. Have an incredible trip! 🌊</span>
 </footer>
 
-<script>
-/* ── Night 1 hotel: pull name, price & maps link from hotels.html ── */
-(function () {
-  fetch('hotels.html')
-    .then(function (r) { return r.text(); })
-    .then(function (html) {
-      var doc  = new DOMParser().parseFromString(html, 'text/html');
-      var card = doc.getElementById('night1-hotel-card');
-      if (!card) return;
-
-      var nameEl  = card.querySelector('.hotel-name');
-      var priceEl = card.querySelector('.hotel-price-badge');
-      var linkEl  = card.querySelector('a.maps-btn');
-
-      if (nameEl) {
-        var name = nameEl.textContent.trim();
-        document.querySelectorAll('.n1-hotel-name').forEach(function (el) {
-          el.textContent = name;
-        });
-      }
-      if (priceEl) {
-        /* Use the USD base price from data-price-usd; CurrencyManager will format it */
-        var usd = priceEl.getAttribute('data-price-usd');
-        document.querySelectorAll('.n1-hotel-price').forEach(function (el) {
-          if (usd) {
-            el.setAttribute('data-price-usd', usd);
-            if (window.CurrencyManager) {
-              el.textContent = window.CurrencyManager.format(parseFloat(usd));
-            }
-          }
-        });
-      }
-      if (linkEl) {
-        document.querySelectorAll('.n1-hotel-link').forEach(function (el) {
-          el.href = linkEl.href;
-        });
-      }
-    })
-    .catch(function () { /* fallback values already in HTML */ });
-})();
-</script>
 
 <script>
 (function () {
@@ -583,6 +542,7 @@
   });
 })();
 </script>
+<script src="hotel-data.js"></script>
 <script src="currency.js"></script>
 <script src="interactions.js"></script>
 </body>
