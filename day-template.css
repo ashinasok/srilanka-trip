@@ -2315,3 +2315,31 @@ body.carousel-locked {
   .stop-card-img-wrap { height: 175px; }
   .stop-card .stop-stats-row { flex-wrap: wrap; }
 }
+
+/* ── Next-Morning Divider ── */
+.next-morning-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0 0.25rem;
+}
+.next-morning-divider::before,
+.next-morning-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c8922a55, transparent);
+}
+.next-morning-label {
+  color: #8a6200;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: #fff8ec;
+  padding: 0.3rem 0.9rem;
+  border: 1.5px solid #e8b84b55;
+  border-radius: 99px;
+}
