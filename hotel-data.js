@@ -11,7 +11,7 @@
 
   var DEFAULTS = [
     { id:'n1', nightLabel:'Night 1',      name:'Villa Freiheit Himmel',     priceUSD:17.22, nights:1, checkIn:'15:00', checkOut:'11:00', days:[1],   location:'Bentota',   mapsUrl:'https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka' },
-    { id:'n2', nightLabel:'Nights 2 & 3', name:'Riverwood Villa',           priceUSD:14.80, nights:2, checkIn:'14:00', checkOut:'11:00', days:[2,3], location:'Weligama',  mapsUrl:'https://maps.google.com/?q=Riverwood+Villa+Weligama+Sri+Lanka' },
+    { id:'n2', nightLabel:'Nights 2 & 3', name:'Riverwood Villa',           priceUSD:14.80, nights:2, checkIn:'14:00', checkOut:'11:00', days:[2,3], location:'Weligama',  mapsUrl:'https://maps.google.com/?q=Riverwood+Villa+Weligama+Sri+Lanka', desc:'A charming riverfront villa just 7 minutes from Weligama Beach. Wake up to birdsong, spot a crocodile drifting past your balcony, and fall asleep to the sound of the river. Breakfast included — Sri Lankan or European. AC, free WiFi, mosquito nets in every room.' },
     { id:'n4', nightLabel:'Night 4',      name:'Kithul Cob Hideaway',       priceUSD:48.34, nights:1, checkIn:'14:00', checkOut:'11:00', days:[4],   location:'Beragala',  mapsUrl:'https://maps.google.com/?q=Kithul+Cob+Hideaway+Beragala+Sri+Lanka' },
     { id:'n5', nightLabel:'Night 5',      name:'Heaven Hills Guest House',  priceUSD:19.22, nights:1, checkIn:'13:00', checkOut:'11:00', days:[5],   location:'Maskeliya', mapsUrl:'https://maps.google.com/?q=Heaven+Hills+Guest+House+Maskeliya+Sri+Lanka' },
     { id:'n6', nightLabel:'Night 6',      name:'Old Bridge Riverside Hotel',priceUSD:30.26, nights:1, checkIn:'14:00', checkOut:'11:00', days:[6],   location:'Kitulgala', mapsUrl:'https://maps.google.com/?q=Old+Bridge+Riverside+Hotel+Kitulgala+Sri+Lanka' }
@@ -138,6 +138,7 @@
             '<span class="tag tag-book">\u2713 Booked &middot; ' + hotel.nightLabel + '</span>' +
           '</div>' +
           '<h3 class="stop-title sl-hotel-name">' + hotel.name + '</h3>' +
+          (hotel.desc ? '<p class="stop-desc">' + hotel.desc + '</p>' : '') +
           '<div class="stop-stats-row">' +
             '<div class="stop-stat"><div class="stop-stat-value">' + hotel.checkIn + '</div><div class="stop-stat-label">Check In</div></div>' +
             '<div class="stop-stat"><div class="stop-stat-value">' + hotel.checkOut + '</div><div class="stop-stat-label">Check Out</div></div>' +
@@ -146,6 +147,36 @@
           '<a href="' + hotel.mapsUrl + '" target="_blank" class="stop-maps-btn-hero sl-hotel-link">\uD83D\uDCCD View on Maps</a>' +
         '</div>';
       stopCards.appendChild(card);
+
+      /* ── inject dinner card for day 2 ── */
+      if (dayNum === 2) {
+        var dinnerIdx = stopCards.querySelectorAll('.stop-card').length;
+        var dinner    = document.createElement('div');
+        dinner.className = 'stop-card';
+        dinner.setAttribute('data-stop-type', 'food');
+        dinner.id = 'stop-' + dinnerIdx;
+        dinner.innerHTML =
+          '<div class="stop-card-img-wrap">' +
+            '<div class="stop-card-img" style="background-image:url(\'images/common/food.webp\')"></div>' +
+            '<div class="stop-card-type-badge">\uD83C\uDF5B Dinner</div>' +
+          '</div>' +
+          '<div class="stop-card-content">' +
+            '<div class="stop-card-header">' +
+              '<span class="stop-icon-pill">\uD83C\uDF5B</span>' +
+              '<span class="stop-card-num">Stop ' + (dinnerIdx + 1) + '</span>' +
+              '<span class="tag tag-food">\uD83C\uDF7D\uFE0F Dinner</span>' +
+            '</div>' +
+            '<h3 class="stop-title">Dinner — Weligama</h3>' +
+            '<p class="stop-desc">Wind down your day with a relaxed dinner in Weligama. The strip along the beach road has a great mix of Sri Lankan rice &amp; curry spots and laid-back seafood cafes. Try the fresh catch — tuna and swordfish are caught that morning. A perfect end to a long, beautiful day on the coast.</p>' +
+            '<div class="stop-stats-row">' +
+              '<div class="stop-stat"><div class="stop-stat-value">8:00 PM</div><div class="stop-stat-label">Dinner time</div></div>' +
+              '<div class="stop-stat stat-paid"><div class="stop-stat-value sl-dinner-price" data-price-usd="6.00">~\u20B9502</div><div class="stop-stat-label">Per person</div></div>' +
+            '</div>' +
+            '<a href="https://maps.google.com/?q=Restaurants+Weligama+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">\uD83D\uDCCD Find Nearby</a>' +
+          '</div>';
+        stopCards.appendChild(dinner);
+      }
+
       return;
     }
 
