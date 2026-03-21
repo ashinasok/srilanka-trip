@@ -100,16 +100,64 @@
       }
     });
 
-    /* check carousel */
+    /* ── new card layout: inject into #stopCards ── */
+    var stopCards = document.getElementById('stopCards');
+    if (stopCards) {
+      var existing = stopCards.querySelector('[data-stop-type="hotel"]');
+      if (existing) {
+        /* update existing injected card */
+        var hName  = existing.querySelector('.sl-hotel-name');
+        var hPrice = existing.querySelector('.sl-hotel-price');
+        var hLink  = existing.querySelector('.sl-hotel-link');
+        if (hName)  hName.textContent = hotel.name;
+        if (hPrice) {
+          hPrice.setAttribute('data-price-usd', hotel.priceUSD);
+          hPrice.textContent = fmt(hotel.priceUSD);
+        }
+        if (hLink)  hLink.href = hotel.mapsUrl;
+        return;
+      }
+
+      /* inject a new stop-card */
+      var imgDay = hotel.days[0];
+      var bgImg  = 'images/day' + imgDay + '/hotel.jpg';
+      var card   = document.createElement('div');
+      card.className = 'stop-card highlight sl-hotel-injected';
+      card.setAttribute('data-stop-type', 'hotel');
+      var cardIdx = stopCards.querySelectorAll('.stop-card').length;
+      card.id = 'stop-' + cardIdx;
+      card.innerHTML =
+        '<div class="stop-card-img-wrap">' +
+          '<div class="stop-card-img" style="background-image:url(\'' + bgImg + '\')"></div>' +
+          '<div class="stop-card-type-badge">\uD83C\uDFE8 Hotel</div>' +
+        '</div>' +
+        '<div class="stop-card-content">' +
+          '<div class="stop-card-header">' +
+            '<span class="stop-icon-pill">\uD83C\uDFE8</span>' +
+            '<span class="stop-card-num">Stop ' + (cardIdx + 1) + '</span>' +
+            '<span class="tag tag-book">\u2713 Booked &middot; ' + hotel.nightLabel + '</span>' +
+          '</div>' +
+          '<h3 class="stop-title sl-hotel-name">' + hotel.name + '</h3>' +
+          '<div class="stop-stats-row">' +
+            '<div class="stop-stat"><div class="stop-stat-value">' + hotel.checkIn + '</div><div class="stop-stat-label">Check In</div></div>' +
+            '<div class="stop-stat"><div class="stop-stat-value">' + hotel.checkOut + '</div><div class="stop-stat-label">Check Out</div></div>' +
+            '<div class="stop-stat stat-paid"><div class="stop-stat-value sl-hotel-price" data-price-usd="' + hotel.priceUSD + '">' + fmt(hotel.priceUSD) + '</div><div class="stop-stat-label">Per Night</div></div>' +
+          '</div>' +
+          '<a href="' + hotel.mapsUrl + '" target="_blank" class="stop-maps-btn-hero sl-hotel-link">\uD83D\uDCCD View on Maps</a>' +
+        '</div>';
+      stopCards.appendChild(card);
+      return;
+    }
+
+    /* ── legacy carousel fallback ── */
     var carousel = document.getElementById('stopCarousel');
     if (!carousel) return;
 
-    var existing = carousel.querySelector('[data-stop-type="hotel"]');
-    if (existing) {
-      /* update existing injected slide */
-      var hName  = existing.querySelector('.sl-hotel-name');
-      var hPrice = existing.querySelector('.sl-hotel-price');
-      var hLink  = existing.querySelector('.sl-hotel-link');
+    var existingSlide = carousel.querySelector('[data-stop-type="hotel"]');
+    if (existingSlide) {
+      var hName  = existingSlide.querySelector('.sl-hotel-name');
+      var hPrice = existingSlide.querySelector('.sl-hotel-price');
+      var hLink  = existingSlide.querySelector('.sl-hotel-link');
       if (hName)  hName.textContent = hotel.name;
       if (hPrice) {
         hPrice.setAttribute('data-price-usd', hotel.priceUSD);
@@ -119,9 +167,8 @@
       return;
     }
 
-    /* inject a new carousel slide */
-    var imgDay   = hotel.days[0];
-    var bgImg    = 'images/day' + imgDay + '/header.jpg';
+    var imgDay2   = hotel.days[0];
+    var bgImg2    = 'images/day' + imgDay2 + '/header.jpg';
     var dotsEl   = document.getElementById('carouselDots');
     var dotCount = dotsEl ? dotsEl.querySelectorAll('.carousel-dot').length : 0;
     var bottom   = carousel.querySelector('.carousel-bottom');
@@ -131,7 +178,7 @@
     slide.className = 'carousel-slide highlight sl-hotel-injected';
     slide.setAttribute('data-stop-type', 'hotel');
     slide.innerHTML =
-      '<div class="stop-bg" style="background-image:url(\'' + bgImg + '\')"></div>' +
+      '<div class="stop-bg" style="background-image:url(\'' + bgImg2 + '\')"></div>' +
       '<div class="stop-gradient"></div>' +
       '<div class="stop-panel">' +
         '<div class="stop-header-row">' +
@@ -148,21 +195,14 @@
           '<a href="' + hotel.mapsUrl + '" target="_blank" class="stop-maps-btn-hero sl-hotel-link">\uD83D\uDCCD View on Maps</a>' +
         '</div>' +
       '</div>';
-
     bottom.parentNode.insertBefore(slide, bottom);
 
-    /* add a new dot */
     if (dotsEl) {
       var dot = document.createElement('button');
       dot.className = 'carousel-dot';
       dot.setAttribute('data-idx', dotCount);
       dot.setAttribute('aria-label', 'Hotel');
       dotsEl.appendChild(dot);
-    }
-
-    /* tell interactions.js to re-init if possible */
-    if (win.initCarousel) {
-      try { win.initCarousel(); } catch (e) {}
     }
   }
 

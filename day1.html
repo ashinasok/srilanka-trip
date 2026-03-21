@@ -43,356 +43,351 @@
 <main>
 
   <!-- ═══════════════════════════════════════════════
-       FULL-SCREEN STOP CAROUSEL
+       DAY HERO BANNER
   ════════════════════════════════════════════════ -->
-  <section class="stop-carousel" id="stopCarousel" aria-label="Day 1 Stops">
-
-    <!-- Eyebrow label -->
-    <div class="carousel-label">Day 1 · 28 March 2026</div>
-
-    <!-- ─── Slide 0 · Overview (was hero) ─── -->
-    <div class="carousel-slide carousel-intro active">
-      <div class="stop-bg" style="background-image: url('images/common/header.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row" style="margin-bottom:.6rem">
-          <span class="tag tag-arrive" style="font-family:'DM Mono',monospace;letter-spacing:.12em;font-size:.65rem">Day 1 · 28 March 2026</span>
-        </div>
-        <h2 class="stop-title" style="font-size:clamp(1.3rem,3vw,1.75rem);margin-bottom:.5rem">Colombo → Bentota</h2>
-        <div style="font-size:.78rem;color:rgba(255,255,255,.62);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
-          Arrival · Hotel Check-in · Temples &amp; Gardens · Checkout
-          <span class="hero-km-badge">~120 km</span>
-        </div>
-        <p class="stop-desc" style="font-style:italic">"Land in paradise — grab a SIM card, your first king coconut, pick up your tuk tuk, and drive south to the river-meets-ocean magic of Bentota."</p>
-        <div class="stop-footer">
-          <div class="stop-tags">
-            <span class="tag tag-km">📏 ~120 km total</span>
-            <span class="tag tag-arrive">✈️ UL122 · 11:05 AM</span>
-            <span class="tag tag-book">10 stops ahead</span>
-          </div>
-          <a href="index.html#day1" class="stop-maps-btn-hero">← Back to Overview</a>
-        </div>
+  <section class="day-hero" aria-label="Day 1 Overview">
+    <div class="day-hero-bg" style="background-image: url('images/common/header.jpg');"></div>
+    <div class="day-hero-overlay"></div>
+    <div class="day-hero-content">
+      <span class="hero-day-label">Day 1 · 28 March 2026</span>
+      <h1 class="hero-day-title">Colombo → Bentota</h1>
+      <div class="hero-route-line">
+        Arrival · Hotel Check-in · Temples &amp; Gardens · Checkout
+        <span class="hero-km-badge">~120 km</span>
       </div>
+      <p class="hero-summary">"Land in paradise — grab a SIM card, your first king coconut, pick up your tuk tuk, and drive south to the river-meets-ocean magic of Bentota."</p>
+      <div class="stop-tags" style="margin-bottom:1.2rem">
+        <span class="tag tag-km">📏 ~120 km total</span>
+        <span class="tag tag-arrive">✈️ UL122 · 11:05 AM</span>
+        <span class="tag tag-book">10 stops ahead</span>
+      </div>
+      <a href="index.html#day1" class="hero-back-link">← Back to Overview</a>
     </div>
+  </section>
 
-    <!-- ─── Slide 1 · Colombo Airport ─── -->
-    <div class="carousel-slide" data-stop-type="normal" data-lat="7.1803" data-lng="79.8838" data-name="Colombo Airport (CMB)" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1/photo1.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+  <!-- ═══════════════════════════════════════════════
+       STICKY STOP NAVIGATION STRIP
+  ════════════════════════════════════════════════ -->
+  <nav class="stop-strip" id="stopStrip" aria-label="Jump to stop"></nav>
+
+  <!-- ═══════════════════════════════════════════════
+       STOP CARDS
+  ════════════════════════════════════════════════ -->
+  <div class="stop-cards" id="stopCards">
+
+    <!-- ─── Stop 0 · Colombo Airport ─── -->
+    <div class="stop-card" id="stop-0" data-stop-type="normal" data-lat="7.1803" data-lng="79.8838" data-name="Colombo Airport (CMB)" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day1/photo1.jpg');"></div>
+        <div class="stop-card-type-badge">✈️ Airport</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">✈️</span>
+          <span class="stop-card-num">Stop 1</span>
         </div>
         <h3 class="stop-title">Colombo Airport (CMB)</h3>
-        <p class="stop-desc">Get a Mobitel or Dialog SIM right inside arrivals. Cross Immigration. Exchange some currency — ATMs inside give good rates. </p>
-        <p class="stop-desc">Pick up tuk tuk from the airport or Negombo. Make sure you order the tuk tuk licence earlier — Saturday is half day and Sunday is a holiday for the Transport Office. Your adventure begins here. </p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">11:05 AM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">1:55 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="5.00">~₹645</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <p class="stop-desc">Get a Mobitel or Dialog SIM right inside arrivals. Cross Immigration. Exchange some currency — ATMs inside give good rates.</p>
+        <p class="stop-desc">Pick up tuk tuk from the airport or Negombo. Make sure you order the tuk tuk licence earlier — Saturday is half day and Sunday is a holiday for the Transport Office. Your adventure begins here.</p>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">11:05 AM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Bandaranaike+International+Airport+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">1:55 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="5.00">~₹645</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Bandaranaike+International+Airport+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 2 · Petrol Stop ─── -->
-    <div class="carousel-slide" data-stop-type="petrol" data-lat="6.8543" data-lng="79.8638" data-name="Petrol Stop 1" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/common/petrol-pump.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 1 · Petrol Stop ─── -->
+    <div class="stop-card" id="stop-1" data-stop-type="petrol" data-lat="6.8543" data-lng="79.8638" data-name="Petrol Stop 1" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/petrol-pump.jpg');"></div>
+        <div class="stop-card-type-badge">⛽ Petrol</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">⛽</span>
-          <span class="tag tag-petrol">⛽ Petrol Stop</span>
+          <span class="stop-card-num">Stop 2</span>
+          <span class="tag tag-petrol">Petrol Stop</span>
         </div>
         <h3 class="stop-title">Petrol Stop 1</h3>
         <p class="stop-desc">CEYPETCO or IOC station on Galle Road before leaving Colombo. 7.5-litre tank — fill it completely before the long coastal run south to Bentota.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">5:00 mins</div>
-              <div class="stop-stat-label">Time Taken</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="6.62">~₹553</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">~5 min</div>
+            <div class="stop-stat-label">Time Taken</div>
           </div>
-          <a href="https://maps.google.com/?q=CEYPETCO+Fuel+Station+Colombo" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="6.62">~₹553</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=CEYPETCO+Fuel+Station+Colombo" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 3 · Coastal Drive ─── -->
-    <div class="carousel-slide" data-stop-type="rest-stop" data-lat="6.7133" data-lng="79.9037" data-name="Panadura Beach" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1/photo2.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
+    <!-- ─── Stop 2 · Panadura Beach ─── -->
+    <div class="stop-card" id="stop-2" data-stop-type="rest-stop" data-lat="6.7133" data-lng="79.9037" data-name="Panadura Beach" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day1/photo2.jpg');"></div>
+        <div class="stop-card-type-badge">🌊 Rest Stop</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
+          <span class="stop-icon-pill">🌊</span>
+          <span class="stop-card-num">Stop 3</span>
+        </div>
         <h3 class="stop-title">Panadura Beach</h3>
-        <p class="stop-desc">Quick 15-minute stop at Panadura Beach to stretch, enjoy sea breeze, and refresh before continuing the journey.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">5:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">5:45 PM</div>
-              <div class="stop-stat-label">Depart</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <p class="stop-desc">Quick 15-minute stop at Panadura Beach to stretch, enjoy the sea breeze, and refresh before continuing the journey south.</p>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">5:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Galle+Road+Colombo+to+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">5:45 PM</div>
+            <div class="stop-stat-label">Depart</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Galle+Road+Colombo+to+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 4 · Hotel Check-in ─── -->
-    <div class="carousel-slide highlight" data-stop-type="hotel" data-lat="6.4219" data-lng="79.9981" data-name="Villa Freiheit Himmel" data-type="hotel">
-      <div class="stop-bg" style="background-image: url('images/day1/hotel.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 3 · Hotel Check-in ─── -->
+    <div class="stop-card highlight" id="stop-3" data-stop-type="hotel" data-lat="6.4219" data-lng="79.9981" data-name="Villa Freiheit Himmel" data-type="hotel">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day1/hotel.jpg');"></div>
+        <div class="stop-card-type-badge">🏨 Hotel</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🏨</span>
+          <span class="stop-card-num">Stop 4</span>
           <span class="tag tag-book">✓ Booked · Night 1</span>
         </div>
         <h3 class="stop-title n1-hotel-name">Villa Freiheit Himmel</h3>
         <p class="stop-desc">Check in, freshen up, unpack the bags, and step onto the balcony. Treetops, warm air, the sound of jungle. You've landed. First night of the adventure has begun.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">7:35 PM</div>
-              <div class="stop-stat-label">Arrive</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:15 PM</div>
-              <div class="stop-stat-label">Freshened up</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value n1-hotel-price" data-price-usd="20.66">~₹1,777</div>
-              <div class="stop-stat-label">Per night</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">7:35 PM</div>
+            <div class="stop-stat-label">Arrive</div>
           </div>
-          <a href="https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero n1-hotel-link">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:15 PM</div>
+            <div class="stop-stat-label">Freshened up</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value n1-hotel-price" data-price-usd="20.66">~₹1,777</div>
+            <div class="stop-stat-label">Per night</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero n1-hotel-link">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 6 · Dinner ─── -->
-    <div class="carousel-slide" data-stop-type="food" data-lat="6.4270" data-lng="80.0039" data-name="Dinner — Bentota" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 4 · Dinner ─── -->
+    <div class="stop-card" id="stop-4" data-stop-type="food" data-lat="6.4270" data-lng="80.0039" data-name="Dinner — Bentota" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/food.webp');"></div>
+        <div class="stop-card-type-badge">🍛 Dinner</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🍛</span>
+          <span class="stop-card-num">Stop 5</span>
         </div>
         <h3 class="stop-title">Dinner</h3>
         <p class="stop-desc">Sri Lankan rice &amp; curry for your first meal in Lanka. Order "without fish, without meat" clearly if vegetarian. Dhal, pumpkin curry, pol sambol, papadum — warm, earthy, and deeply satisfying after a long travel day.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">9:30 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="4" data-price-usd-max="9">₹350–750</div>
-              <div class="stop-stat-label">Per person</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Susantha+Garden+Hotel+Bentota" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">9:30 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="4" data-price-usd-max="9">₹350–750</div>
+            <div class="stop-stat-label">Per person</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Susantha+Garden+Hotel+Bentota" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 6 · Morning Beach Walk ─── -->
-    <div class="carousel-slide" data-stop-type="free" data-lat="6.4145" data-lng="80.0038" data-name="Bentota River Mouth Beach Walk" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1/photo3.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 5 · Morning Beach Walk ─── -->
+    <div class="stop-card" id="stop-5" data-stop-type="free" data-lat="6.4145" data-lng="80.0038" data-name="Bentota River Mouth Beach Walk" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day1/photo3.jpg');"></div>
+        <div class="stop-card-type-badge">🏖️ Free</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🏖️</span>
+          <span class="stop-card-num">Stop 6</span>
           <span class="tag tag-free">FREE</span>
         </div>
         <h3 class="stop-title">Bentota River Mouth Beach Walk</h3>
         <p class="stop-desc">Where the Bentota River meets the Indian Ocean — cool golden sand at 6 AM with almost no one around. Your first proper Sri Lanka beach moment. The sky is pink and the air is fresh.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">6:00 AM</div>
-              <div class="stop-stat-label">Start</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">6:40 AM</div>
-              <div class="stop-stat-label">Back by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">6:00 AM</div>
+            <div class="stop-stat-label">Start</div>
           </div>
-          <a href="https://maps.google.com/?q=Bentota+Beach+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">6:40 AM</div>
+            <div class="stop-stat-label">Back by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Bentota+Beach+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 7 · Breakfast ─── -->
-    <div class="carousel-slide" data-stop-type="food" data-lat="6.4219" data-lng="79.9981" data-name="Breakfast" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 6 · Breakfast ─── -->
+    <div class="stop-card" id="stop-6" data-stop-type="food" data-lat="6.4219" data-lng="79.9981" data-name="Breakfast" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/food.webp');"></div>
+        <div class="stop-card-type-badge">🍳 Breakfast</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🍳</span>
+          <span class="stop-card-num">Stop 7</span>
         </div>
         <h3 class="stop-title">Breakfast</h3>
         <p class="stop-desc">Start the morning with a Sri Lankan or continental breakfast — egg hoppers, pol sambol, fresh fruit, and a cup of Ceylon tea. Light, fresh, and energising before a full morning of exploring.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">7:00 AM</div>
-              <div class="stop-stat-label">Start</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:00 AM</div>
-              <div class="stop-stat-label">Done by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Included</div>
-              <div class="stop-stat-label">At hotel</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">7:00 AM</div>
+            <div class="stop-stat-label">Start</div>
           </div>
-          <a href="https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero n1-hotel-link">📍 Hotel on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:00 AM</div>
+            <div class="stop-stat-label">Done by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Included</div>
+            <div class="stop-stat-label">At hotel</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero n1-hotel-link">📍 Hotel on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 8 · Kande Viharaya Temple ─── -->
-    <div class="carousel-slide highlight" data-stop-type="free" data-lat="6.4367" data-lng="80.0042" data-name="Kande Viharaya Temple" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1/photo4.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 7 · Kande Viharaya Temple ─── -->
+    <div class="stop-card highlight" id="stop-7" data-stop-type="free" data-lat="6.4367" data-lng="80.0042" data-name="Kande Viharaya Temple" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day1/photo4.jpg');"></div>
+        <div class="stop-card-type-badge">🛕 Temple</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🛕</span>
+          <span class="stop-card-num">Stop 8</span>
           <span class="tag tag-free">FREE</span>
         </div>
         <h3 class="stop-title">Kande Viharaya Temple</h3>
         <p class="stop-desc">A striking hilltop Buddhist temple in Aluthgama with a magnificent seated Buddha statue visible for miles. Climb the steps through colourful flags and statues — a moment of peace and beautiful views over the coastline.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:15 AM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:45 AM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Entry</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:15 AM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Kande+Viharaya+Temple+Aluthgama+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:45 AM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Entry</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Kande+Viharaya+Temple+Aluthgama+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 9 · Brief Garden ─── -->
-    <div class="carousel-slide" data-stop-type="paid" data-lat="6.3756" data-lng="80.0467" data-name="Brief Garden" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1/photo5.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 8 · Brief Garden ─── -->
+    <div class="stop-card" id="stop-8" data-stop-type="paid" data-lat="6.3756" data-lng="80.0467" data-name="Brief Garden" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day1/photo5.jpg');"></div>
+        <div class="stop-card-type-badge">🎨 Garden</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🎨</span>
+          <span class="stop-card-num">Stop 9</span>
           <span class="tag tag-book">📅 Book in advance</span>
         </div>
         <h3 class="stop-title">Brief Garden — Bevis Bawa's Surrealist World</h3>
         <p class="stop-desc">Geoffrey's eccentric brother Bevis made this surrealist jungle of sculptural art and whimsical corners. Even stranger and more magical than Lunuganga. A one-hour wander through living art.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">09:00 AM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">10:00 AM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="8.28">~₹691</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">09:00 AM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Brief+Garden+Henarathgoda+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">10:00 AM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="8.28">~₹691</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Brief+Garden+Henarathgoda+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 10 · Checkout ─── -->
-    <div class="carousel-slide" data-stop-type="normal" data-lat="6.4219" data-lng="79.9981" data-name="Checkout" data-type="stop">
-      <div class="stop-bg" style="background-image: url('images/day1/hotel.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <!-- ─── Stop 9 · Checkout ─── -->
+    <div class="stop-card" id="stop-9" data-stop-type="normal" data-lat="6.4219" data-lng="79.9981" data-name="Checkout" data-type="stop">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day1/hotel.jpg');"></div>
+        <div class="stop-card-type-badge">🏨 Checkout</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🏨</span>
+          <span class="stop-card-num">Stop 10</span>
         </div>
         <h3 class="stop-title">Checkout</h3>
         <p class="stop-desc">Pack up, check the room, and say goodbye to Villa Freiheit Himmel. Head south — today: sea turtles, a UNESCO fort, stilt fishermen at sunset, and your new home in Weligama.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">1:00 PM</div>
-              <div class="stop-stat-label">Check Out</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">1:30 PM</div>
-              <div class="stop-stat-label">Depart</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Done</div>
-              <div class="stop-stat-label">Night 1</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">1:00 PM</div>
+            <div class="stop-stat-label">Check Out</div>
           </div>
-          <a href="https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero n1-hotel-link">📍 Hotel on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">1:30 PM</div>
+            <div class="stop-stat-label">Depart</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Done</div>
+            <div class="stop-stat-label">Night 1</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Villa+Freiheit+Himmel+Bentota+Sri+Lanka" target="_blank" class="stop-maps-btn-hero n1-hotel-link">📍 Hotel on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Dots + counter ─── -->
-    <div class="carousel-bottom">
-      <div class="carousel-dots" id="carouselDots">
-        <button class="carousel-dot active" data-idx="0"  aria-label="Overview"></button>
-        <button class="carousel-dot"        data-idx="1"  aria-label="Stop 1"></button>
-        <button class="carousel-dot"        data-idx="2"  aria-label="Stop 2"></button>
-        <button class="carousel-dot"        data-idx="3"  aria-label="Stop 3"></button>
-        <button class="carousel-dot"        data-idx="4"  aria-label="Stop 4"></button>
-        <button class="carousel-dot"        data-idx="5"  aria-label="Stop 5"></button>
-        <button class="carousel-dot"        data-idx="6"  aria-label="Stop 6"></button>
-        <button class="carousel-dot"        data-idx="7"  aria-label="Stop 7"></button>
-        <button class="carousel-dot"        data-idx="8"  aria-label="Stop 8"></button>
-        <button class="carousel-dot"        data-idx="9"  aria-label="Stop 9"></button>
-        <button class="carousel-dot"        data-idx="10" aria-label="Stop 10"></button>
-      </div>
-      <div class="carousel-counter" id="carouselCounter">Overview</div>
-    </div>
-
-  </section><!-- /stop-carousel -->
+  </div><!-- /stop-cards -->
 
   <!-- ═══════════════════════════════════════════════
        DAY SPEND — full-screen budget breakdown

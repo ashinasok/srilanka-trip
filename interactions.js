@@ -74,7 +74,7 @@
   ───────────────────────────────────────── */
   function initReveal() {
     var sel = [
-      '.stop', '.hotel-card', '.restaurant-card',
+      '.stop', '.stop-card', '.hotel-card', '.restaurant-card',
       '.budget-category', '.overview-card', '.toc-row',
       '.accom-card', '.booking-card', '.cat-summary-chip',
       '.fuel-stop-card', '.stay-block', '.section-block',
@@ -1035,16 +1035,20 @@
   ───────────────────────────────────────── */
   function initDaySpend() {
     var section   = document.getElementById('daySpend');
+    /* Support both new card layout (#stopCards) and legacy carousel (#stopCarousel) */
+    var stopCards = document.getElementById('stopCards');
     var carousel  = document.getElementById('stopCarousel');
-    if (!section || !carousel) return;
+    var container = stopCards || carousel;
+    if (!section || !container) return;
 
     /* Colour palette for each paid stop (cycles if > 6 stops) */
     var PALETTE = ['#f0a060', '#12a3a3', '#e8b84b', '#c06080', '#60a0d0', '#a060c0'];
     /* Gap colour between donut segments — matches section dark bg */
     var GAP_COL = '#071c1c';
 
-    /* ── 1. Collect paid stops from carousel ── */
-    var slides = Array.prototype.slice.call(carousel.querySelectorAll('.carousel-slide'));
+    /* ── 1. Collect paid stops from stop-cards or carousel ── */
+    var slideSelector = stopCards ? '.stop-card' : '.carousel-slide';
+    var slides = Array.prototype.slice.call(container.querySelectorAll(slideSelector));
     var items  = [];
 
     slides.forEach(function (slide) {
@@ -1170,6 +1174,51 @@
   }
 
   /* ─────────────────────────────────────────
+     18. STOP STRIP — sticky pill nav for card layout
+  ───────────────────────────────────────── */
+  function initStopStrip() {
+    var strip  = document.getElementById('stopStrip');
+    var cards  = document.querySelectorAll('#stopCards .stop-card');
+    if (!strip || !cards.length) return;
+
+    /* Build one pill per stop-card */
+    cards.forEach(function (card, i) {
+      var icon  = card.querySelector('.stop-icon-pill');
+      var title = card.querySelector('.stop-title');
+      var pill  = document.createElement('a');
+      pill.className  = 'stop-strip-pill';
+      pill.href       = '#stop-' + i;
+      pill.setAttribute('data-idx', i);
+      pill.innerHTML  = (icon ? icon.textContent.trim() + ' ' : '') +
+        (title ? title.textContent.trim().split(/[\-—,:]/)[0].trim().slice(0, 18) : ('Stop ' + (i + 1)));
+      strip.appendChild(pill);
+
+      pill.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    /* Highlight active pill via IntersectionObserver */
+    if (!('IntersectionObserver' in window)) return;
+    var pills = strip.querySelectorAll('.stop-strip-pill');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = Array.prototype.indexOf.call(cards, entry.target);
+        pills.forEach(function (p) { p.classList.remove('active'); });
+        if (pills[idx]) {
+          pills[idx].classList.add('active');
+          /* Scroll pill into view within the strip */
+          pills[idx].scrollIntoView({ block: 'nearest', inline: 'center' });
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '-100px 0px -50% 0px' });
+
+    cards.forEach(function (card) { obs.observe(card); });
+  }
+
+  /* ─────────────────────────────────────────
      INIT
   ───────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
@@ -1181,8 +1230,9 @@
     initCurrencyToggle();
     initTimelineToggle();
     initSettingsPanel();   // after timeline toggle so time nodes are in final DOM
-    initStopCarousel();    // full-screen carousel (day pages)
-    initDaySpend();        // auto-populate Day Spend section from carousel paid stops
+    initStopCarousel();    // full-screen carousel (legacy)
+    initStopStrip();      // sticky pill nav for card layout (new)
+    initDaySpend();        // auto-populate Day Spend section
     initLightbox();
     initFilterTabs();
     initCounters();

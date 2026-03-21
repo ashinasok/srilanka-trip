@@ -43,270 +43,257 @@
 <main>
 
   <!-- ═══════════════════════════════════════════════
-       FULL-SCREEN STOP CAROUSEL
+       DAY HERO BANNER
   ════════════════════════════════════════════════ -->
-  <section class="stop-carousel" id="stopCarousel" aria-label="Day 6 Stops">
-
-    <!-- Eyebrow label -->
-    <div class="carousel-label">Day 6 · 2 April 2026</div>
-
-    <!-- ─── Slide 0 · Overview (Intro) ─── -->
-    <div class="carousel-slide carousel-intro active">
-      <div class="stop-bg" style="background-image: url('images/common/header.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row" style="margin-bottom:.6rem">
-          <span class="tag tag-arrive" style="font-family:'DM Mono',monospace;letter-spacing:.12em;font-size:.65rem">Day 6 · 2 April 2026</span>
-        </div>
-        <h2 class="stop-title" style="font-size:clamp(1.3rem,3vw,1.75rem);margin-bottom:.5rem">The Big Abseil Day</h2>
-        <div style="font-size:.78rem;color:rgba(255,255,255,.62);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
-          🧗 Laxapana 126m · Prehistoric Cave · Rainforest · Natural Rock Pools
-          <span class="hero-km-badge">~80 km</span>
-        </div>
-        <p class="stop-desc" style="font-style:italic">"The defining moment of the trip — abseil 126 metres down a thundering waterfall. Then recover in one of Sri Lanka's most cinematic towns among ancient caves, primeval rainforest, and natural rock slides."</p>
-        <div class="stop-footer">
-          <div class="stop-tags">
-            <span class="tag tag-km">📏 ~80 km total</span>
-            <span class="tag tag-book">7 stops today</span>
-          </div>
-          <a href="index.html#day6" class="stop-maps-btn-hero">← Back to Overview</a>
-        </div>
+  <section class="day-hero" aria-label="Day 6 Overview">
+    <div class="day-hero-bg" style="background-image: url('images/common/header.jpg');"></div>
+    <div class="day-hero-overlay"></div>
+    <div class="day-hero-content">
+      <span class="hero-day-label">Day 6 · 2 April 2026</span>
+      <h1 class="hero-day-title">The Big Abseil Day</h1>
+      <div class="hero-route-line">
+        Laxapana 126m · Prehistoric Cave · Rainforest · Rock Pools
+        <span class="hero-km-badge">~80 km</span>
       </div>
+      <p class="hero-summary">"The defining moment of the trip — abseil 126 metres down a thundering waterfall. Then recover in one of Sri Lanka's most cinematic towns among ancient caves, primeval rainforest, and natural rock slides."</p>
+      <div class="stop-tags" style="margin-bottom:1.2rem">
+        <span class="tag tag-km">📏 ~80 km total</span>
+        <span class="tag tag-book">7 stops ahead</span>
+      </div>
+      <a href="index.html#day6" class="hero-back-link">← Back to Overview</a>
     </div>
+  </section>
 
-    <!-- ─── Slide 1 · Laxapana Falls Abseil ⭐ ─── -->
-    <div class="carousel-slide highlight" data-stop-type="paid">
-      <div class="stop-bg" style="background-image: url('images/common/loc/laxapana-falls.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+  <!-- ═══════════════════════════════════════════════
+       STICKY STOP NAVIGATION STRIP
+  ════════════════════════════════════════════════ -->
+  <nav class="stop-strip" id="stopStrip" aria-label="Jump to stop"></nav>
+
+  <!-- ═══════════════════════════════════════════════
+       STOP CARDS
+  ════════════════════════════════════════════════ -->
+  <div class="stop-cards" id="stopCards">
+
+    <div class="stop-card highlight" id="stop-0" data-stop-type="paid" data-name="Laxapana Falls Abseil">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/loc/laxapana-falls.jpg');"></div>
+        <div class="stop-card-type-badge">🧗 THE Moment</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🧗</span>
+          <span class="stop-card-num">Stop 1</span>
           <span class="tag tag-star">⭐ THE Moment</span>
-          <span class="tag tag-book">📅 MUST book ahead! Ceylon Extreme: +94 70 7900 700</span>
+          <span class="tag tag-book">📅 MUST book! Ceylon Extreme: +94 70 7900 700</span>
         </div>
         <h3 class="stop-title">Laxapana Falls Abseil — 126 Metres!!</h3>
         <p class="stop-desc">THE moment. The highest free-falling waterfall abseil in Sri Lanka. Walk backwards off a 126-metre cliff with the falls thundering beside you. The valley opens up as you descend — it's like becoming a superhero. Professional guides, full safety kit, 3 hours total.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:00 AM</div>
-              <div class="stop-stat-label">Start</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">11:15 AM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="162.00">~₹14,000</div>
-              <div class="stop-stat-label">Per person</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:00 AM</div>
+            <div class="stop-stat-label">Start</div>
           </div>
-          <a href="https://maps.google.com/?q=Laxapana+Falls+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">11:15 AM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="162.00">~₹14,000</div>
+            <div class="stop-stat-label">Per person</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Laxapana+Falls+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 2 · Drive to Kitulgala ─── -->
-    <div class="carousel-slide" data-stop-type="normal">
-      <div class="stop-bg stop-bg-icon stop-bg-drive">🛺</div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-1" data-stop-type="normal" data-name="Drive to Kitulgala">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day6/photo1.jpg');"></div>
+        <div class="stop-card-type-badge">🚗 Drive</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🚗</span>
+          <span class="stop-card-num">Stop 2</span>
           <span class="tag tag-km">📏 80 km · ~2 hrs</span>
           <span class="tag tag-petrol">⛽ Petrol Stop 6</span>
         </div>
         <h3 class="stop-title">Drive to Kitulgala — 80 km</h3>
         <p class="stop-desc">Winding mountain roads through tea estates and misty valleys. One of the most beautiful 2-hour drives in Sri Lanka. Fill up at Hatton before leaving the highlands — Petrol Stop 6.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">11:30 AM</div>
-              <div class="stop-stat-label">Depart</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">1:30 PM</div>
-              <div class="stop-stat-label">Arrive</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">11:30 AM</div>
+            <div class="stop-stat-label">Depart</div>
           </div>
-          <a href="https://maps.google.com/?q=Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">1:30 PM</div>
+            <div class="stop-stat-label">Arrive</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 3 · Arrive Kitulgala, Lunch ─── -->
-    <div class="carousel-slide" data-stop-type="food">
-      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-2" data-stop-type="food" data-name="Lunch by the River">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/food.webp');"></div>
+        <div class="stop-card-type-badge">🍛 Lunch</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🍛</span>
+          <span class="stop-card-num">Stop 3</span>
         </div>
         <h3 class="stop-title">Arrive Kitulgala — Lunch by the River</h3>
         <p class="stop-desc">Vegetarian kottu roti by the Kelani River. Let the achievement of the morning settle in while the river rushes past. The same river you'll raft on tomorrow. A moment well earned.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">1:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">2:25 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">1:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Kitulgala+Rest+House+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">2:25 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Kitulgala+Rest+House+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 4 · Belilena Prehistoric Cave ─── -->
-    <div class="carousel-slide" data-stop-type="paid">
-      <div class="stop-bg" style="background-image: url('images/common/loc/belilena-cave.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-3" data-stop-type="paid" data-name="Belilena Cave">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/loc/belilena-cave.jpg');"></div>
+        <div class="stop-card-type-badge">🦴 32,000 Years Old</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🦴</span>
+          <span class="stop-card-num">Stop 4</span>
           <span class="tag tag-book">32,000 years old</span>
         </div>
         <h3 class="stop-title">Belilena Prehistoric Cave</h3>
         <p class="stop-desc">People lived in this cave 32,000 YEARS AGO. "Balangoda Man" — the oldest human remains in Sri Lanka — was discovered here. Walk through a rubber estate to reach it. Genuinely mind-bending to stand inside.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">2:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">3:20 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="2.04">~₹170</div>
-              <div class="stop-stat-label">Entry</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">2:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Belilena+Cave+Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">3:20 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="2.04">~₹170</div>
+            <div class="stop-stat-label">Entry</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Belilena+Cave+Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 5 · Makandawa Rainforest ─── -->
-    <div class="carousel-slide" data-stop-type="paid">
-      <div class="stop-bg" style="background-image: url('images/common/loc/makandawa-forest.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-4" data-stop-type="paid" data-name="Makandawa Rainforest">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/loc/makandawa-forest.jpg');"></div>
+        <div class="stop-card-type-badge">🌿 Rainforest</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🌿</span>
+          <span class="stop-card-num">Stop 5</span>
         </div>
         <h3 class="stop-title">Makandawa Rainforest Walk</h3>
         <p class="stop-desc">Giant ancient trees with canopy that blocks the sky. Endemic birds that exist only in Sri Lanka. The sounds — cicadas, hornbills, rushing streams. 1 hour on marked paths through primeval jungle.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">4:00 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">5:05 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="0.67">~₹56</div>
-              <div class="stop-stat-label">Entry</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">4:00 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Makandawa+Rainforest+Kitulgala" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">5:05 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="0.67">~₹56</div>
+            <div class="stop-stat-label">Entry</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Makandawa+Rainforest+Kitulgala" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 6 · Kataran Oya Rock Pools ⭐ ─── -->
-    <div class="carousel-slide highlight" data-stop-type="free">
-      <div class="stop-bg" style="background-image: url('images/common/loc/kataran-oya.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card highlight" id="stop-5" data-stop-type="free" data-name="Kataran Oya Rock Pools">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/loc/kataran-oya.jpg');"></div>
+        <div class="stop-card-type-badge">💦 Natural Water Park</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">💦</span>
+          <span class="stop-card-num">Stop 6</span>
           <span class="tag tag-star">⭐ Natural Water Park</span>
           <span class="tag tag-free">FREE</span>
         </div>
         <h3 class="stop-title">Kataran Oya — Natural Rock Pools</h3>
         <p class="stop-desc">Seven natural pools connected by smooth rock slides with a jumping waterfall. Like a natural water park carved by the river over millennia. The perfect way to wash off the abseil adrenaline and celebrate the day.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">5:15 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">6:20 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">5:15 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Kataran+Oya+Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">6:20 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Kataran+Oya+Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 7 · Dinner at Riverside Lodge ─── -->
-    <div class="carousel-slide" data-stop-type="food">
-      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-6" data-stop-type="food" data-name="Dinner at Riverside">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/food.webp');"></div>
+        <div class="stop-card-type-badge">🍽️ Dinner</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🍽️</span>
+          <span class="stop-card-num">Stop 7</span>
         </div>
         <h3 class="stop-title">Dinner at Riverside Lodge</h3>
         <p class="stop-desc">Tell them vegetarian when booking. Many Kitulgala lodges sit right on the Kelani River — dinner with the sound of rushing water after the most epic day of the trip. Sleep well — last full day tomorrow.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">7:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">Open</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">7:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Flamingo+Villa+Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">Open</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Flamingo+Villa+Kitulgala+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Dots + counter ─── -->
-    <div class="carousel-bottom">
-      <div class="carousel-dots" id="carouselDots">
-        <button class="carousel-dot active" data-idx="0" aria-label="Overview"></button>
-        <button class="carousel-dot"        data-idx="1" aria-label="Stop 1"></button>
-        <button class="carousel-dot"        data-idx="2" aria-label="Stop 2"></button>
-        <button class="carousel-dot"        data-idx="3" aria-label="Stop 3"></button>
-        <button class="carousel-dot"        data-idx="4" aria-label="Stop 4"></button>
-        <button class="carousel-dot"        data-idx="5" aria-label="Stop 5"></button>
-        <button class="carousel-dot"        data-idx="6" aria-label="Stop 6"></button>
-        <button class="carousel-dot"        data-idx="7" aria-label="Stop 7"></button>
-      </div>
-      <div class="carousel-counter" id="carouselCounter">Overview</div>
-    </div>
+    <!-- Hotel card injected here by hotel-data.js -->
 
-  </section><!-- /stop-carousel -->
+  </div><!-- /stop-cards -->
 
   <!-- ═══════════════════════════════════════════════
        DAY SPEND — full-screen budget breakdown

@@ -43,270 +43,257 @@
 <main>
 
   <!-- ═══════════════════════════════════════════════
-       FULL-SCREEN STOP CAROUSEL
+       DAY HERO BANNER
   ════════════════════════════════════════════════ -->
-  <section class="stop-carousel" id="stopCarousel" aria-label="Day 5 Stops">
-
-    <!-- Eyebrow label -->
-    <div class="carousel-label">Day 5 · 1 April 2026</div>
-
-    <!-- ─── Slide 0 · Overview (Intro) ─── -->
-    <div class="carousel-slide carousel-intro active">
-      <div class="stop-bg" style="background-image: url('images/common/header.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row" style="margin-bottom:.6rem">
-          <span class="tag tag-arrive" style="font-family:'DM Mono',monospace;letter-spacing:.12em;font-size:.65rem">Day 5 · 1 April 2026</span>
-        </div>
-        <h2 class="stop-title" style="font-size:clamp(1.3rem,3vw,1.75rem);margin-bottom:.5rem">Highland Wonders</h2>
-        <div style="font-size:.78rem;color:rgba(255,255,255,.62);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
-          Infinity Pools · Bambarakanda · Lipton's Seat ⭐ · Maskeliya Lake
-          <span class="hero-km-badge">~110 km</span>
-        </div>
-        <p class="stop-desc" style="font-style:italic">"The most dramatic scenery of the trip — swim on the edge of a 220-metre cliff at dawn, stand at Sri Lanka's tallest waterfall, drive through endless tea estates to Lipton's famous viewpoint, and rest by a glass-calm highland lake."</p>
-        <div class="stop-footer">
-          <div class="stop-tags">
-            <span class="tag tag-km">📏 ~110 km total</span>
-            <span class="tag tag-book">7 stops today</span>
-          </div>
-          <a href="index.html#day5" class="stop-maps-btn-hero">← Back to Overview</a>
-        </div>
+  <section class="day-hero" aria-label="Day 5 Overview">
+    <div class="day-hero-bg" style="background-image: url('images/common/header.jpg');"></div>
+    <div class="day-hero-overlay"></div>
+    <div class="day-hero-content">
+      <span class="hero-day-label">Day 5 · 1 April 2026</span>
+      <h1 class="hero-day-title">Highland Wonders</h1>
+      <div class="hero-route-line">
+        Infinity Pools · Bambarakanda · Lipton's Seat · Maskeliya Lake
+        <span class="hero-km-badge">~110 km</span>
       </div>
+      <p class="hero-summary">"The most dramatic scenery of the trip — swim on the edge of a 220-metre cliff at dawn, stand at Sri Lanka's tallest waterfall, drive through endless tea estates to Lipton's famous viewpoint, and rest by a glass-calm highland lake."</p>
+      <div class="stop-tags" style="margin-bottom:1.2rem">
+        <span class="tag tag-km">📏 ~110 km total</span>
+        <span class="tag tag-book">7 stops ahead</span>
+      </div>
+      <a href="index.html#day5" class="hero-back-link">← Back to Overview</a>
     </div>
+  </section>
 
-    <!-- ─── Slide 1 · Upper Diyaluma Infinity Pools ⭐ ─── -->
-    <div class="carousel-slide highlight" data-stop-type="paid">
-      <div class="stop-bg" style="background-image: url('images/day5/photo1.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+  <!-- ═══════════════════════════════════════════════
+       STICKY STOP NAVIGATION STRIP
+  ════════════════════════════════════════════════ -->
+  <nav class="stop-strip" id="stopStrip" aria-label="Jump to stop"></nav>
+
+  <!-- ═══════════════════════════════════════════════
+       STOP CARDS
+  ════════════════════════════════════════════════ -->
+  <div class="stop-cards" id="stopCards">
+
+    <div class="stop-card highlight" id="stop-0" data-stop-type="paid" data-name="Upper Diyaluma Infinity Pools">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/day5/photo1.jpg');"></div>
+        <div class="stop-card-type-badge">🌊 Must Do</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🌊</span>
+          <span class="stop-card-num">Stop 1</span>
           <span class="tag tag-star">⭐ Must Do</span>
           <span class="tag tag-book">📅 Guide: Saman +94 71 430 4910</span>
         </div>
         <h3 class="stop-title">Upper Diyaluma Infinity Pools</h3>
         <p class="stop-desc">Natural swimming pools right at the cliff edge — you literally swim and look DOWN at the entire valley 220 metres below. Hike up with Guide Saman (+94 71 430 4910) — he knows every hidden pool. 30-min drive up Poonagala Road + 30-min walk. Dawn light is magical.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">6:30 AM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:05 AM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="3.05">~₹255</div>
-              <div class="stop-stat-label">Guide fee</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">6:30 AM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Diyaluma+Falls+Upper+Pools+Koslanda" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:05 AM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="3.05">~₹255</div>
+            <div class="stop-stat-label">Guide fee</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Diyaluma+Falls+Upper+Pools+Koslanda" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 2 · Breakfast + Check Out ─── -->
-    <div class="carousel-slide" data-stop-type="food">
-      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-1" data-stop-type="food" data-name="Breakfast + Check Out">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/food.webp');"></div>
+        <div class="stop-card-type-badge">🍳 Breakfast</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🍳</span>
+          <span class="stop-card-num">Stop 2</span>
         </div>
         <h3 class="stop-title">Breakfast + Check Out</h3>
         <p class="stop-desc">Ask for early breakfast at 8 AM when you check in the night before. String hoppers are the perfect highland fuel — earthy, filling, light. Check out and pack the tuk tuk carefully for the mountain drive through the tea estates.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">8:15 AM</div>
-              <div class="stop-stat-label">Start</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">9:20 AM</div>
-              <div class="stop-stat-label">Check Out</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">8:15 AM</div>
+            <div class="stop-stat-label">Start</div>
           </div>
-          <a href="https://maps.google.com/?q=Diyaluma+Eco+Hotel+Koslanda" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">9:20 AM</div>
+            <div class="stop-stat-label">Check Out</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Diyaluma+Eco+Hotel+Koslanda" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 3 · Bambarakanda Falls ─── -->
-    <div class="carousel-slide" data-stop-type="paid">
-      <div class="stop-bg" style="background-image: url('images/common/loc/bambarakanda-falls.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-2" data-stop-type="paid" data-name="Bambarakanda Falls">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/loc/bambarakanda-falls.jpg');"></div>
+        <div class="stop-card-type-badge">🏔️ Sri Lanka's Tallest</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🏔️</span>
-          <span class="tag tag-book">📏 40 km · 1 hr</span>
+          <span class="stop-card-num">Stop 3</span>
+          <span class="tag tag-km">📏 40 km · 1 hr</span>
         </div>
         <h3 class="stop-title">Bambarakanda Falls — Sri Lanka's Tallest</h3>
         <p class="stop-desc">263 metres — taller than the Eiffel Tower. A thin silver ribbon dropping from the sky into a misty pool. 45-minute stop for photos and awe. In April the falls are at full force. Stunning in every sense of the word.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">11:00 AM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">11:50 AM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="1.16">~₹97</div>
-              <div class="stop-stat-label">Entry</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">11:00 AM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Bambarakanda+Falls+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">11:50 AM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="1.16">~₹97</div>
+            <div class="stop-stat-label">Entry</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Bambarakanda+Falls+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 4 · Lipton's Seat ⭐ ─── -->
-    <div class="carousel-slide highlight" data-stop-type="free">
-      <div class="stop-bg" style="background-image: url('images/common/loc/liptons-seat.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card highlight" id="stop-3" data-stop-type="free" data-name="Lipton's Seat">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/loc/liptons-seat.jpg');"></div>
+        <div class="stop-card-type-badge">⭐ Tea Vista</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">⭐</span>
-          <span class="tag tag-star">⭐ NEW</span>
+          <span class="stop-card-num">Stop 4</span>
+          <span class="tag tag-star">⭐ Must See</span>
           <span class="tag tag-free">FREE</span>
         </div>
         <h3 class="stop-title">Lipton's Seat — Tea Estate Vista</h3>
         <p class="stop-desc">Drive through endless rolling tea plantations to the hilltop where Sir Thomas Lipton surveyed his vast empire. On a clear April day you can see all the way to the southern coast. The winding road through Dambatenne Tea Factory is one of Sri Lanka's most scenic drives.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">12:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">1:15 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">12:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Lipton+Seat+Haputale+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">1:15 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Lipton+Seat+Haputale+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 5 · Maskeliya Lunch ─── -->
-    <div class="carousel-slide" data-stop-type="food">
-      <div class="stop-bg" style="background-image: url('images/common/food.webp');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-4" data-stop-type="food" data-name="Maskeliya Lunch">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/food.webp');"></div>
+        <div class="stop-card-type-badge">🍛 Lunch</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🍛</span>
+          <span class="stop-card-num">Stop 5</span>
         </div>
         <h3 class="stop-title">Maskeliya Lunch</h3>
         <p class="stop-desc">Highland rice and curry — pumpkin, dhal, jackfruit, and cashew curries are spiced completely differently up here. The vegetables taste of cool mountain earth. Best vegetarian food of the whole trip!</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">1:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">2:25 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">1:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Maskeliya+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">2:25 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Maskeliya+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 6 · Maskeliya Reservoir Walk ─── -->
-    <div class="carousel-slide" data-stop-type="free">
-      <div class="stop-bg" style="background-image: url('images/common/loc/maskeliya-reservoir.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-5" data-stop-type="free" data-name="Maskeliya Reservoir Walk">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/loc/maskeliya-reservoir.jpg');"></div>
+        <div class="stop-card-type-badge">🚶 Lake Walk</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🚶</span>
+          <span class="stop-card-num">Stop 6</span>
           <span class="tag tag-free">FREE</span>
         </div>
         <h3 class="stop-title">Maskeliya Reservoir Walk</h3>
         <p class="stop-desc">A glass-calm lake surrounded by misty tea-estate mountains — 45 minutes of peaceful highland walking with cool air all around. Almost no other tourists. One of the most serene moments of the entire trip.</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">2:30 PM</div>
-              <div class="stop-stat-label">Arrive by</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">3:20 PM</div>
-              <div class="stop-stat-label">Leave by</div>
-            </div>
-            <div class="stop-stat stat-free">
-              <div class="stop-stat-value">Free</div>
-              <div class="stop-stat-label">Price</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">2:30 PM</div>
+            <div class="stop-stat-label">Arrive by</div>
           </div>
-          <a href="https://maps.google.com/?q=Maskeliya+Reservoir+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">3:20 PM</div>
+            <div class="stop-stat-label">Leave by</div>
+          </div>
+          <div class="stop-stat stat-free">
+            <div class="stop-stat-value">Free</div>
+            <div class="stop-stat-label">Price</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Maskeliya+Reservoir+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Slide 7 · Check In + Petrol Stops 4 & 5 ─── -->
-    <div class="carousel-slide" data-stop-type="petrol">
-      <div class="stop-bg" style="background-image: url('images/common/petrol-pump.jpg');"></div>
-      <div class="stop-gradient"></div>
-      <div class="stop-panel">
-        <div class="stop-header-row">
+    <div class="stop-card" id="stop-6" data-stop-type="petrol" data-name="Check In + Petrol Stops">
+      <div class="stop-card-img-wrap">
+        <div class="stop-card-img" style="background-image: url('images/common/petrol-pump.jpg');"></div>
+        <div class="stop-card-type-badge">🏨 Check In</div>
+      </div>
+      <div class="stop-card-content">
+        <div class="stop-card-header">
           <span class="stop-icon-pill">🏨</span>
+          <span class="stop-card-num">Stop 7</span>
           <span class="tag tag-petrol">⛽ Petrol Stops 4 &amp; 5</span>
         </div>
         <h3 class="stop-title">Check In — Heaven Hills + Petrol Stops</h3>
         <p class="stop-desc">Check in at Heaven Hills Guest House with stunning Maskeliya Lake views. Fill up at Wellawaya (Petrol 4) and again at Hatton (Petrol 5) en route. Early dinner, then sleep well — tomorrow is the BIG Laxapana abseil!</p>
-        <div class="stop-footer">
-          <div class="stop-stats-row">
-            <div class="stop-stat">
-              <div class="stop-stat-value">3:30 PM</div>
-              <div class="stop-stat-label">Arrive</div>
-            </div>
-            <div class="stop-stat">
-              <div class="stop-stat-value">Wellawaya &amp; Hatton</div>
-              <div class="stop-stat-label">Fill up at</div>
-            </div>
-            <div class="stop-stat stat-paid">
-              <div class="stop-stat-value" data-price-usd="9.00">~₹750</div>
-              <div class="stop-stat-label">Total petrol</div>
-            </div>
+        <div class="stop-stats-row">
+          <div class="stop-stat">
+            <div class="stop-stat-value">3:30 PM</div>
+            <div class="stop-stat-label">Arrive</div>
           </div>
-          <a href="https://maps.google.com/?q=Hatton+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
+          <div class="stop-stat">
+            <div class="stop-stat-value">Wellawaya &amp; Hatton</div>
+            <div class="stop-stat-label">Fill up at</div>
+          </div>
+          <div class="stop-stat stat-paid">
+            <div class="stop-stat-value" data-price-usd="9.00">~₹750</div>
+            <div class="stop-stat-label">Total petrol</div>
+          </div>
         </div>
+        <a href="https://maps.google.com/?q=Hatton+Sri+Lanka" target="_blank" class="stop-maps-btn-hero">📍 View on Maps</a>
       </div>
     </div>
 
-    <!-- ─── Dots + counter ─── -->
-    <div class="carousel-bottom">
-      <div class="carousel-dots" id="carouselDots">
-        <button class="carousel-dot active" data-idx="0" aria-label="Overview"></button>
-        <button class="carousel-dot"        data-idx="1" aria-label="Stop 1"></button>
-        <button class="carousel-dot"        data-idx="2" aria-label="Stop 2"></button>
-        <button class="carousel-dot"        data-idx="3" aria-label="Stop 3"></button>
-        <button class="carousel-dot"        data-idx="4" aria-label="Stop 4"></button>
-        <button class="carousel-dot"        data-idx="5" aria-label="Stop 5"></button>
-        <button class="carousel-dot"        data-idx="6" aria-label="Stop 6"></button>
-        <button class="carousel-dot"        data-idx="7" aria-label="Stop 7"></button>
-      </div>
-      <div class="carousel-counter" id="carouselCounter">Overview</div>
-    </div>
+    <!-- Hotel card injected here by hotel-data.js -->
 
-  </section><!-- /stop-carousel -->
+  </div><!-- /stop-cards -->
 
   <!-- ═══════════════════════════════════════════════
        DAY SPEND — full-screen budget breakdown
