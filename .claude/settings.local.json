@@ -84,7 +84,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(grep -rn \"stop-type=\"\"hotel\"\"\\\\|data-stop-type=\"\"hotel\"\"\" /Users/ashinasok/Desktop/Trip/day*.html)"
+      "Bash(grep -rn \"stop-type=\"\"hotel\"\"\\\\|data-stop-type=\"\"hotel\"\"\" /Users/ashinasok/Desktop/Trip/day*.html)",
+      "Bash(grep -n \"carousel-intro\\\\|day[1-7]/header.jpg\" /Users/ashinasok/Desktop/Trip/day*.html)",
+      "Bash(grep -n \"header.jpg\" /Users/ashinasok/Desktop/Trip/day*.html)"
     ]
   }
 }
