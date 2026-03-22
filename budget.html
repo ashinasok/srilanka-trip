@@ -315,24 +315,71 @@
   text-align: center;
 }
 
-/* ── CATEGORY SUMMARY GRID ── */
-.cat-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 0.8rem;
-  margin-bottom: 2.5rem;
-}
-.cat-summary-chip {
+/* ── DAY BUDGET CARDS ── */
+.day-budget-card {
   background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   border: 1.5px solid var(--cream-dark);
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  text-align: center;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
 }
-.csc-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
-.csc-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
-.csc-amt { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--teal); margin-top: 0.2rem; }
+.day-budget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: #fdfaf4;
+  border-bottom: 1.5px solid var(--cream-dark);
+}
+.day-budget-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.day-num-pill {
+  background: var(--navy);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.28rem 0.65rem;
+  border-radius: 99px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.day-budget-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.2;
+}
+.day-budget-date {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+.day-budget-total {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--teal);
+  white-space: nowrap;
+}
+.day-stops-table { font-size: 0.84rem; }
+.day-stops-table td { padding: 0.55rem 1.5rem; }
+.day-stops-table .stop-name-cell { color: var(--text); }
+.day-stops-table .stop-amt-cell {
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+}
+.day-stops-table tr { border-bottom: 1px solid #f5f0e8; }
+.day-stops-table tr:last-child { border-bottom: none; }
+.day-stops-table tr:hover { background: #fdf9f2; }
 
 </style>
 </head>
@@ -371,403 +418,34 @@
 <div class="budget-hero">
   <div class="budget-hero-eyebrow">28 March – 3 April 2026 &nbsp;·&nbsp; Per Person &nbsp;·&nbsp; Excl. Flight</div>
   <h1 class="budget-hero-title">Trip Budget</h1>
-  <div class="budget-hero-total" data-budget-cat="grand">₹41,424</div>
-  <div class="budget-hero-total-sub" id="budget-hero-sub">~$482 USD per person, excluding flight</div>
-  <div class="cost-stats">
-    <div class="cost-stat">
-      <div class="cost-stat-val" data-budget-cat="stays">₹5,321</div>
-      <div class="cost-stat-lbl">6 Nights Stay</div>
-    </div>
-    <div class="cost-stat">
-      <div class="cost-stat-val" data-budget-cat="transport">₹1,450</div>
-      <div class="cost-stat-lbl">Transport</div>
-    </div>
-    <div class="cost-stat">
-      <div class="cost-stat-val" data-budget-cat="exp">₹23,297</div>
-      <div class="cost-stat-lbl">Experiences</div>
-    </div>
-    <div class="cost-stat">
-      <div class="cost-stat-val" data-budget-cat="fees">₹2,406</div>
-      <div class="cost-stat-lbl">Entry Fees</div>
-    </div>
-    <div class="cost-stat">
-      <div class="cost-stat-val" data-budget-cat="food">₹8,950</div>
-      <div class="cost-stat-lbl">Food</div>
-    </div>
-  </div>
-  <p class="budget-hero-sub" style="margin-top:1.5rem;">Hotel costs shared equally between 2 people · Rates: ₹86/USD · ₹3.6/LKR</p>
+  <div class="budget-hero-total" data-budget-grand>…</div>
+  <div class="budget-hero-total-sub" id="budget-hero-sub">calculating…</div>
 </div>
 
 <!-- BODY -->
 <div class="budget-body">
   <div class="budget-container">
 
-    <!-- CATEGORY SUMMARY CHIPS -->
-    <div class="cat-summary-grid" style="margin-top:0.5rem;">
-      <div class="cat-summary-chip">
-        <div class="csc-icon">🏨</div>
-        <div class="csc-label">Stays</div>
-        <div class="csc-amt" data-budget-cat="stays">₹5,321</div>
-      </div>
-      <div class="cat-summary-chip">
-        <div class="csc-icon">🛺</div>
-        <div class="csc-label">Transport</div>
-        <div class="csc-amt" data-budget-cat="transport">₹1,450</div>
-      </div>
-      <div class="cat-summary-chip">
-        <div class="csc-icon">🎯</div>
-        <div class="csc-label">Experiences</div>
-        <div class="csc-amt" data-budget-cat="exp">₹23,297</div>
-      </div>
-      <div class="cat-summary-chip">
-        <div class="csc-icon">🎟️</div>
-        <div class="csc-label">Entry Fees</div>
-        <div class="csc-amt" data-budget-cat="fees">₹2,406</div>
-      </div>
-      <div class="cat-summary-chip">
-        <div class="csc-icon">🍛</div>
-        <div class="csc-label">Food</div>
-        <div class="csc-amt" data-budget-cat="food">₹8,950</div>
-      </div>
+    <!-- DAY-BY-DAY BREAKDOWN (populated by JS fetch) -->
+    <div id="budget-days-container" style="padding-top:0.5rem;">
+      <div style="text-align:center;padding:3rem;color:var(--muted);font-size:0.9rem;">Loading trip costs…</div>
     </div>
 
-    <!-- ── STAYS ── -->
-    <div class="budget-category">
-      <div class="cat-header">
-        <div class="cat-header-left">
-          <div class="cat-icon">🏨</div>
-          <div>
-            <div class="cat-name">Stays</div>
-            <div class="cat-note">6 nights · hotel cost split between 2 people</div>
-          </div>
-        </div>
-        <div class="cat-subtotal">
-          <div class="cat-subtotal-amt" data-budget-cat="stays">₹5,321</div>
-          <div class="cat-subtotal-lbl">your share</div>
-        </div>
+    <!-- GRAND TOTAL -->
+    <div class="grand-total-bar" style="margin-top:1rem;">
+      <div>
+        <div class="gt-total-label">Grand Total per person</div>
+        <div class="gt-total-inr" data-budget-grand>…</div>
+        <div class="gt-total-usd">7 days · hotel ÷ 2 · petrol ÷ 2 · excl. flight</div>
       </div>
-      <table class="budget-table">
-        <thead>
-          <tr>
-            <th>Hotel</th>
-            <th>Night</th>
-            <th>Room Rate</th>
-            <th>Your Share</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Villa Freiheit Himmel, Bentota</td>
-            <td class="td-day">Night 1 · 28 Mar</td>
-            <td class="td-note" data-price-usd="20.66">~$20.66</td>
-            <td data-price-usd="10.33">~₹888</td>
-          </tr>
-          <tr>
-            <td>Riverwood Villa, Weligama</td>
-            <td class="td-day">Night 2 · 29 Mar</td>
-            <td class="td-note" data-price-usd="14.80" data-price-suffix="/night">~$14.80/night</td>
-            <td data-price-usd="7.40">~₹636</td>
-          </tr>
-          <tr>
-            <td>Riverwood Villa, Weligama</td>
-            <td class="td-day">Night 3 · 30 Mar</td>
-            <td class="td-note" data-price-usd="14.80" data-price-suffix="/night">~$14.80/night</td>
-            <td data-price-usd="7.40">~₹636</td>
-          </tr>
-          <tr>
-            <td>Nature Hub Koslanda, Diyaluma</td>
-            <td class="td-day">Night 4 · 31 Mar</td>
-            <td class="td-note">$24 ÷ 2 people</td>
-            <td data-price-usd="12.00">~₹1,032</td>
-          </tr>
-          <tr>
-            <td>Heaven Hills Guest House, Maskeliya</td>
-            <td class="td-day">Night 5 · 1 Apr</td>
-            <td class="td-note" data-price-usd="19.22">~₹1,653</td>
-            <td data-price-usd="9.61">~₹827</td>
-          </tr>
-          <tr>
-            <td>Old Bridge Riverside Hotel, Kitulgala</td>
-            <td class="td-day">Night 6 · 2 Apr</td>
-            <td class="td-note" data-price-usd="30.26">~₹2,603</td>
-            <td data-price-usd="15.13">~₹1,301</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── TRANSPORT ── -->
-    <div class="budget-category">
-      <div class="cat-header">
-        <div class="cat-header-left">
-          <div class="cat-icon">🛺</div>
-          <div>
-            <div class="cat-name">Transport</div>
-            <div class="cat-note">Fuel · shared between 2 people · 5 petrol stops</div>
-          </div>
-        </div>
-        <div class="cat-subtotal">
-          <div class="cat-subtotal-amt" data-budget-cat="transport">₹1,450</div>
-          <div class="cat-subtotal-lbl">your share</div>
-        </div>
-      </div>
-      <table class="budget-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Detail</th>
-            <th>Total Cost</th>
-            <th>Your Share</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Fuel — 5 Stops <span class="shared-badge">Shared</span></td>
-            <td class="td-note">~680 km total · 92 Octane · 5 fill-ups</td>
-            <td class="td-note" data-price-usd="33.72">~₹2,900</td>
-            <td data-price-usd="16.86">~₹1,450</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── EXPERIENCES ── -->
-    <div class="budget-category">
-      <div class="cat-header">
-        <div class="cat-header-left">
-          <div class="cat-icon">🎯</div>
-          <div>
-            <div class="cat-name">Experiences</div>
-            <div class="cat-note">Activities · all priced per person</div>
-          </div>
-        </div>
-        <div class="cat-subtotal">
-          <div class="cat-subtotal-amt" data-budget-cat="exp">₹23,297</div>
-          <div class="cat-subtotal-lbl">per person</div>
-        </div>
-      </div>
-      <table class="budget-table">
-        <thead>
-          <tr>
-            <th>Activity</th>
-            <th>Day</th>
-            <th>Notes</th>
-            <th>Per Person</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Mangrove River Boat Safari <span class="shared-badge">Shared</span></td>
-            <td class="td-day">Day 1</td>
-            <td class="td-note">Boat rate ÷ 2 · Book via hotel</td>
-            <td data-price-usd="9.88">~₹850</td>
-          </tr>
-          <tr>
-            <td>Blue Whale Watching</td>
-            <td class="td-day">Day 3</td>
-            <td class="td-note">Raja &amp; Whales · 15,000 LKR/person</td>
-            <td data-price-usd="48.45">~₹4,167</td>
-          </tr>
-          <tr>
-            <td>Surf Lesson</td>
-            <td class="td-day">Day 3</td>
-            <td class="td-note">Weligama Beach · 1.5 hrs</td>
-            <td data-price-usd="19.77">~₹1,700</td>
-          </tr>
-          <tr>
-            <td style="font-weight:600;">Laxapana Falls Abseil — 126m ⭐</td>
-            <td class="td-day">Day 6</td>
-            <td class="td-note">Ceylon Extreme · 50,400 LKR/person</td>
-            <td style="color:var(--orange);" data-price-usd="162.79">~₹14,000</td>
-          </tr>
-          <tr>
-            <td>White Water Rafting</td>
-            <td class="td-day">Day 7</td>
-            <td class="td-note">Adventure LK · $30/person</td>
-            <td data-price-usd="30.00">~₹2,580</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── ENTRY FEES ── -->
-    <div class="budget-category">
-      <div class="cat-header">
-        <div class="cat-header-left">
-          <div class="cat-icon">🎟️</div>
-          <div>
-            <div class="cat-name">Entry Fees</div>
-            <div class="cat-note">Sites, guides &amp; gear · per person</div>
-          </div>
-        </div>
-        <div class="cat-subtotal">
-          <div class="cat-subtotal-amt" data-budget-cat="fees">₹2,406</div>
-          <div class="cat-subtotal-lbl">per person</div>
-        </div>
-      </div>
-      <table class="budget-table">
-        <thead>
-          <tr>
-            <th>Attraction</th>
-            <th>Day</th>
-            <th></th>
-            <th>Per Person</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Lunuganga Estate (Geoffrey Bawa)</td>
-            <td class="td-day">Day 2</td>
-            <td></td>
-            <td data-price-usd="2.97">~₹255</td>
-          </tr>
-          <tr>
-            <td>Brief Garden (Bevis Bawa)</td>
-            <td class="td-day">Day 2</td>
-            <td></td>
-            <td data-price-usd="2.97">~₹255</td>
-          </tr>
-          <tr>
-            <td>Kosgoda Turtle Hatchery</td>
-            <td class="td-day">Day 2</td>
-            <td></td>
-            <td data-price-usd="4.94">~₹425</td>
-          </tr>
-          <tr>
-            <td>Hikkaduwa Snorkel Gear Rental</td>
-            <td class="td-day">Day 2</td>
-            <td></td>
-            <td data-price-usd="4.94">~₹425</td>
-          </tr>
-          <tr>
-            <td>Koggala Stilt Fishermen Photo Tip</td>
-            <td class="td-day">Day 2</td>
-            <td class="td-note">Customary tip to fishermen</td>
-            <td data-price-usd="1.98">~₹170</td>
-          </tr>
-          <tr>
-            <td>Buduruwagala Rock Carvings</td>
-            <td class="td-day">Day 4</td>
-            <td></td>
-            <td data-price-usd="4.94">~₹425</td>
-          </tr>
-          <tr>
-            <td>Upper Diyaluma Guide (Saman) <span class="shared-badge">Shared</span></td>
-            <td class="td-day">Day 5</td>
-            <td class="td-note">Flat guide fee ÷ 2</td>
-            <td data-price-usd="1.49">~₹128</td>
-          </tr>
-          <tr>
-            <td>Bambarakanda Falls Entry</td>
-            <td class="td-day">Day 5</td>
-            <td></td>
-            <td data-price-usd="1.13">~₹97</td>
-          </tr>
-          <tr>
-            <td>Belilena Prehistoric Cave</td>
-            <td class="td-day">Day 6</td>
-            <td></td>
-            <td data-price-usd="1.98">~₹170</td>
-          </tr>
-          <tr>
-            <td>Makandawa Rainforest Walk</td>
-            <td class="td-day">Day 6</td>
-            <td></td>
-            <td data-price-usd="0.65">~₹56</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── FOOD ── -->
-    <div class="budget-category">
-      <div class="cat-header">
-        <div class="cat-header-left">
-          <div class="cat-icon">🍛</div>
-          <div>
-            <div class="cat-name">Food</div>
-            <div class="cat-note">Lunch + dinner · several hotels include breakfast</div>
-          </div>
-        </div>
-        <div class="cat-subtotal">
-          <div class="cat-subtotal-amt" data-budget-cat="food">₹8,950</div>
-          <div class="cat-subtotal-lbl">per person</div>
-        </div>
-      </div>
-      <table class="budget-table">
-        <thead>
-          <tr>
-            <th>Meal</th>
-            <th>Coverage</th>
-            <th>Est. Cost/Meal</th>
-            <th>7-Day Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Breakfast</td>
-            <td class="td-note">Included at 4 of 6 hotels — paid for 3 days</td>
-            <td class="td-note" data-price-usd="3.49" data-price-suffix="/meal">~₹300/meal</td>
-            <td data-price-usd="10.47">~₹900</td>
-          </tr>
-          <tr>
-            <td>Lunch</td>
-            <td class="td-note">Rice &amp; curry · roadside local restaurants · all 7 days</td>
-            <td class="td-note" data-price-usd="5.81" data-price-suffix="/meal">~₹500/meal</td>
-            <td data-price-usd="40.70">~₹3,500</td>
-          </tr>
-          <tr>
-            <td>Dinner</td>
-            <td class="td-note">Guesthouse meals or local restaurants · all 7 days</td>
-            <td class="td-note" data-price-usd="5.81" data-price-suffix="/meal">~₹500/meal</td>
-            <td data-price-usd="40.70">~₹3,500</td>
-          </tr>
-          <tr>
-            <td>Drinks &amp; snacks</td>
-            <td class="td-note">King coconuts, bottled water, chai · all 7 days</td>
-            <td class="td-note" data-price-usd="1.74" data-price-suffix="/day">~₹150/day</td>
-            <td data-price-usd="12.21">~₹1,050</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── GRAND TOTAL ── -->
-    <div class="grand-total-bar">
-      <div class="gt-rows">
-        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.4);font-family:'DM Mono',monospace;margin-bottom:0.6rem;">Breakdown</div>
-        <div class="gt-row">
-          <span class="gt-row-label">🏨 Stays (6 nights)</span>
-          <span class="gt-row-amt" data-budget-cat="stays">₹5,321</span>
-        </div>
-        <div class="gt-row">
-          <span class="gt-row-label">🛺 Transport</span>
-          <span class="gt-row-amt" data-budget-cat="transport">₹1,450</span>
-        </div>
-        <div class="gt-row">
-          <span class="gt-row-label">🎯 Experiences</span>
-          <span class="gt-row-amt" data-budget-cat="exp">₹23,297</span>
-        </div>
-        <div class="gt-row">
-          <span class="gt-row-label">🎟️ Entry Fees</span>
-          <span class="gt-row-amt" data-budget-cat="fees">₹2,406</span>
-        </div>
-        <div class="gt-row">
-          <span class="gt-row-label">🍛 Food</span>
-          <span class="gt-row-amt" data-budget-cat="food">₹8,950</span>
-        </div>
-      </div>
-      <div class="gt-total-section">
-        <div class="gt-total-label">Total per person</div>
-        <div class="gt-total-inr" data-budget-cat="grand">₹41,424</div>
-        <div class="gt-total-usd" id="budget-hero-sub-gt">~$482 USD &nbsp;·&nbsp; Excl. flight</div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);text-align:right;line-height:1.7;">
+        Prices pulled live<br>from each day page
       </div>
     </div>
 
     <!-- DISCLAIMER -->
     <div class="budget-disclaimer">
-      All prices convert automatically with the currency setting. <strong>Experiences</strong> (abseil, whale watching, rafting) are the biggest variable — these are locked in at the prices shown.
-      <strong>Food</strong> is a fixed estimate based on ₹300 breakfast · ₹500 lunch/dinner · ₹150 snacks per day. <strong>Flight excluded.</strong>
+      Prices are read directly from each day's itinerary cards and convert with the currency setting above. Hotel and petrol costs are split ÷ 2 between both people. Any new stop price added to a day page will appear here automatically. <strong>Flight excluded.</strong>
     </div>
 
   </div>
@@ -821,48 +499,118 @@
 <script src="currency.js"></script>
 <script>
 (function () {
-  /* USD amounts per person for each line item */
-  var USD = {
-    stays:     [10.33, 7.40, 7.40, 12.00, 9.61, 15.13],
-    transport: [16.86],
-    exp:       [9.88, 48.45, 19.77, 162.79, 30.00],
-    fees:      [2.97, 2.97, 4.94, 4.94, 1.98, 4.94, 1.49, 1.13, 1.98, 0.65],
-    food:      [10.47, 40.70, 40.70, 12.21]
-  };
+  var DAY_META = [
+    { n:1, label:'Colombo \u2192 Bentota',      date:'28 Mar 2026' },
+    { n:2, label:'Bentota \u2192 Weligama',      date:'29 Mar 2026' },
+    { n:3, label:'Weligama \u2014 The Big Day',  date:'30 Mar 2026' },
+    { n:4, label:'Into the Mountains',           date:'31 Mar 2026' },
+    { n:5, label:'Highland Wonders',             date:'1 Apr 2026'  },
+    { n:6, label:'The Big Abseil Day',           date:'2 Apr 2026'  },
+    { n:7, label:'Rafting &amp; Goodbye',        date:'3 Apr 2026'  }
+  ];
 
-  function sum(arr) { return arr.reduce(function (a, b) { return a + b; }, 0); }
+  var state = { days: null };
 
-  function render() {
-    var CM = window.CurrencyManager;
-    if (!CM) return;
+  function fetchDay(meta) {
+    return fetch('day' + meta.n + '.html')
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var stops = [];
+        doc.querySelectorAll('.stop-card').forEach(function (card) {
+          var stopType  = card.getAttribute('data-stop-type') || '';
+          var budgetUsd = parseFloat(card.getAttribute('data-budget-usd'));
+          var shared    = parseInt(card.getAttribute('data-budget-shared'), 10) || 1;
+          var nights    = parseInt(card.getAttribute('data-budget-nights'), 10) || 1;
+          var name      = card.getAttribute('data-name') ||
+                          (card.querySelector('.stop-title') ? card.querySelector('.stop-title').textContent.trim() : 'Stop');
+          var perPerson;
 
-    var t = {
-      stays:     sum(USD.stays),
-      transport: sum(USD.transport),
-      exp:       sum(USD.exp),
-      fees:      sum(USD.fees),
-      food:      sum(USD.food)
-    };
-    t.grand = t.stays + t.transport + t.exp + t.fees + t.food;
+          if (!isNaN(budgetUsd) && budgetUsd > 0) {
+            /* explicit budget override on the stop card */
+            perPerson = (budgetUsd * nights) / shared;
+          } else {
+            /* fall back to first [data-price-usd] child */
+            var priceEl = card.querySelector('[data-price-usd]');
+            if (!priceEl) return;
+            var usd = parseFloat(priceEl.getAttribute('data-price-usd'));
+            if (isNaN(usd) || usd <= 0) return;
+            usd *= nights;
+            /* hotel and petrol are shared ÷ 2 */
+            perPerson = (stopType === 'hotel' || stopType === 'petrol') ? usd / 2 : usd;
+          }
 
-    ['stays', 'transport', 'exp', 'fees', 'food', 'grand'].forEach(function (cat) {
-      document.querySelectorAll('[data-budget-cat="' + cat + '"]').forEach(function (el) {
-        el.textContent = CM.format(t[cat]);
+          if (perPerson > 0) stops.push({ name: name, usd: perPerson });
+        });
+
+        return {
+          meta:  meta,
+          stops: stops,
+          total: stops.reduce(function (s, x) { return s + x.usd; }, 0)
+        };
       });
-    });
-
-    var grandFmt = CM.format(t.grand);
-    var heroSub = document.getElementById('budget-hero-sub');
-    if (heroSub) heroSub.textContent = grandFmt + ' per person · excl. flight';
-    var gtSub = document.getElementById('budget-hero-sub-gt');
-    if (gtSub) gtSub.textContent = grandFmt + ' · Excl. flight';
   }
 
-  document.addEventListener('sl:currencyChange', render);
+  function fmt(usd) {
+    var CM = window.CurrencyManager;
+    return CM ? CM.format(usd) : '$' + usd.toFixed(2);
+  }
+
+  function renderAll() {
+    if (!state.days) return;
+    var days = state.days;
+    var grand = days.reduce(function (s, d) { return s + d.total; }, 0);
+
+    /* hero */
+    document.querySelectorAll('[data-budget-grand]').forEach(function (el) {
+      el.textContent = fmt(grand);
+    });
+    var sub = document.getElementById('budget-hero-sub');
+    if (sub) sub.textContent = fmt(grand) + ' per person \xb7 excl. flight';
+
+    /* day cards */
+    var container = document.getElementById('budget-days-container');
+    if (!container) return;
+    container.innerHTML = days.map(function (d) {
+      var rows = d.stops.map(function (s) {
+        return '<tr><td class="stop-name-cell">' + s.name +
+               '</td><td class="stop-amt-cell">' + fmt(s.usd) + '</td></tr>';
+      }).join('');
+      return '<div class="day-budget-card">' +
+        '<div class="day-budget-header">' +
+          '<div class="day-budget-left">' +
+            '<span class="day-num-pill">Day ' + d.meta.n + '</span>' +
+            '<div>' +
+              '<div class="day-budget-title">' + d.meta.label + '</div>' +
+              '<div class="day-budget-date">' + d.meta.date + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="day-budget-total">' + fmt(d.total) + '</div>' +
+        '</div>' +
+        (rows ? '<table class="budget-table day-stops-table"><tbody>' + rows + '</tbody></table>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  document.addEventListener('sl:currencyChange', renderAll);
+
+  function init() {
+    Promise.all(DAY_META.map(fetchDay))
+      .then(function (days) {
+        state.days = days;
+        /* wait for CurrencyManager if not ready yet */
+        if (window.CurrencyManager) { renderAll(); return; }
+        var t = setInterval(function () {
+          if (window.CurrencyManager) { clearInterval(t); renderAll(); }
+        }, 50);
+      })
+      .catch(function (e) { console.error('Budget fetch error', e); });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { setTimeout(render, 300); });
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    setTimeout(render, 300);
+    setTimeout(init, 0);
   }
 }());
 </script>
