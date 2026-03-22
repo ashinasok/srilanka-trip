@@ -715,6 +715,22 @@
   }
 
   /* — 15c. Currency application — */
+  function updateRateDisplay(c) {
+    var el = document.getElementById('sl-rate-display');
+    if (!el || !window.CurrencyManager) return;
+    var CM = window.CurrencyManager;
+    var code = (c || CM.getCurrency()).toLowerCase();
+    var syms = { inr: '₹', usd: '$', lkr: 'රු' };
+    var sym  = syms[code] || '';
+    if (code === 'usd') {
+      el.textContent = '1 USD = $1.00';
+    } else {
+      var rate = CM.getRate(code);
+      var rounded = Math.round(rate * 100) / 100;
+      el.textContent = '1 USD = ' + sym + rounded.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+    }
+  }
+
   function applyCurrency(c) {
     var labels = { inr: '₹ INR', usd: '$ USD', lkr: 'රු LKR' };
     localStorage.setItem('sl-currency', c);
@@ -723,6 +739,8 @@
     if (window.CurrencyManager) {
       window.CurrencyManager.setCurrency(c);
     }
+
+    updateRateDisplay(c);
 
     /* Sync any standalone #currency-toggle button */
     var legacyBtn = document.getElementById('currency-toggle');
@@ -779,6 +797,7 @@
             '<button class="sl-cur-btn' + (storedCur === 'usd' ? ' sl-cur-active' : '') + '" data-cur="usd">$ USD</button>' +
             '<button class="sl-cur-btn' + (storedCur === 'lkr' ? ' sl-cur-active' : '') + '" data-cur="lkr">රු LKR</button>' +
           '</div>' +
+          '<div id="sl-rate-display" style="margin-top:0.55rem;font-size:0.72rem;color:rgba(255,255,255,0.42);font-family:\'DM Mono\',monospace;letter-spacing:0.03em;"></div>' +
         '</div>' +
 
       '</div>' +
@@ -850,6 +869,9 @@
     /* — Currency buttons — */
     var curBtns = panel.querySelectorAll('.sl-cur-btn');
     applyCurrency(storedCur);
+    /* Show rate immediately and re-show after live rates arrive */
+    updateRateDisplay(storedCur);
+    document.addEventListener('sl:currencyChange', function () { updateRateDisplay(); });
 
     curBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {

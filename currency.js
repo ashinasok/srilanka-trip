@@ -151,11 +151,17 @@
     _init();
   }
 
+  function getRate(c) {
+    var code = ((c || _currency) + '').toUpperCase();
+    return _rates[code] || FALLBACK[code] || 1;
+  }
+
   /* Export */
   global.CurrencyManager = {
     setCurrency : setCurrency,
     getCurrency : getCurrency,
     getSymbol   : getSymbol,
+    getRate     : getRate,
     format      : format,
     formatRange : formatRange,
     convert     : convert,
